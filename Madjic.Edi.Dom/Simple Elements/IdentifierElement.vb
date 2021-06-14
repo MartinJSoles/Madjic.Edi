@@ -17,7 +17,7 @@ Friend Class IdentifierElement
         'End If
 
         Me.Codelist = codelist
-        Me.AllowedValues = allowedValues.ToUpperInvariant()
+        Me.AllowedValues = allowedValues?.ToUpperInvariant()
     End Sub
 
     Public Overrides Sub ValidateElement(results As ValidationResults)
