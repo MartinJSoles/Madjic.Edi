@@ -12,3 +12,6 @@ objects that implement the specific interface.
 Internally, there are single classes used for all implementations of each segment. For example, there is an internal class named `REF_Obj`. This class implements a large number
 of interfaces, one for each distinct use. The same is true for transaction sets and individual loops (in the 837 professional there are a number of 2310 loops, they are all backed
 by a single class definition).
+
+## Known Issues
+1. There is no code in place to properly handle the repeating elements (such as the EB03 element).
