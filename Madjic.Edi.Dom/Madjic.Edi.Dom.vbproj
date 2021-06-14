@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>Madjic.Edi.Dom</RootNamespace>
+    <TargetFrameworks>netstandard2.0;net5.0</TargetFrameworks>
+    <Authors>Martin Soles</Authors>
+    <Company>madjic.com</Company>
+    <Description>Strongly typed classes to support ANSI X12 5010 transaction sets for HIPAA</Description>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Generated Code\" />
+  </ItemGroup>
+
+</Project>
