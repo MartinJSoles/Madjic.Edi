@@ -40,10 +40,15 @@
                         End If
                     Case ReadAction.PopulateSegmentAndLoop
                         segmentHandler.Invoke(args)
-
+                        Dim ExitBoundedLoop As Boolean
+                    
                         If Await args.ReadSegmentAsync().ConfigureAwait(False) Then
-                            Await loopHandler.Invoke(args)
+
+                        Do
+                            Await loopHandler.Invoke(args).ConfigureAwait(False)
                             segment = args.DataSegment.SegmentID
+                            ExitBoundedLoop = segment Is Nothing OrElse String.Compare(segment, "LE", StringComparison.OrdinalIgnoreCase) = 0
+                        Loop Until ExitBoundedLoop
                         Else
                             Return -2
                         End If
