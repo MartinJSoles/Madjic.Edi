@@ -38,7 +38,7 @@
                         Else
                             Return -2 'unexpected end of transaction
                         End If
-                    Case ReadAction.PopulateSegmentAndLoop
+                    Case ReadAction.PopulateSegmentAndStartBoundedLoop
                         segmentHandler.Invoke(args)
                         Dim ExitBoundedLoop As Boolean
                     

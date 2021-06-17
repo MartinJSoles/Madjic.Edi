@@ -6,7 +6,7 @@
     ''' <param name="state">The incoming state</param>
     ''' <param name="segment">The name of the segment</param>
     ''' <param name="action">The action to perform</param>
-    Public Sub New(ByVal state As Integer, ByVal segment As String, ByVal action As ReadAction, ByVal nextState As Integer, ByVal isFinal As Boolean)
+    Friend Sub New(ByVal state As Integer, ByVal segment As String, ByVal action As ReadAction, ByVal nextState As Integer, ByVal isFinal As Boolean)
         Me.State = state
         Me.Segment = segment
         Me.Action = action
@@ -17,27 +17,27 @@
     ''' <summary>
     ''' The state to match up when running the state machine
     ''' </summary>
-    Public Property State() As Integer
+    Friend Property State() As Integer
 
     ''' <summary>
     ''' The name of the segment to match up when running the state machine
     ''' </summary>
-    Public Property Segment() As String
+    Friend Property Segment() As String
 
     ''' <summary>
     ''' The action to take when a matching entry is found while running the state machine
     ''' </summary>
-    Public Property Action() As ReadAction
+    Friend Property Action() As ReadAction
 
     ''' <summary>
     ''' The state the machine should be in after the action is performed
     ''' </summary>
-    Public Property NextState() As Integer
+    Friend Property NextState() As Integer
 
     ''' <summary>
     ''' Indicates that this state is final
     ''' </summary>
-    Public Property IsFinal() As Boolean
+    Friend Property IsFinal() As Boolean
 
 End Class
 
@@ -82,5 +82,5 @@ Friend Enum ReadAction
     ''' <summary>
     ''' The segment should be populated and then a loop populated from the next segment.
     ''' </summary>
-    PopulateSegmentAndLoop
+    PopulateSegmentAndStartBoundedLoop
 End Enum
