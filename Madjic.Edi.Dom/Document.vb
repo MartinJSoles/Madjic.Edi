@@ -276,7 +276,7 @@
     ''' <param name="stream">The stream to write the EDI document to.</param>
     ''' <remarks>This will write each <see cref="Envelope">Envelope</see> object, and its child Functional Groups and Transactions, to the given <see cref="IO.stream">IO.Stream</see>.</remarks>
     Public Function ToStreamAsync(stream As IO.Stream) As Task
-        Return ToStreamAsync(stream, New Text.UTF8Encoding(False, True), False)
+        Return ToStreamAsync(stream, New Text.UTF8Encoding(False, True), False, 1024, True)
     End Function
 
     ''' <summary>
@@ -286,7 +286,7 @@
     ''' <param name="textEncoding">The encoding to use when writing the EDI document.</param>
     ''' <remarks>This will write each <see cref="Envelope">Envelope</see> object, and its child Functional Groups and Transactions, to the given <see cref="IO.stream">IO.Stream</see>.</remarks>
     Public Function ToStreamAsync(stream As IO.Stream, textEncoding As Text.Encoding) As Task
-        Return ToStreamAsync(stream, textEncoding, False)
+        Return ToStreamAsync(stream, textEncoding, False, 1024, True)
     End Function
 
     ''' <summary>
@@ -296,7 +296,7 @@
     ''' <param name="insertNewLines">If true, each segment will have a NewLine character sequence added to the segment terminator for each envelope. If false, the segment terminator is written as is.</param>
     ''' <remarks>This will write each <see cref="Envelope">Envelope</see> object, and its child Functional Groups and Transactions, to the given <see cref="IO.stream">IO.Stream</see>.</remarks>
     Public Function ToStreamAsync(stream As IO.Stream, insertNewLines As Boolean) As Task
-        Return ToStreamAsync(stream, New Text.UTF8Encoding(False, True), insertNewLines)
+        Return ToStreamAsync(stream, New Text.UTF8Encoding(False, True), insertNewLines, 1024, True)
     End Function
 
     ''' <summary>
@@ -305,37 +305,43 @@
     ''' <param name="stream">The stream to write the EDI document to.</param>
     ''' <param name="textEncoding">The encoding to use when writing the EDI document.</param>
     ''' <param name="insertNewLines">If true, each segment will have a NewLine character sequence added to the segment terminator for each envelope. If false, the segment terminator is written as is.</param>
+    ''' <param name="bufferSize">The size of the buffer to use for the stream writer, in bytes.</param>
+    ''' <param name="leaveOpen">If true, the underlying stream is left open after the document has been written.</param>
     ''' <remarks>This will write each <see cref="Envelope">Envelope</see> object, and its child Functional Groups and Transactions, to the given <see cref="IO.stream">IO.Stream</see>.</remarks>
-    Public Async Function ToStreamAsync(stream As IO.Stream, textEncoding As Text.Encoding, insertNewLines As Boolean) As Task
+    Public Function ToStreamAsync(stream As IO.Stream, textEncoding As Text.Encoding, insertNewLines As Boolean, bufferSize As Integer, leaveOpen As Boolean) As Task
+        Using writer As New IO.StreamWriter(stream, textEncoding, bufferSize, leaveOpen)
+            Return ToStreamAsync(writer, insertNewLines)
+        End Using
+    End Function
+
+    Public Async Function ToStreamAsync(writer As IO.TextWriter, insertNewLines As Boolean) As Task
         If Not insertNewLines Then
-            Using writer As New IO.StreamWriter(stream, textEncoding)
-                For Each item In mEnvelopes
-                    Await item.WriteAsync(writer, False).ConfigureAwait(False)
-                Next
-            End Using
+            For Each item In mEnvelopes
+                Await item.WriteAsync(writer, False).ConfigureAwait(False)
+            Next
         Else
-            Using writer As New IO.StreamWriter(stream, textEncoding)
-                Dim oldSegTerm As String
-                For Each item In mEnvelopes
-                    oldSegTerm = item.SegmentTerminator
+            Dim oldSegTerm As String
+            For Each item In mEnvelopes
+                oldSegTerm = item.SegmentTerminator
 
-                    Dim HasCr = If(oldSegTerm.Contains(vbCr), 1, 0)
-                    Dim HasLf = If(oldSegTerm.Contains(vbLf), 2, 0)
+                Dim HasCr = If(oldSegTerm.Contains(vbCr), 1, 0)
+                Dim HasLf = If(oldSegTerm.Contains(vbLf), 2, 0)
 
-                    Select Case HasCr + HasLf
-                        Case 0
-                            item.SegmentTerminator = oldSegTerm & vbCrLf
-                        Case 1
-                            item.SegmentTerminator = oldSegTerm.Replace(vbCr, vbCrLf)
-                        Case 2
-                            item.SegmentTerminator = oldSegTerm.Replace(vbLf, vbCrLf)
-                    End Select
+                Select Case HasCr + HasLf
+                    Case 0
+                        item.SegmentTerminator = oldSegTerm & vbCrLf
+                    Case 1
+                        item.SegmentTerminator = oldSegTerm.Replace(vbCr, vbCrLf)
+                    Case 2
+                        item.SegmentTerminator = oldSegTerm.Replace(vbLf, vbCrLf)
+                End Select
 
-                    Await item.WriteAsync(writer, False)
-                    item.SegmentTerminator = oldSegTerm
-                Next
-            End Using
+                Await item.WriteAsync(writer, False)
+                item.SegmentTerminator = oldSegTerm
+            Next
         End If
+
+        Await writer.FlushAsync().ConfigureAwait(False)
     End Function
 
     Public Sub Validate(results As ValidationResults) Implements IValidate.Validate
