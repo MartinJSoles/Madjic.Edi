@@ -14,6 +14,28 @@ Public Class TestBasicFileParsing
 
     End Function
 
+    <TestMethod()> Async Function TestMultipleFunctionalGroups() As Task
+        Dim Doc As Document
+
+        Using stream As New IO.FileStream(".\samples\TestMultipleFunctionalGroups.txt", IO.FileMode.Open, IO.FileAccess.Read, IO.FileShare.Read)
+            Doc = Await Document.FromStreamAsync(stream)
+        End Using
+
+        Assert.AreEqual(2, Doc.Envelopes.First.FunctionalGroups.Count)
+    End Function
+
+    <TestMethod()> Async Function TestMultipleEnvelopes() As Task
+        Dim Doc As Document
+
+        Using stream As New IO.FileStream(".\samples\TestMultipleEnvelopes.txt", IO.FileMode.Open, IO.FileAccess.Read, IO.FileShare.Read)
+            Doc = Await Document.FromStreamAsync(stream)
+        End Using
+
+        Assert.AreEqual(2, Doc.Envelopes.Count)
+        Assert.AreEqual(1, Doc.Envelopes(1).FunctionalGroups.Count)
+        Assert.AreEqual(2, Doc.Envelopes(1).FunctionalGroups(0).Transactions.Count)
+    End Function
+
     <TestMethod> Async Function DoesTestFileRoundTrip() As Task
         Dim Source As String
         Dim Output As String
