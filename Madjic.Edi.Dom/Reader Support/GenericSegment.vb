@@ -2,6 +2,7 @@
 ''' Provides a raw segment that can be used by the Reader classes.
 ''' </summary>
 ''' <remarks>This class is not exposed outside of the reader methods.</remarks>
+<DebuggerDisplay("{DebuggerText}")>
 Friend Class GenericSegment
     Inherits Segment
 
@@ -49,5 +50,20 @@ Friend Class GenericSegment
         End If
 
         Return Nothing
+    End Function
+
+    Private Function DebuggerText() As String
+        Dim sb As New Text.StringBuilder()
+
+        sb.Append(SegmentID)
+
+        For Each element As StringElement In Elements
+            sb.Append("*"c)
+            sb.Append(element.Value)
+        Next
+
+        sb.Append("~"c)
+
+        Return sb.ToString
     End Function
 End Class
