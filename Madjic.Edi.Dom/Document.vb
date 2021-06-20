@@ -123,7 +123,7 @@
                 Await ReadGroupAsync(Env, G).ConfigureAwait(False)
             End If
 
-        Loop Until rdr.IsAtEndOfEnvelope OrElse G Is Nothing OrElse G.IsAtEndOfGroup
+        Loop Until rdr.IsAtEndOfEnvelope OrElse G Is Nothing
     End Function
 
     ''' <summary>
