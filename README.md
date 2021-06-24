@@ -15,3 +15,5 @@ by a single class definition).
 
 ## Known Issues
 1. There is no code in place to properly handle the repeating elements (such as the EB03 element).
+2. The transaction sets get parsed into the base standard but are not represented in the implementation guide (I.G.) level (837 claim file vs. 837 professional claim file).
+3. Creating transaction sets is affected by the lack of I.G. work that should happen (there should be an extra initialization step that happens to set the specialized loop and segment containers).
