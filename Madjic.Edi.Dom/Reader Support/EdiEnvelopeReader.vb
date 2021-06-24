@@ -90,6 +90,8 @@
             End Get
         End Property
 
+        Public ReadOnly Property EnvelopeTA3Segments As New List(Of Segments.TA3)
+
         Public ReadOnly Property EnvelopTA1Segments As New List(Of Segments.TA1)
 
         Private mState As Integer '0=new (look for ISB, ISE, TA1, GS), 1=read ISB (look for ISE, TA1, GS), 2=read ISE (look for TA1, GS), 3=read TA1, (look for GS)
@@ -103,7 +105,7 @@
             'Try to realign the reader to a GS or IEA segment
             Do Until atEOF
                 If Reader.CurrentSegment IsNot Nothing Then
-                    If mState = 0 Then 'At start, look for ISB, ISE, TA1, GS, or IEA
+                    If mState = 0 Then 'At start, look for ISB, ISE, TA1, TA3, GS, or IEA
                         If String.Compare(Reader.CurrentSegment.SegmentID, "ISB", StringComparison.OrdinalIgnoreCase) = 0 Then
                             mISB = Segments.ISB_Obj.FromGenericSegment(Reader.CurrentSegment, Reader)
                             mState = 1
@@ -122,6 +124,9 @@
                             Return New EdiGroupReader(Me, Reader)
                         ElseIf String.Compare(Reader.CurrentSegment.SegmentID, "IEA", StringComparison.OrdinalIgnoreCase) = 0 Then
                             atEOF = True
+                        ElseIf String.Compare(Reader.CurrentSegment.SegmentID, "TA3", StringComparison.OrdinalIgnoreCase) = 0 Then
+                            EnvelopeTA3Segments.Add(Segments.TA3_Obj.FromGenericSegment(Reader.CurrentSegment, Reader))
+                            mState = 4
                         Else
                             atEOF = (Await Reader.ReadAsync().ConfigureAwait(False) Is Nothing)
                         End If
@@ -157,7 +162,7 @@
                         Else
                             atEOF = (Await Reader.ReadAsync().ConfigureAwait(False) Is Nothing)
                         End If
-                    Else 'Look for GS or IEA
+                    ElseIf mState = 3 Then 'Look for GS or IEA
                         If String.Compare(Reader.CurrentSegment.SegmentID, "GS", StringComparison.OrdinalIgnoreCase) = 0 Then
                             Reader.ResetCountGroup()
                             Return New EdiGroupReader(Me, Reader)
@@ -165,6 +170,15 @@
                             atEOF = True
                         Else
                             atEOF = (Await Reader.ReadAsync().ConfigureAwait(False) Is Nothing)
+                        End If
+                    ElseIf mState = 4 Then 'Look for TA3, IEA
+                        If String.Compare(Reader.CurrentSegment.SegmentID, "TA3", StringComparison.OrdinalIgnoreCase) = 0 Then
+                            EnvelopeTA3Segments.Add(Segments.TA3_Obj.FromGenericSegment(Reader.CurrentSegment, Reader))
+                        ElseIf String.Compare(Reader.CurrentSegment.SegmentID, "IEA", StringComparison.OrdinalIgnoreCase) = 0 Then
+                            atEOF = True
+                        Else
+
+                            Throw New EdiException("Unexpected segment at the envelope level.", Reader.CountEnvelope)
                         End If
                     End If
                 Else
