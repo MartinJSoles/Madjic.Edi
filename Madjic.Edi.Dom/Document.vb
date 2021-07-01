@@ -161,7 +161,7 @@
             T = Await rdr.ReadTransactionSetAsync().ConfigureAwait(False)
 
             If T IsNot Nothing Then
-                Dim tran = Await ReadTransaction(Grp, T).ConfigureAwait(False)
+                Dim tran = Await ReadTransactionAsync(Grp, T).ConfigureAwait(False)
 
                 If tran IsNot Nothing Then
                     Grp.AddTransactionSet(tran)
@@ -178,12 +178,12 @@
     ''' <param name="rdr">An <see cref="EdiReader.EdiTransactionSetReader">EdiTransactionSetReader</see> to read from.</param>
     ''' <returns>A <see cref="TransactionSet">TransactionSet</see> object.</returns>
     ''' <remarks>This method examines the values in the functional group and ST segment to determine which actual transaction set to read.</remarks>
-    Private Shared Async Function ReadTransaction(grp As FunctionalGroup, rdr As EdiReader.EdiTransactionSetReader) As Task(Of TransactionSet)
+    Private Shared Async Function ReadTransactionAsync(grp As FunctionalGroup, rdr As EdiReader.EdiTransactionSetReader) As Task(Of TransactionSet)
         Dim rval = ReaderFactory.CreateTransaction(grp, rdr)
 
         If rval IsNot Nothing Then
             Dim args As New ReaderArgs(rdr) With {
-                .Implementation = ReaderFactory.GetImplementationKey(rval.VersionCode, rval.TransactionSetIdCode)
+                .Implementation = ReaderFactory.GetImplementationKey(rval.VersionCode, rval.TransactionSetIdCode, grp.FunctionalIdCode)
             }
             Await rval.ReadAsync(args).ConfigureAwait(False)
         End If

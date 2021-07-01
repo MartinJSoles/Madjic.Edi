@@ -23,9 +23,16 @@
 
     Public Sub AddTransactionSet(item As TransactionSet)
         If Not IsIterator Then
-            mTransactions.Add(item)
+            If mTransactions.Count = 0 Then
+                mTransactions.Add(item)
+                mID = item.ParentFunctionGroupCode
+            ElseIf String.Compare(FunctionalIdCode, item.ParentFunctionGroupCode, StringComparison.Ordinal) = 0 Then
+                mTransactions.Add(item)
+            Else
+                Throw New NotSupportedException($"The transaction set requires the FuntionalGroup.FunctionalIdCode to match. Expected is '{FunctionalIdCode}', received '{item.ParentFunctionGroupCode}'.")
+            End If
         Else
-            Throw New NotSupportedException("You cannot add a TransactionSet object when useForwardOnlyEnumeration is set to true from the Document.")
+                Throw New NotSupportedException("You cannot add a TransactionSet object when useForwardOnlyEnumeration is set to true from the Document.")
         End If
     End Sub
 
@@ -100,7 +107,11 @@
             Return mID
         End Get
         Set(ByVal value As String)
-            mID = value
+            If mTransactions.Count = 0 Then
+                mID = value
+            Else
+                Throw New NotSupportedException("Cannot change the FunctionalIdCode once a transaction set has been added.")
+            End If
         End Set
     End Property
 

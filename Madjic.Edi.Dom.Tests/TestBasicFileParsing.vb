@@ -3,10 +3,50 @@ Imports Microsoft.VisualStudio.TestTools.UnitTesting
 <TestClass>
 Public Class TestBasicFileParsing
 
+    Private Shared ReadOnly AllFiles() As String = {
+        ".\samples\TestMultipleFunctionalGroups.txt",
+        ".\samples\TestMultipleEnvelopes.txt",
+        ".\samples\Test270.txt",
+        ".\samples\Test271.txt",
+        ".\samples\Test277.txt",
+        ".\samples\Test278.txt",
+        ".\samples\Test820.txt",
+        ".\samples\Test834.txt",
+        ".\samples\Test835.txt",
+        ".\samples\Test837P.txt",
+        ".\samples\Test999.txt"}
+
+    <TestMethod()> Async Function TestAllFileImplementations() As Task
+        Dim Doc As Document
+        Dim ExpectedTypes() As Type = {
+            GetType(Transactions.Transaction270.Transaction270_B1.TransactionSet),
+            GetType(Transactions.Transaction271.Transaction271_B1.TransactionSet),
+            GetType(Transactions.Transaction277.Transaction277_A1.TransactionSet),
+            GetType(Transactions.Transaction278.Transaction278_A3.TransactionSet),
+            GetType(Transactions.Transaction820.Transaction820_A1.TransactionSet),
+            GetType(Transactions.Transaction834.Transaction834_A1.TransactionSet),
+            GetType(Transactions.Transaction835.Transaction835_W1.TransactionSet),
+            GetType(Transactions.Transaction837.Transaction837_Q1.TransactionSet),
+            GetType(Transactions.Transaction999.Transaction999.TransactionSet)}
+
+        For FileId = 2 To 10
+            Debug.Write("<-- File --> ")
+            Debug.WriteLine(AllFiles(FileId))
+
+            Using stream As New IO.FileStream(AllFiles(FileId), IO.FileMode.Open, IO.FileAccess.Read, IO.FileShare.Read)
+                Doc = Await Document.FromStreamAsync(stream)
+            End Using
+
+            Assert.IsTrue(Doc.Envelopes.Count > 0, $"Parsing file ""{AllFiles(FileId)}"" did not produce any envelope.")
+            Assert.IsTrue(Doc.Envelopes(0).FunctionalGroups.Count > 0, $"Parsing file ""{AllFiles(FileId)}"" did not produce any functional group.")
+            Assert.IsTrue(Doc.Envelopes(0).FunctionalGroups(0).Transactions.Count > 0, $"Parsing file ""{AllFiles(FileId)}"" did not produce any transaction set.")
+            Assert.IsInstanceOfType(Doc.Envelopes(0).FunctionalGroups(0).Transactions(0), ExpectedTypes(FileId - 2), $"Parsing file ""{AllFiles(FileId)}"" did not produce correct transaction type.")
+        Next
+    End Function
     <TestMethod()> Async Function CanOpenTestFile() As Task
         Dim Doc As Madjic.Edi.Dom.Document
 
-        Using stream As New IO.FileStream(".\samples\test271.txt", IO.FileMode.Open, IO.FileAccess.Read, IO.FileShare.Read)
+        Using stream As New IO.FileStream(AllFiles(3), IO.FileMode.Open, IO.FileAccess.Read, IO.FileShare.Read)
             Doc = Await Madjic.Edi.Dom.Document.FromStreamAsync(stream)
         End Using
 
@@ -17,7 +57,7 @@ Public Class TestBasicFileParsing
     <TestMethod()> Async Function TestMultipleFunctionalGroups() As Task
         Dim Doc As Document
 
-        Using stream As New IO.FileStream(".\samples\TestMultipleFunctionalGroups.txt", IO.FileMode.Open, IO.FileAccess.Read, IO.FileShare.Read)
+        Using stream As New IO.FileStream(AllFiles(0), IO.FileMode.Open, IO.FileAccess.Read, IO.FileShare.Read)
             Doc = Await Document.FromStreamAsync(stream)
         End Using
 
@@ -27,7 +67,7 @@ Public Class TestBasicFileParsing
     <TestMethod()> Async Function TestMultipleEnvelopes() As Task
         Dim Doc As Document
 
-        Using stream As New IO.FileStream(".\samples\TestMultipleEnvelopes.txt", IO.FileMode.Open, IO.FileAccess.Read, IO.FileShare.Read)
+        Using stream As New IO.FileStream(AllFiles(1), IO.FileMode.Open, IO.FileAccess.Read, IO.FileShare.Read)
             Doc = Await Document.FromStreamAsync(stream)
         End Using
 
@@ -41,11 +81,11 @@ Public Class TestBasicFileParsing
         Dim Output As String
         Dim Doc As Document
 
-        Using stream As New IO.FileStream(".\samples\test271.txt", IO.FileMode.Open, IO.FileAccess.Read, IO.FileShare.Read)
+        Using stream As New IO.FileStream(AllFiles(3), IO.FileMode.Open, IO.FileAccess.Read, IO.FileShare.Read)
             Source = ReadStreamToString(stream)
         End Using
 
-        Using stream As New IO.FileStream(".\samples\test271.txt", IO.FileMode.Open, IO.FileAccess.Read, IO.FileShare.Read)
+        Using stream As New IO.FileStream(AllFiles(3), IO.FileMode.Open, IO.FileAccess.Read, IO.FileShare.Read)
             Doc = Await Document.FromStreamAsync(stream)
         End Using
 
@@ -59,6 +99,25 @@ Public Class TestBasicFileParsing
 
         'Ensure strings are equal
         Assert.AreEqual(Source, Output, False)
+    End Function
+
+    <TestMethod> Async Function ReadImplementation271() As Task
+        Dim Doc As Document
+
+        Using stream As New IO.FileStream(AllFiles(3), IO.FileMode.Open, IO.FileAccess.Read, IO.FileShare.Read)
+            Doc = Await Document.FromStreamAsync(stream)
+        End Using
+
+        Dim RawTS = Doc.Envelopes(0).FunctionalGroups(0).Transactions(0)
+        Dim Imp = TryCast(RawTS, Transactions.Transaction271.Transaction271_B1.TransactionSet)
+
+        Assert.IsNotNull(Imp)
+
+        Assert.IsNotNull(Imp.Loop2000A)
+        Assert.IsTrue(Imp.Loop2000A.Count > 0)
+
+        Assert.IsNotNull(Imp.Loop2000B)
+        Assert.IsTrue(Imp.Loop2000B.Count > 0)
     End Function
 
     ''' <summary>
