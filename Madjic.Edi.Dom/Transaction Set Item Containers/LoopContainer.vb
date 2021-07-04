@@ -6,15 +6,11 @@
         Return String.Format("LoopContainer, T: {0}, Table: {1}, Position: {2}, Maximum Repetitions: {3}, Count: {4}, Parent: {5}", GetType(T).ToString, Table, Position, MaximumRepetitions, Count, If(Parent IsNot Nothing, Parent.ToString, "(null)"))
     End Function
 
-    Public ReadOnly Property Table As Integer
+    Public ReadOnly Property Table As Char
 
-    Public ReadOnly Property Position As Integer
+    Public ReadOnly Property Position As String
 
-    Public Sub New(table As Integer, position As Integer)
-        Me.New(0, table, position)
-    End Sub
-
-    Public Sub New(maximumRepetitions As Integer, table As Integer, position As Integer)
+    Public Sub New(maximumRepetitions As Integer, table As Char, position As String)
         MyBase.New()
         Me.MaximumRepetitions = maximumRepetitions
         Me.Table = table

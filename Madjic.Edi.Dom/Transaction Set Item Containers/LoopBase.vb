@@ -56,12 +56,12 @@
     Friend Property Parent As IParanted Implements IParanted.Parent
 
     'These are used to link the actual instances of loops to their appropriate collections.
-    Friend Property SetArea As Integer? Implements ILoop.SetArea
-    Friend Property SetSequence As Integer? Implements ILoop.SetSequence
+    Friend Property SetArea As String Implements ILoop.SetArea
+    Friend Property SetSequence As String Implements ILoop.SetSequence
 
     'These are the standard positions for loops.
-    Friend Property SetTable As Integer
-    Friend Property SetPosition As Integer
+    Friend Property SetTable As Char
+    Friend Property SetPosition As String
 
     Private mLoop As String
     Public Property LoopID As String

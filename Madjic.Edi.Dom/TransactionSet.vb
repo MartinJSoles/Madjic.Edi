@@ -86,12 +86,14 @@ Public MustInherit Class TransactionSet
         Dim Count As Integer
 
         For index = 0 To mChildren.Count - 2
-            Await mChildren(index).WriteAsync(writer, clearAfterWriting, envelope)
+            If mChildren(index) IsNot Nothing Then
+                Await mChildren(index).WriteAsync(writer, clearAfterWriting, envelope)
 
-            If TypeOf mChildren(index) Is Segment Then
-                Count += 1
-            Else
-                Count += mChildren(index).WriteCount
+                If TypeOf mChildren(index) Is Segment Then
+                    Count += 1
+                Else
+                    Count += mChildren(index).WriteCount
+                End If
             End If
         Next
 

@@ -12,12 +12,12 @@
     ''' <summary>
     ''' Gets the area that this loop instance is defined in the implementation.
     ''' </summary>
-    Public ReadOnly Property Area As Integer
+    Public ReadOnly Property Area As String
 
     ''' <summary>
     ''' Gets the sequence that this loop instance is defined in the implementation.
     ''' </summary>
-    Public ReadOnly Property Sequence As Integer
+    Public ReadOnly Property Sequence As String
 
     ''' <summary>
     ''' Creates a new instance of the <see cref="LoopSubsetContainer(Of T, K)">LoopSubsetContainer</see> class.
@@ -26,7 +26,7 @@
     ''' <param name="area">The implementation area covered by this collection.</param>
     ''' <param name="sequence">The area sequence covered by this collection.</param>
     ''' <remarks></remarks>
-    Friend Sub New(parent As LoopContainer(Of K), repeat As Integer, area As Integer, sequence As Integer)
+    Friend Sub New(parent As LoopContainer(Of K), repeat As Integer, area As String, sequence As String)
         Me.Parent = parent
         Me.Area = area
         Me.Sequence = sequence
@@ -90,7 +90,7 @@
         For index = Parent.Count - 1 To 0 Step -1
             Dim n = TryCast(Parent(index), ILoop)
 
-            If n IsNot Nothing AndAlso TypeOf n Is K AndAlso n.SetArea.HasValue AndAlso n.SetArea = Area AndAlso n.SetSequence.HasValue AndAlso n.SetSequence = Sequence Then
+            If n IsNot Nothing AndAlso TypeOf n Is K AndAlso String.Compare(n.SetArea, Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(n.SetSequence, Sequence, StringComparison.OrdinalIgnoreCase) = 0 Then
                 Parent.RemoveAt(index)
             End If
         Next
@@ -102,7 +102,7 @@
     Public Function Contains(item As T) As Boolean Implements ICollection(Of T).Contains
         Dim L = TryCast(item, ILoop)
 
-        If L IsNot Nothing AndAlso TypeOf L Is K AndAlso L.SetArea.HasValue AndAlso L.SetSequence.HasValue AndAlso L.SetArea = Area AndAlso L.SetSequence = Sequence Then
+        If L IsNot Nothing AndAlso TypeOf L Is K AndAlso String.Compare(L.SetArea, Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(L.SetSequence, Sequence, StringComparison.OrdinalIgnoreCase) = 0 Then
             Return Parent.Contains(L)
         Else
             Return False
@@ -116,7 +116,7 @@
         For Each node In Parent
             Dim n = TryCast(node, ILoop)
 
-            If n IsNot Nothing AndAlso n.SetArea.HasValue AndAlso n.SetSequence.HasValue AndAlso n.SetArea = Area AndAlso n.SetSequence = Sequence Then
+            If n IsNot Nothing AndAlso String.Compare(n.SetArea, Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(n.SetSequence, Sequence, StringComparison.OrdinalIgnoreCase) = 0 Then
                 array(arrayIndex) = n
                 arrayIndex += 1
             End If
@@ -128,17 +128,7 @@
     ''' </summary>
     Public ReadOnly Property Count As Integer Implements ICollection(Of T).Count
         Get
-            Dim idx As Integer
-
-            For Each node In Parent
-                Dim n = TryCast(node, ILoop)
-
-                If n IsNot Nothing AndAlso TypeOf n Is K AndAlso n.SetArea.HasValue AndAlso n.SetSequence.HasValue AndAlso n.SetArea = Area AndAlso n.SetSequence = Sequence Then
-                    idx += 1
-                End If
-            Next
-
-            Return idx
+            Return (From c In Parent Where String.Compare(c.SetArea, Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(c.SetSequence, Sequence, StringComparison.OrdinalIgnoreCase) = 0).Count
         End Get
     End Property
 
@@ -154,7 +144,7 @@
     Public Function Remove(item As T) As Boolean Implements ICollection(Of T).Remove
         Dim L = TryCast(item, ILoop)
 
-        If L IsNot Nothing AndAlso TypeOf L Is K AndAlso L.SetArea.HasValue AndAlso L.SetSequence.HasValue AndAlso L.SetArea = Area AndAlso L.SetSequence = Sequence Then
+        If L IsNot Nothing AndAlso TypeOf L Is K AndAlso String.Compare(L.SetArea, Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(L.SetSequence, Sequence, StringComparison.OrdinalIgnoreCase) = 0 Then
             Return Parent.Remove(L)
         Else
             Return False
@@ -162,7 +152,7 @@
     End Function
 
     Public Function GetEnumerator() As IEnumerator(Of T) Implements IEnumerable(Of T).GetEnumerator
-        Return New SubsetEnumerator(Me)
+        Return (From c In Parent Where String.Compare(c.SetArea, Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(c.SetSequence, Sequence, StringComparison.OrdinalIgnoreCase) = 0).Cast(Of T).GetEnumerator
     End Function
 
     ''' <summary>
@@ -172,7 +162,7 @@
         Dim idx As Integer
         Dim L = TryCast(item, ILoop)
 
-        If L IsNot Nothing AndAlso TypeOf L Is K AndAlso L.SetArea.HasValue AndAlso L.SetSequence.HasValue AndAlso L.SetArea = Area AndAlso L.SetSequence = Sequence Then
+        If L IsNot Nothing AndAlso TypeOf L Is K AndAlso String.Compare(L.SetArea, Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(L.SetSequence, Sequence, StringComparison.OrdinalIgnoreCase) = 0 Then
             For Each node In Parent
                 If node.Equals(L) Then
                     Return idx
@@ -180,7 +170,7 @@
 
                 Dim n = TryCast(node, ILoop)
 
-                If n.SetArea = Area AndAlso n.SetSequence = Sequence Then
+                If String.Compare(n.SetArea, Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(n.SetSequence, Sequence, StringComparison.OrdinalIgnoreCase) = 0 Then
                     idx += 1
                 End If
             Next
@@ -208,7 +198,7 @@
             Do While curt < Parent.Count AndAlso idx <= index
                 Dim n = TryCast(Parent(curt), ILoop)
 
-                If n IsNot Nothing AndAlso n.SetArea.HasValue AndAlso n.SetSequence.HasValue AndAlso n.SetArea = Area AndAlso n.SetSequence = Sequence Then
+                If n IsNot Nothing AndAlso String.Compare(n.SetArea, Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(n.SetSequence, Sequence, StringComparison.OrdinalIgnoreCase) = 0 Then
                     If idx = index Then
                         Parent.Insert(curt, L)
                         Exit Sub
@@ -234,7 +224,7 @@
             For Each node In Parent
                 Dim n = TryCast(node, ILoop)
 
-                If n IsNot Nothing AndAlso TypeOf n Is K AndAlso n.SetArea.HasValue AndAlso n.SetSequence.HasValue AndAlso n.SetArea = Area AndAlso n.SetSequence = Sequence Then
+                If n IsNot Nothing AndAlso TypeOf n Is K AndAlso String.Compare(n.SetArea, Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(n.SetSequence, Sequence, StringComparison.OrdinalIgnoreCase) = 0 Then
                     If index = idx Then
                         n = TryCast(node, ILoop)
                         Return n
@@ -254,7 +244,7 @@
                 For curt = 0 To Parent.Count - 1
                     Dim n = TryCast(Parent(curt), ILoop)
 
-                    If n.SetArea.HasValue AndAlso n.SetSequence.HasValue AndAlso n.SetArea = Area AndAlso n.SetSequence = Sequence Then
+                    If String.Compare(n.SetArea, Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(n.SetSequence, Sequence, StringComparison.OrdinalIgnoreCase) = 0 Then
                         If idx = index Then
                             L.SetArea = Area
                             L.SetSequence = Sequence
@@ -280,7 +270,7 @@
         For curt = 0 To Parent.Count - 1
             Dim n = TryCast(Parent(curt), LoopBase)
 
-            If n IsNot Nothing AndAlso TypeOf n Is K AndAlso n.SetArea.HasValue AndAlso n.SetSequence.HasValue AndAlso n.SetArea = Area AndAlso n.SetSequence = Sequence Then
+            If n IsNot Nothing AndAlso TypeOf n Is K AndAlso String.Compare(n.SetArea, Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(n.SetSequence, Sequence, StringComparison.OrdinalIgnoreCase) = 0 Then
                 If index = idx Then
                     Parent.RemoveAt(curt)
                     Exit Sub
@@ -297,72 +287,72 @@
         Return GetEnumerator()
     End Function
 
-    Private Class SubsetEnumerator
-        Implements IEnumerator(Of T)
+    '    Private Class SubsetEnumerator
+    '        Implements IEnumerator(Of T)
 
 
-        Private mParent As LoopSubsetContainer(Of T, K)
-        Private mCurrent As Integer
+    '        Private mParent As LoopSubsetContainer(Of T, K)
+    '        Private mCurrent As Integer
 
-        Public Sub New(parent As LoopSubsetContainer(Of T, K))
-            mParent = parent
-            mCurrent = -1
-        End Sub
+    '        Public Sub New(parent As LoopSubsetContainer(Of T, K))
+    '            mParent = parent
+    '            mCurrent = -1
+    '        End Sub
 
-        Public ReadOnly Property Current As T Implements IEnumerator(Of T).Current
-            Get
-                If mCurrent < 0 Then
-                    Throw New NotSupportedException
-                Else
-                    Return mParent(mCurrent)
-                End If
-            End Get
-        End Property
+    '        Public ReadOnly Property Current As T Implements IEnumerator(Of T).Current
+    '            Get
+    '                If mCurrent < 0 Then
+    '                    Throw New NotSupportedException
+    '                Else
+    '                    Return mParent(mCurrent)
+    '                End If
+    '            End Get
+    '        End Property
 
-        Private ReadOnly Property Current1 As Object Implements IEnumerator.Current
-            Get
-                Return Current
-            End Get
-        End Property
+    '        Private ReadOnly Property Current1 As Object Implements IEnumerator.Current
+    '            Get
+    '                Return Current
+    '            End Get
+    '        End Property
 
-        Public Function MoveNext() As Boolean Implements IEnumerator.MoveNext
-            Do While mCurrent < mParent.Parent.Count - 1
-                mCurrent += 1
+    '        Public Function MoveNext() As Boolean Implements IEnumerator.MoveNext
+    '            Do While mCurrent < mParent.Parent.Count - 1
+    '                mCurrent += 1
 
-                Dim n As LoopBase = TryCast(mParent(mCurrent), LoopBase)
+    '                Dim n As LoopBase = TryCast(mParent(mCurrent), LoopBase)
 
-                If n IsNot Nothing AndAlso TypeOf n Is K AndAlso n.SetArea.HasValue AndAlso n.SetSequence.HasValue AndAlso n.SetArea = mParent.Area AndAlso n.SetSequence = mParent.Sequence Then
-                    Exit Do
-                End If
-            Loop
+    '                If n IsNot Nothing AndAlso TypeOf n Is K AndAlso String.Compare(n.SetArea, mParent.Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(n.SetSequence, mParent.Sequence, StringComparison.OrdinalIgnoreCase) = 0 Then
+    '                    Exit Do
+    '                End If
+    '            Loop
 
-            Return mCurrent < mParent.Parent.Count
-        End Function
+    '            Return mCurrent < mParent.Parent.Count
+    '        End Function
 
-        Public Sub Reset() Implements IEnumerator.Reset
-            mCurrent = -1
-        End Sub
+    '        Public Sub Reset() Implements IEnumerator.Reset
+    '            mCurrent = -1
+    '        End Sub
 
-#Region "IDisposable Support"
-        Private disposedValue As Boolean ' To detect redundant calls
+    '#Region "IDisposable Support"
+    '        Private disposedValue As Boolean ' To detect redundant calls
 
-        ' IDisposable
-        Protected Overridable Sub Dispose(disposing As Boolean)
-            If Not Me.disposedValue Then
-                If disposing Then
-                    mParent = Nothing
-                End If
-            End If
-            Me.disposedValue = True
-        End Sub
+    '        ' IDisposable
+    '        Protected Overridable Sub Dispose(disposing As Boolean)
+    '            If Not Me.disposedValue Then
+    '                If disposing Then
+    '                    mParent = Nothing
+    '                End If
+    '            End If
+    '            Me.disposedValue = True
+    '        End Sub
 
-        ' This code added by Visual Basic to correctly implement the disposable pattern.
-        Public Sub Dispose() Implements IDisposable.Dispose
-            ' Do not change this code.  Put cleanup code in Dispose(disposing As Boolean) above.
-            Dispose(True)
-            GC.SuppressFinalize(Me)
-        End Sub
-#End Region
+    '        ' This code added by Visual Basic to correctly implement the disposable pattern.
+    '        Public Sub Dispose() Implements IDisposable.Dispose
+    '            ' Do not change this code.  Put cleanup code in Dispose(disposing As Boolean) above.
+    '            Dispose(True)
+    '            GC.SuppressFinalize(Me)
+    '        End Sub
+    '#End Region
 
-    End Class
+    '    End Class
 End Class

@@ -1,8 +1,8 @@
 ﻿Public Interface ISegment
     Inherits ITransactionSetItem
 
-    Property SetArea As Integer?
-    Property SetSequence As Integer?
+    Property SetArea As String
+    Property SetSequence As String
 End Interface
 
 ''' <summary>
@@ -140,10 +140,10 @@ Public MustInherit Class Segment
     Friend Property Parent As IParanted Implements IParanted.Parent
 
     'These are used to link the actual instances of segments to their appropriate collections.
-    Friend Property SetArea As Integer? Implements ISegment.SetArea
-    Friend Property SetSequence As Integer? Implements ISegment.SetSequence
+    Friend Property SetArea As String Implements ISegment.SetArea
+    Friend Property SetSequence As String Implements ISegment.SetSequence
 
     'These are the standard positions for segments.
-    Friend Property SetTable As Integer
-    Friend Property SetPosition As Integer
+    Friend Property SetTable As Char
+    Friend Property SetPosition As String
 End Class

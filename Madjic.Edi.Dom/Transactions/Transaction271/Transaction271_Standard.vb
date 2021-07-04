@@ -3,7 +3,7 @@
 
 		Partial Friend Class Standard_Obj
 			Inherits TransactionSet
-			Implements Standard, Dom.Transactions.Transaction271.Transaction271_B1.TransactionSet
+			Implements Standard, Edi.Dom.Transactions.Transaction271.Transaction271_B1.TransactionSet
 			Friend Sub New(versionCode As String)
 				Me.New(String.Empty, versionCode)
 			End Sub
@@ -11,10 +11,10 @@
 			Friend Sub New(controlNumber As String, versionCode As String)
 				MyBase.New("HB", versionCode)
 
-				Children.AddRange({New Dom.Segments.ST_Obj,
-											CType(Nothing, Dom.Segments.BHT_Obj),
-											New LoopContainer(Of Dom.Transactions.Transaction271.Loops.Loop2000)(0, 2, 100),
-											New Dom.Segments.SE_Obj})
+				Children.AddRange({New Edi.Dom.Segments.ST_Obj,
+											CType(Nothing, Edi.Dom.Segments.BHT_Obj),
+											New LoopContainer(Of Edi.Dom.Transactions.Transaction271.Loops.Loop2000)(0, "2", "0100"),
+											New Edi.Dom.Segments.SE_Obj})
 
 				ST_Obj.ST01 = "271"
 				ST_Obj.ST02 = controlNumber
@@ -42,18 +42,18 @@
 				Dim Implementation As String = args.Implementation
 				Dim Seg As Segment
 				If String.Compare(SegmentName, "ST", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.ST_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.ST_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					ST_Obj = Seg
-					Dim S2 = CType(Seg, Dom.Segments.ST_Obj)
+					Dim S2 = CType(Seg, Edi.Dom.Segments.ST_Obj)
 					If MyBase.CompareKey(S2.ST01, ";271;") AndAlso String.Compare(args.Implementation, "_271B1", StringComparison.OrdinalIgnoreCase) = 0 Then
-						Seg.SetArea = 1
-						Seg.SetSequence = 36
+						Seg.SetArea = "1"
+						Seg.SetSequence = "0100"
 					End If
 				ElseIf String.Compare(SegmentName, "BHT", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.BHT_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.BHT_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					BHT_Obj = Seg
 				ElseIf String.Compare(SegmentName, "SE", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.SE_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.SE_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					SE_Obj = Seg
 				End If
 			End Sub
@@ -64,28 +64,28 @@
 				Dim Temp = args.Implementation
 
 				If String.Compare(args.DataSegment.SegmentID, "HL", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Dim NewLoop As LoopBase = New Dom.Transactions.Transaction271.Loop2000_Obj
+					Dim NewLoop As LoopBase = New Edi.Dom.Transactions.Transaction271.Loop2000_Obj
 					Dim LoopKey As String = args.DataSegment.ToStringValue(2)
 					Loop2000_Obj.Add(NewLoop)
 					If MyBase.CompareKey(LoopKey, ";20;") AndAlso String.Compare(args.Implementation, "_271B1", StringComparison.OrdinalIgnoreCase) = 0 Then
 						args.Implementation = "_271B1__2000A"
-						NewLoop.SetArea = 2
-						NewLoop.SetSequence = 36
+						NewLoop.SetArea = "2"
+						NewLoop.SetSequence = "0100"
 						Await NewLoop.ReadAsync(args).ConfigureAwait(False)
 					ElseIf MyBase.CompareKey(LoopKey, ";21;") AndAlso String.Compare(args.Implementation, "_271B1", StringComparison.OrdinalIgnoreCase) = 0 Then
 						args.Implementation = "_271B1__2000B"
-						NewLoop.SetArea = 3
-						NewLoop.SetSequence = 36
+						NewLoop.SetArea = "3"
+						NewLoop.SetSequence = "0100"
 						Await NewLoop.ReadAsync(args).ConfigureAwait(False)
 					ElseIf MyBase.CompareKey(LoopKey, ";22;") AndAlso String.Compare(args.Implementation, "_271B1", StringComparison.OrdinalIgnoreCase) = 0 Then
 						args.Implementation = "_271B1__2000C"
-						NewLoop.SetArea = 4
-						NewLoop.SetSequence = 36
+						NewLoop.SetArea = "4"
+						NewLoop.SetSequence = "0100"
 						Await NewLoop.ReadAsync(args).ConfigureAwait(False)
 					ElseIf MyBase.CompareKey(LoopKey, ";23;") AndAlso String.Compare(args.Implementation, "_271B1", StringComparison.OrdinalIgnoreCase) = 0 Then
 						args.Implementation = "_271B1__2000D"
-						NewLoop.SetArea = 5
-						NewLoop.SetSequence = 36
+						NewLoop.SetArea = "5"
+						NewLoop.SetSequence = "0100"
 						Await NewLoop.ReadAsync(args).ConfigureAwait(False)
 					Else
 						Await NewLoop.ReadAsync(args).ConfigureAwait(False)
@@ -93,127 +93,127 @@
 				End If
 				args.Implementation = Temp
 			End Function
-			Friend Property ST_Obj As Dom.Segments.ST_Obj
+			Friend Property ST_Obj As Edi.Dom.Segments.ST_Obj
 				Get
-					Return CType(Children(0), Dom.Segments.ST_Obj)
+					Return CType(Children(0), Edi.Dom.Segments.ST_Obj)
 				End Get
-				Set(value As Dom.Segments.ST_Obj)
+				Set(value As Edi.Dom.Segments.ST_Obj)
 					Children(0) = value
 				End Set
 			End Property
 
-			Private Property ST_Std As Dom.Segments.ST Implements Dom.Transactions.Transaction271.Standard.ST
+			Private Property ST_Std As Edi.Dom.Segments.ST Implements Edi.Dom.Transactions.Transaction271.Standard.ST
 				Get
-					Return CType(Children(0), Dom.Segments.ST_Obj)
+					Return CType(Children(0), Edi.Dom.Segments.ST_Obj)
 				End Get
-				Set(value As Dom.Segments.ST)
+				Set(value As Edi.Dom.Segments.ST)
 					Children(0) = value
 				End Set
 			End Property
 
-			Private Property ST_IFace_Transaction271_B1 As Dom.Transactions.Transaction271.Transaction271_B1.Segments.ST Implements Dom.Transactions.Transaction271.Transaction271_B1.TransactionSet.ST
+			Private Property ST_IFace_Transaction271_B1 As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.ST Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.TransactionSet.ST
 				Get
-					Return CType(Children(0), Dom.Transactions.Transaction271.Transaction271_B1.Segments.ST)
+					Return CType(Children(0), Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.ST)
 				End Get
-				Set(value As Dom.Transactions.Transaction271.Transaction271_B1.Segments.ST)
+				Set(value As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.ST)
 					Children(0) = value
 				End Set
 			End Property
-			Friend Property BHT_Obj As Dom.Segments.BHT_Obj
+			Friend Property BHT_Obj As Edi.Dom.Segments.BHT_Obj
 				Get
-					Return CType(Children(1), Dom.Segments.BHT_Obj)
+					Return CType(Children(1), Edi.Dom.Segments.BHT_Obj)
 				End Get
-				Set(value As Dom.Segments.BHT_Obj)
+				Set(value As Edi.Dom.Segments.BHT_Obj)
 					Children(1) = value
 				End Set
 			End Property
 
-			Private Property BHT_Std As Dom.Segments.BHT Implements Dom.Transactions.Transaction271.Standard.BHT
+			Private Property BHT_Std As Edi.Dom.Segments.BHT Implements Edi.Dom.Transactions.Transaction271.Standard.BHT
 				Get
-					Return CType(Children(1), Dom.Segments.BHT_Obj)
+					Return CType(Children(1), Edi.Dom.Segments.BHT_Obj)
 				End Get
-				Set(value As Dom.Segments.BHT)
+				Set(value As Edi.Dom.Segments.BHT)
 					Children(1) = value
 				End Set
 			End Property
 
-			Private Property BHT_IFace_Transaction271_B1 As Dom.Transactions.Transaction271.Transaction271_B1.Segments.BHT Implements Dom.Transactions.Transaction271.Transaction271_B1.TransactionSet.BHT
+			Private Property BHT_IFace_Transaction271_B1 As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.BHT Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.TransactionSet.BHT
 				Get
-					Return CType(Children(1), Dom.Transactions.Transaction271.Transaction271_B1.Segments.BHT)
+					Return CType(Children(1), Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.BHT)
 				End Get
-				Set(value As Dom.Transactions.Transaction271.Transaction271_B1.Segments.BHT)
+				Set(value As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.BHT)
 					Children(1) = value
 				End Set
 			End Property
-			Friend ReadOnly Property Loop2000_Obj As LoopContainer(Of Dom.Transactions.Transaction271.Loops.Loop2000) Implements Dom.Transactions.Transaction271.Standard.Loop2000
+			Friend ReadOnly Property Loop2000_Obj As LoopContainer(Of Edi.Dom.Transactions.Transaction271.Loops.Loop2000) Implements Edi.Dom.Transactions.Transaction271.Standard.Loop2000
 				Get
-					Return CType(Children(2), LoopContainer(Of Dom.Transactions.Transaction271.Loops.Loop2000))
+					Return CType(Children(2), LoopContainer(Of Edi.Dom.Transactions.Transaction271.Loops.Loop2000))
 				End Get
 			End Property
 
-			Private Loop2000ASubset_Transaction271_B1 As LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000A, Dom.Transactions.Transaction271.Loops.Loop2000)
-			Private ReadOnly Property Loop2000A_Obj_Transaction271_B1 As LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000A, Dom.Transactions.Transaction271.Loops.Loop2000) Implements Dom.Transactions.Transaction271.Transaction271_B1.TransactionSet.Loop2000A
+			Private Loop2000ASubset_Transaction271_B1 As LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000A, Edi.Dom.Transactions.Transaction271.Loops.Loop2000)
+			Private ReadOnly Property Loop2000A_Obj_Transaction271_B1 As LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000A, Edi.Dom.Transactions.Transaction271.Loops.Loop2000) Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.TransactionSet.Loop2000A
 				Get
 					If Loop2000ASubset_Transaction271_B1 Is Nothing Then
-						Loop2000ASubset_Transaction271_B1 = New LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000A, Dom.Transactions.Transaction271.Loops.Loop2000)(Children(2), 0, 2, 36)
+						Loop2000ASubset_Transaction271_B1 = New LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000A, Edi.Dom.Transactions.Transaction271.Loops.Loop2000)(Children(2), 0, "2", "0100")
 					End If
 
 					Return Loop2000ASubset_Transaction271_B1
 				End Get
 			End Property
-			Private Loop2000BSubset_Transaction271_B1 As LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000B, Dom.Transactions.Transaction271.Loops.Loop2000)
-			Private ReadOnly Property Loop2000B_Obj_Transaction271_B1 As LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000B, Dom.Transactions.Transaction271.Loops.Loop2000) Implements Dom.Transactions.Transaction271.Transaction271_B1.TransactionSet.Loop2000B
+			Private Loop2000BSubset_Transaction271_B1 As LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000B, Edi.Dom.Transactions.Transaction271.Loops.Loop2000)
+			Private ReadOnly Property Loop2000B_Obj_Transaction271_B1 As LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000B, Edi.Dom.Transactions.Transaction271.Loops.Loop2000) Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.TransactionSet.Loop2000B
 				Get
 					If Loop2000BSubset_Transaction271_B1 Is Nothing Then
-						Loop2000BSubset_Transaction271_B1 = New LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000B, Dom.Transactions.Transaction271.Loops.Loop2000)(Children(2), 0, 3, 36)
+						Loop2000BSubset_Transaction271_B1 = New LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000B, Edi.Dom.Transactions.Transaction271.Loops.Loop2000)(Children(2), 0, "3", "0100")
 					End If
 
 					Return Loop2000BSubset_Transaction271_B1
 				End Get
 			End Property
-			Private Loop2000CSubset_Transaction271_B1 As LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000C, Dom.Transactions.Transaction271.Loops.Loop2000)
-			Private ReadOnly Property Loop2000C_Obj_Transaction271_B1 As LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000C, Dom.Transactions.Transaction271.Loops.Loop2000) Implements Dom.Transactions.Transaction271.Transaction271_B1.TransactionSet.Loop2000C
+			Private Loop2000CSubset_Transaction271_B1 As LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000C, Edi.Dom.Transactions.Transaction271.Loops.Loop2000)
+			Private ReadOnly Property Loop2000C_Obj_Transaction271_B1 As LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000C, Edi.Dom.Transactions.Transaction271.Loops.Loop2000) Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.TransactionSet.Loop2000C
 				Get
 					If Loop2000CSubset_Transaction271_B1 Is Nothing Then
-						Loop2000CSubset_Transaction271_B1 = New LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000C, Dom.Transactions.Transaction271.Loops.Loop2000)(Children(2), 0, 4, 36)
+						Loop2000CSubset_Transaction271_B1 = New LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000C, Edi.Dom.Transactions.Transaction271.Loops.Loop2000)(Children(2), 0, "4", "0100")
 					End If
 
 					Return Loop2000CSubset_Transaction271_B1
 				End Get
 			End Property
-			Private Loop2000DSubset_Transaction271_B1 As LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000D, Dom.Transactions.Transaction271.Loops.Loop2000)
-			Private ReadOnly Property Loop2000D_Obj_Transaction271_B1 As LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000D, Dom.Transactions.Transaction271.Loops.Loop2000) Implements Dom.Transactions.Transaction271.Transaction271_B1.TransactionSet.Loop2000D
+			Private Loop2000DSubset_Transaction271_B1 As LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000D, Edi.Dom.Transactions.Transaction271.Loops.Loop2000)
+			Private ReadOnly Property Loop2000D_Obj_Transaction271_B1 As LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000D, Edi.Dom.Transactions.Transaction271.Loops.Loop2000) Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.TransactionSet.Loop2000D
 				Get
 					If Loop2000DSubset_Transaction271_B1 Is Nothing Then
-						Loop2000DSubset_Transaction271_B1 = New LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000D, Dom.Transactions.Transaction271.Loops.Loop2000)(Children(2), 0, 5, 36)
+						Loop2000DSubset_Transaction271_B1 = New LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000D, Edi.Dom.Transactions.Transaction271.Loops.Loop2000)(Children(2), 0, "5", "0100")
 					End If
 
 					Return Loop2000DSubset_Transaction271_B1
 				End Get
 			End Property
-			Friend Property SE_Obj As Dom.Segments.SE_Obj
+			Friend Property SE_Obj As Edi.Dom.Segments.SE_Obj
 				Get
-					Return CType(Children(3), Dom.Segments.SE_Obj)
+					Return CType(Children(3), Edi.Dom.Segments.SE_Obj)
 				End Get
-				Set(value As Dom.Segments.SE_Obj)
+				Set(value As Edi.Dom.Segments.SE_Obj)
 					Children(3) = value
 				End Set
 			End Property
 
-			Private Property SE_Std As Dom.Segments.SE Implements Dom.Transactions.Transaction271.Standard.SE
+			Private Property SE_Std As Edi.Dom.Segments.SE Implements Edi.Dom.Transactions.Transaction271.Standard.SE
 				Get
-					Return CType(Children(3), Dom.Segments.SE_Obj)
+					Return CType(Children(3), Edi.Dom.Segments.SE_Obj)
 				End Get
-				Set(value As Dom.Segments.SE)
+				Set(value As Edi.Dom.Segments.SE)
 					Children(3) = value
 				End Set
 			End Property
 
-			Private Property SE_IFace_Transaction271_B1 As Dom.Transactions.Transaction271.Transaction271_B1.Segments.SE Implements Dom.Transactions.Transaction271.Transaction271_B1.TransactionSet.SE
+			Private Property SE_IFace_Transaction271_B1 As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.SE Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.TransactionSet.SE
 				Get
-					Return CType(Children(3), Dom.Transactions.Transaction271.Transaction271_B1.Segments.SE)
+					Return CType(Children(3), Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.SE)
 				End Get
-				Set(value As Dom.Transactions.Transaction271.Transaction271_B1.Segments.SE)
+				Set(value As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.SE)
 					Children(3) = value
 				End Set
 			End Property
@@ -221,18 +221,18 @@
 
 		Partial Friend Class Loop2000_Obj
 			Inherits LoopBase
-			Implements Dom.Transactions.Transaction271.Loops.Loop2000,
-									Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000A,
-									Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000B,
-									Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000C,
-									Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000D
+			Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2000,
+									Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000A,
+									Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000B,
+									Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000C,
+									Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000D
 			Friend Sub New()
 				MyBase.New
 
-				Children.AddRange({CType(Nothing, Dom.Segments.HL_Obj),
-												New SegmentContainer(Of Dom.Segments.TRN)(2, 2, 200),
-												New SegmentContainer(Of Dom.Segments.AAA)(9, 2, 250),
-												New LoopContainer(Of Dom.Transactions.Transaction271.Loops.Loop2100)(0, 2, 300)})
+				Children.AddRange({CType(Nothing, Edi.Dom.Segments.HL_Obj),
+												New SegmentContainer(Of Edi.Dom.Segments.TRN)(2, "2", "0200"),
+												New SegmentContainer(Of Edi.Dom.Segments.AAA)(9, "2", "0250"),
+												New LoopContainer(Of Edi.Dom.Transactions.Transaction271.Loops.Loop2100)(0, "2", "0300")})
 
 				Initialize()
 			End Sub
@@ -261,27 +261,27 @@
 				Dim Implementation As String = args.Implementation
 				Dim Seg As Segment
 				If String.Compare(SegmentName, "HL", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.HL_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.HL_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					HL_Obj = Seg
-					Dim S2 = CType(Seg, Dom.Segments.HL_Obj)
+					Dim S2 = CType(Seg, Edi.Dom.Segments.HL_Obj)
 					If MyBase.CompareKey(S2.HL03, ";20;") AndAlso String.Compare(args.Implementation, "_271B1__2000A", StringComparison.OrdinalIgnoreCase) = 0 Then
-						Seg.SetArea = 2
-						Seg.SetSequence = 36
+						Seg.SetArea = "2"
+						Seg.SetSequence = "0100"
 					ElseIf MyBase.CompareKey(S2.HL03, ";21;") AndAlso String.Compare(args.Implementation, "_271B1__2000B", StringComparison.OrdinalIgnoreCase) = 0 Then
-						Seg.SetArea = 3
-						Seg.SetSequence = 36
+						Seg.SetArea = "3"
+						Seg.SetSequence = "0100"
 					ElseIf MyBase.CompareKey(S2.HL03, ";22;") AndAlso String.Compare(args.Implementation, "_271B1__2000C", StringComparison.OrdinalIgnoreCase) = 0 Then
-						Seg.SetArea = 4
-						Seg.SetSequence = 36
+						Seg.SetArea = "4"
+						Seg.SetSequence = "0100"
 					ElseIf MyBase.CompareKey(S2.HL03, ";23;") AndAlso String.Compare(args.Implementation, "_271B1__2000D", StringComparison.OrdinalIgnoreCase) = 0 Then
-						Seg.SetArea = 5
-						Seg.SetSequence = 36
+						Seg.SetArea = "5"
+						Seg.SetSequence = "0100"
 					End If
 				ElseIf String.Compare(SegmentName, "TRN", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.TRN_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.TRN_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					TRN_Obj.Add(Seg)
 				ElseIf String.Compare(SegmentName, "AAA", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.AAA_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.AAA_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					AAA_Obj.Add(Seg)
 				End If
 			End Sub
@@ -292,28 +292,28 @@
 				Dim Temp = args.Implementation
 
 				If String.Compare(args.DataSegment.SegmentID, "NM1", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Dim NewLoop As LoopBase = New Dom.Transactions.Transaction271.Loop2100_Obj
+					Dim NewLoop As LoopBase = New Edi.Dom.Transactions.Transaction271.Loop2100_Obj
 					Dim LoopKey As String = args.DataSegment.ToStringValue(0)
 					Loop2100_Obj.Add(NewLoop)
 					If MyBase.CompareKey(LoopKey, ";2B;36;GP;P5;PR;") AndAlso String.Compare(args.Implementation, "_271B1__2000A", StringComparison.OrdinalIgnoreCase) = 0 Then
 						args.Implementation = "_271B1__2000A__2100A"
-						NewLoop.SetArea = 2
-						NewLoop.SetSequence = 108
+						NewLoop.SetArea = "2"
+						NewLoop.SetSequence = "0300"
 						Await NewLoop.ReadAsync(args).ConfigureAwait(False)
 					ElseIf MyBase.CompareKey(LoopKey, ";1P;2B;36;80;FA;GP;P5;PR;") AndAlso String.Compare(args.Implementation, "_271B1__2000B", StringComparison.OrdinalIgnoreCase) = 0 Then
 						args.Implementation = "_271B1__2000B__2100B"
-						NewLoop.SetArea = 3
-						NewLoop.SetSequence = 108
+						NewLoop.SetArea = "3"
+						NewLoop.SetSequence = "0300"
 						Await NewLoop.ReadAsync(args).ConfigureAwait(False)
 					ElseIf MyBase.CompareKey(LoopKey, ";IL;") AndAlso String.Compare(args.Implementation, "_271B1__2000C", StringComparison.OrdinalIgnoreCase) = 0 Then
 						args.Implementation = "_271B1__2000C__2100C"
-						NewLoop.SetArea = 4
-						NewLoop.SetSequence = 108
+						NewLoop.SetArea = "4"
+						NewLoop.SetSequence = "0300"
 						Await NewLoop.ReadAsync(args).ConfigureAwait(False)
 					ElseIf MyBase.CompareKey(LoopKey, ";03;") AndAlso String.Compare(args.Implementation, "_271B1__2000D", StringComparison.OrdinalIgnoreCase) = 0 Then
 						args.Implementation = "_271B1__2000D__2100D"
-						NewLoop.SetArea = 5
-						NewLoop.SetSequence = 108
+						NewLoop.SetArea = "5"
+						NewLoop.SetSequence = "0300"
 						Await NewLoop.ReadAsync(args).ConfigureAwait(False)
 					Else
 						Await NewLoop.ReadAsync(args).ConfigureAwait(False)
@@ -321,109 +321,109 @@
 				End If
 				args.Implementation = Temp
 			End Function
-			Friend Property HL_Obj As Dom.Segments.HL_Obj
+			Friend Property HL_Obj As Edi.Dom.Segments.HL_Obj
 				Get
-					Return CType(Children(0), Dom.Segments.HL_Obj)
+					Return CType(Children(0), Edi.Dom.Segments.HL_Obj)
 				End Get
-				Set(value As Dom.Segments.HL_Obj)
+				Set(value As Edi.Dom.Segments.HL_Obj)
 					Children(0) = value
 				End Set
 			End Property
 
-			Private Property HL_Std As Dom.Segments.HL Implements Dom.Transactions.Transaction271.Loops.Loop2000.HL
+			Private Property HL_Std As Edi.Dom.Segments.HL Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2000.HL
 				Get
-					Return CType(Children(0), Dom.Segments.HL_Obj)
+					Return CType(Children(0), Edi.Dom.Segments.HL_Obj)
 				End Get
-				Set(value As Dom.Segments.HL)
+				Set(value As Edi.Dom.Segments.HL)
 					Children(0) = value
 				End Set
 			End Property
 
-			Private Property HL_IFace_Loop2000A_Obj As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000A.HL Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000A.HL
+			Private Property HL_IFace_Loop2000A_Obj As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000A.HL Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000A.HL
 				Get
-					Return CType(Children(0), Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000A.HL)
+					Return CType(Children(0), Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000A.HL)
 				End Get
-				Set(value As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000A.HL)
+				Set(value As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000A.HL)
 					Children(0) = value
 				End Set
 			End Property
-			Private Property HL_IFace_1_Loop2000B_Obj As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000B.HL Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000B.HL
+			Private Property HL_IFace_1_Loop2000B_Obj As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000B.HL Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000B.HL
 				Get
-					Return CType(Children(0), Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000B.HL)
+					Return CType(Children(0), Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000B.HL)
 				End Get
-				Set(value As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000B.HL)
+				Set(value As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000B.HL)
 					Children(0) = value
 				End Set
 			End Property
-			Private Property HL_IFace_2_Loop2000C_Obj As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000C.HL Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000C.HL
+			Private Property HL_IFace_2_Loop2000C_Obj As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000C.HL Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000C.HL
 				Get
-					Return CType(Children(0), Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000C.HL)
+					Return CType(Children(0), Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000C.HL)
 				End Get
-				Set(value As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000C.HL)
+				Set(value As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000C.HL)
 					Children(0) = value
 				End Set
 			End Property
-			Private Property HL_IFace_3_Loop2000D_Obj As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000D.HL Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000D.HL
+			Private Property HL_IFace_3_Loop2000D_Obj As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000D.HL Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000D.HL
 				Get
-					Return CType(Children(0), Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000D.HL)
+					Return CType(Children(0), Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000D.HL)
 				End Get
-				Set(value As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000D.HL)
+				Set(value As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000D.HL)
 					Children(0) = value
 				End Set
 			End Property
-			Friend ReadOnly Property TRN_Obj As SegmentContainer(Of Dom.Segments.TRN) Implements Dom.Transactions.Transaction271.Loops.Loop2000.TRN
+			Friend ReadOnly Property TRN_Obj As SegmentContainer(Of Edi.Dom.Segments.TRN) Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2000.TRN
 				Get
-					Return CType(Children(1), SegmentContainer(Of Dom.Segments.TRN))
+					Return CType(Children(1), SegmentContainer(Of Edi.Dom.Segments.TRN))
 				End Get
 			End Property
 
-			Private TRNSubset_Loop2000C_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000C.TRN, Dom.Segments.TRN)
-			Private ReadOnly Property TRN_Loop2000C_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000C.TRN, Dom.Segments.TRN) Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000C.TRN
+			Private TRNSubset_Loop2000C_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000C.TRN, Edi.Dom.Segments.TRN)
+			Private ReadOnly Property TRN_Loop2000C_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000C.TRN, Edi.Dom.Segments.TRN) Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000C.TRN
 				Get
 					If TRNSubset_Loop2000C_Obj Is Nothing Then
-						TRNSubset_Loop2000C_Obj = New SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000C.TRN, Dom.Segments.TRN)(Children(1), 3, 4, 72)
+						TRNSubset_Loop2000C_Obj = New SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000C.TRN, Edi.Dom.Segments.TRN)(Children(1), 3, "4", "0200")
 					End If
 
 					Return TRNSubset_Loop2000C_Obj
 				End Get
 			End Property
-			Private TRNSubset_1_Loop2000D_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000D.TRN, Dom.Segments.TRN)
-			Private ReadOnly Property TRN_Loop2000D_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000D.TRN, Dom.Segments.TRN) Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000D.TRN
+			Private TRNSubset_1_Loop2000D_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000D.TRN, Edi.Dom.Segments.TRN)
+			Private ReadOnly Property TRN_Loop2000D_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000D.TRN, Edi.Dom.Segments.TRN) Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000D.TRN
 				Get
 					If TRNSubset_1_Loop2000D_Obj Is Nothing Then
-						TRNSubset_1_Loop2000D_Obj = New SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000D.TRN, Dom.Segments.TRN)(Children(1), 3, 5, 72)
+						TRNSubset_1_Loop2000D_Obj = New SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000D.TRN, Edi.Dom.Segments.TRN)(Children(1), 3, "5", "0200")
 					End If
 
 					Return TRNSubset_1_Loop2000D_Obj
 				End Get
 			End Property
-			Friend ReadOnly Property AAA_Obj As SegmentContainer(Of Dom.Segments.AAA) Implements Dom.Transactions.Transaction271.Loops.Loop2000.AAA
+			Friend ReadOnly Property AAA_Obj As SegmentContainer(Of Edi.Dom.Segments.AAA) Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2000.AAA
 				Get
-					Return CType(Children(2), SegmentContainer(Of Dom.Segments.AAA))
+					Return CType(Children(2), SegmentContainer(Of Edi.Dom.Segments.AAA))
 				End Get
 			End Property
 
-			Private AAASubset_Loop2000A_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000A.AAA, Dom.Segments.AAA)
-			Private ReadOnly Property AAA_Loop2000A_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000A.AAA, Dom.Segments.AAA) Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000A.AAA
+			Private AAASubset_Loop2000A_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000A.AAA, Edi.Dom.Segments.AAA)
+			Private ReadOnly Property AAA_Loop2000A_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000A.AAA, Edi.Dom.Segments.AAA) Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000A.AAA
 				Get
 					If AAASubset_Loop2000A_Obj Is Nothing Then
-						AAASubset_Loop2000A_Obj = New SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000A.AAA, Dom.Segments.AAA)(Children(2), 9, 2, 6552)
+						AAASubset_Loop2000A_Obj = New SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000A.AAA, Edi.Dom.Segments.AAA)(Children(2), 9, "2", "0250")
 					End If
 
 					Return AAASubset_Loop2000A_Obj
 				End Get
 			End Property
-			Friend ReadOnly Property Loop2100_Obj As LoopContainer(Of Dom.Transactions.Transaction271.Loops.Loop2100) Implements Dom.Transactions.Transaction271.Loops.Loop2000.Loop2100
+			Friend ReadOnly Property Loop2100_Obj As LoopContainer(Of Edi.Dom.Transactions.Transaction271.Loops.Loop2100) Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2000.Loop2100
 				Get
-					Return CType(Children(3), LoopContainer(Of Dom.Transactions.Transaction271.Loops.Loop2100))
+					Return CType(Children(3), LoopContainer(Of Edi.Dom.Transactions.Transaction271.Loops.Loop2100))
 				End Get
 			End Property
 
-			Private Loop2100ASubset_Loop2000A_Obj As LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100A, Dom.Transactions.Transaction271.Loops.Loop2100)
-			Private Property Loop2100A_IFace_Loop2000A_Obj As Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100A Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000A.Loop2100A
+			Private Loop2100ASubset_Loop2000A_Obj As LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100A, Edi.Dom.Transactions.Transaction271.Loops.Loop2100)
+			Private Property Loop2100A_IFace_Loop2000A_Obj As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100A Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000A.Loop2100A
 				Get
 					If Loop2100ASubset_Loop2000A_Obj Is Nothing Then
-						Loop2100ASubset_Loop2000A_Obj = New LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100A, Dom.Transactions.Transaction271.Loops.Loop2100)(Children(3), 1, 2, 108)
+						Loop2100ASubset_Loop2000A_Obj = New LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100A, Edi.Dom.Transactions.Transaction271.Loops.Loop2100)(Children(3), 1, "2", "0300")
 					End If
 
 					If Loop2100ASubset_Loop2000A_Obj.Count > 0 Then
@@ -432,9 +432,9 @@
 						Return Nothing
 					End If
 				End Get
-				Set(value As Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100A)
+				Set(value As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100A)
 					If Loop2100ASubset_Loop2000A_Obj Is Nothing Then
-						Loop2100ASubset_Loop2000A_Obj = New LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100A, Dom.Transactions.Transaction271.Loops.Loop2100)(Children(3), 1, 2, 108)
+						Loop2100ASubset_Loop2000A_Obj = New LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100A, Edi.Dom.Transactions.Transaction271.Loops.Loop2100)(Children(3), 1, "2", "0300")
 					End If
 
 					If Loop2100ASubset_Loop2000A_Obj.Count = 0 Then
@@ -444,11 +444,11 @@
 					End If
 				End Set
 			End Property
-			Private Loop2100BSubset_Loop2000B_Obj As LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100B, Dom.Transactions.Transaction271.Loops.Loop2100)
-			Private Property Loop2100B_IFace_Loop2000B_Obj As Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100B Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000B.Loop2100B
+			Private Loop2100BSubset_Loop2000B_Obj As LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100B, Edi.Dom.Transactions.Transaction271.Loops.Loop2100)
+			Private Property Loop2100B_IFace_Loop2000B_Obj As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100B Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000B.Loop2100B
 				Get
 					If Loop2100BSubset_Loop2000B_Obj Is Nothing Then
-						Loop2100BSubset_Loop2000B_Obj = New LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100B, Dom.Transactions.Transaction271.Loops.Loop2100)(Children(3), 1, 3, 108)
+						Loop2100BSubset_Loop2000B_Obj = New LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100B, Edi.Dom.Transactions.Transaction271.Loops.Loop2100)(Children(3), 1, "3", "0300")
 					End If
 
 					If Loop2100BSubset_Loop2000B_Obj.Count > 0 Then
@@ -457,9 +457,9 @@
 						Return Nothing
 					End If
 				End Get
-				Set(value As Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100B)
+				Set(value As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100B)
 					If Loop2100BSubset_Loop2000B_Obj Is Nothing Then
-						Loop2100BSubset_Loop2000B_Obj = New LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100B, Dom.Transactions.Transaction271.Loops.Loop2100)(Children(3), 1, 3, 108)
+						Loop2100BSubset_Loop2000B_Obj = New LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100B, Edi.Dom.Transactions.Transaction271.Loops.Loop2100)(Children(3), 1, "3", "0300")
 					End If
 
 					If Loop2100BSubset_Loop2000B_Obj.Count = 0 Then
@@ -469,11 +469,11 @@
 					End If
 				End Set
 			End Property
-			Private Loop2100CSubset_Loop2000C_Obj As LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100C, Dom.Transactions.Transaction271.Loops.Loop2100)
-			Private Property Loop2100C_IFace_Loop2000C_Obj As Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100C Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000C.Loop2100C
+			Private Loop2100CSubset_Loop2000C_Obj As LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100C, Edi.Dom.Transactions.Transaction271.Loops.Loop2100)
+			Private Property Loop2100C_IFace_Loop2000C_Obj As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100C Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000C.Loop2100C
 				Get
 					If Loop2100CSubset_Loop2000C_Obj Is Nothing Then
-						Loop2100CSubset_Loop2000C_Obj = New LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100C, Dom.Transactions.Transaction271.Loops.Loop2100)(Children(3), 1, 4, 108)
+						Loop2100CSubset_Loop2000C_Obj = New LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100C, Edi.Dom.Transactions.Transaction271.Loops.Loop2100)(Children(3), 1, "4", "0300")
 					End If
 
 					If Loop2100CSubset_Loop2000C_Obj.Count > 0 Then
@@ -482,9 +482,9 @@
 						Return Nothing
 					End If
 				End Get
-				Set(value As Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100C)
+				Set(value As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100C)
 					If Loop2100CSubset_Loop2000C_Obj Is Nothing Then
-						Loop2100CSubset_Loop2000C_Obj = New LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100C, Dom.Transactions.Transaction271.Loops.Loop2100)(Children(3), 1, 4, 108)
+						Loop2100CSubset_Loop2000C_Obj = New LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100C, Edi.Dom.Transactions.Transaction271.Loops.Loop2100)(Children(3), 1, "4", "0300")
 					End If
 
 					If Loop2100CSubset_Loop2000C_Obj.Count = 0 Then
@@ -494,11 +494,11 @@
 					End If
 				End Set
 			End Property
-			Private Loop2100DSubset_Loop2000D_Obj As LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100D, Dom.Transactions.Transaction271.Loops.Loop2100)
-			Private Property Loop2100D_IFace_Loop2000D_Obj As Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100D Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000D.Loop2100D
+			Private Loop2100DSubset_Loop2000D_Obj As LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100D, Edi.Dom.Transactions.Transaction271.Loops.Loop2100)
+			Private Property Loop2100D_IFace_Loop2000D_Obj As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100D Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000D.Loop2100D
 				Get
 					If Loop2100DSubset_Loop2000D_Obj Is Nothing Then
-						Loop2100DSubset_Loop2000D_Obj = New LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100D, Dom.Transactions.Transaction271.Loops.Loop2100)(Children(3), 1, 5, 108)
+						Loop2100DSubset_Loop2000D_Obj = New LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100D, Edi.Dom.Transactions.Transaction271.Loops.Loop2100)(Children(3), 1, "5", "0300")
 					End If
 
 					If Loop2100DSubset_Loop2000D_Obj.Count > 0 Then
@@ -507,9 +507,9 @@
 						Return Nothing
 					End If
 				End Get
-				Set(value As Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100D)
+				Set(value As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100D)
 					If Loop2100DSubset_Loop2000D_Obj Is Nothing Then
-						Loop2100DSubset_Loop2000D_Obj = New LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100D, Dom.Transactions.Transaction271.Loops.Loop2100)(Children(3), 1, 5, 108)
+						Loop2100DSubset_Loop2000D_Obj = New LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100D, Edi.Dom.Transactions.Transaction271.Loops.Loop2100)(Children(3), 1, "5", "0300")
 					End If
 
 					If Loop2100DSubset_Loop2000D_Obj.Count = 0 Then
@@ -523,29 +523,29 @@
 		End Class
 		Partial Friend Class Loop2100_Obj
 			Inherits LoopBase
-			Implements Dom.Transactions.Transaction271.Loops.Loop2100,
-									Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100A,
-									Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100B,
-									Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100C,
-									Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100D
+			Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2100,
+									Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100A,
+									Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100B,
+									Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100C,
+									Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100D
 			Friend Sub New()
 				MyBase.New
 
-				Children.AddRange({CType(Nothing, Dom.Segments.NM1_Obj),
-												New SegmentContainer(Of Dom.Segments.REF)(9, 2, 400),
-												CType(Nothing, Dom.Segments.N2_Obj),
-												CType(Nothing, Dom.Segments.N3_Obj),
-												CType(Nothing, Dom.Segments.N4_Obj),
-												New SegmentContainer(Of Dom.Segments.PER)(3, 2, 800),
-												New SegmentContainer(Of Dom.Segments.AAA)(9, 2, 850),
-												CType(Nothing, Dom.Segments.PRV_Obj),
-												CType(Nothing, Dom.Segments.DMG_Obj),
-												CType(Nothing, Dom.Segments.INS_Obj),
-												CType(Nothing, Dom.Segments.HI_Obj),
-												New SegmentContainer(Of Dom.Segments.DTP)(9, 2, 1200),
-												New SegmentContainer(Of Dom.Segments.LUI)(9, 2, 1250),
-												New SegmentContainer(Of Dom.Segments.MPI)(9, 2, 1275),
-												New LoopContainer(Of Dom.Transactions.Transaction271.Loops.Loop2110)(0, 2, 1300)})
+				Children.AddRange({CType(Nothing, Edi.Dom.Segments.NM1_Obj),
+												New SegmentContainer(Of Edi.Dom.Segments.REF)(9, "2", "0400"),
+												CType(Nothing, Edi.Dom.Segments.N2_Obj),
+												CType(Nothing, Edi.Dom.Segments.N3_Obj),
+												CType(Nothing, Edi.Dom.Segments.N4_Obj),
+												New SegmentContainer(Of Edi.Dom.Segments.PER)(3, "2", "0800"),
+												New SegmentContainer(Of Edi.Dom.Segments.AAA)(9, "2", "0850"),
+												CType(Nothing, Edi.Dom.Segments.PRV_Obj),
+												CType(Nothing, Edi.Dom.Segments.DMG_Obj),
+												CType(Nothing, Edi.Dom.Segments.INS_Obj),
+												CType(Nothing, Edi.Dom.Segments.HI_Obj),
+												New SegmentContainer(Of Edi.Dom.Segments.DTP)(9, "2", "1200"),
+												New SegmentContainer(Of Edi.Dom.Segments.LUI)(9, "2", "1250"),
+												New SegmentContainer(Of Edi.Dom.Segments.MPI)(9, "2", "1275"),
+												New LoopContainer(Of Edi.Dom.Transactions.Transaction271.Loops.Loop2110)(0, "2", "1300")})
 
 				Initialize()
 			End Sub
@@ -677,98 +677,98 @@
 				Dim Implementation As String = args.Implementation
 				Dim Seg As Segment
 				If String.Compare(SegmentName, "NM1", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.NM1_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.NM1_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					NM1_Obj = Seg
-					Dim S2 = CType(Seg, Dom.Segments.NM1_Obj)
+					Dim S2 = CType(Seg, Edi.Dom.Segments.NM1_Obj)
 					If MyBase.CompareKey(S2.NM101, ";2B;36;GP;P5;PR;") AndAlso String.Compare(args.Implementation, "_271B1__2000A__2100A", StringComparison.OrdinalIgnoreCase) = 0 Then
-						Seg.SetArea = 2
-						Seg.SetSequence = 108
+						Seg.SetArea = "2"
+						Seg.SetSequence = "0300"
 					ElseIf MyBase.CompareKey(S2.NM101, ";1P;2B;36;80;FA;GP;P5;PR;") AndAlso String.Compare(args.Implementation, "_271B1__2000B__2100B", StringComparison.OrdinalIgnoreCase) = 0 Then
-						Seg.SetArea = 3
-						Seg.SetSequence = 108
+						Seg.SetArea = "3"
+						Seg.SetSequence = "0300"
 					ElseIf MyBase.CompareKey(S2.NM101, ";IL;") AndAlso String.Compare(args.Implementation, "_271B1__2000C__2100C", StringComparison.OrdinalIgnoreCase) = 0 Then
-						Seg.SetArea = 4
-						Seg.SetSequence = 108
+						Seg.SetArea = "4"
+						Seg.SetSequence = "0300"
 					ElseIf MyBase.CompareKey(S2.NM101, ";03;") AndAlso String.Compare(args.Implementation, "_271B1__2000D__2100D", StringComparison.OrdinalIgnoreCase) = 0 Then
-						Seg.SetArea = 5
-						Seg.SetSequence = 108
+						Seg.SetArea = "5"
+						Seg.SetSequence = "0300"
 					End If
 				ElseIf String.Compare(SegmentName, "REF", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.REF_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.REF_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					REF_Obj.Add(Seg)
-					Dim S2 = CType(Seg, Dom.Segments.REF_Obj)
+					Dim S2 = CType(Seg, Edi.Dom.Segments.REF_Obj)
 					If MyBase.CompareKey(S2.REF01, ";0B;1C;1D;1J;4A;CT;EL;EO;HPI;JD;N5;N7;Q4;SY;TJ;") AndAlso String.Compare(args.Implementation, "_271B1__2000B__2100B", StringComparison.OrdinalIgnoreCase) = 0 Then
-						Seg.SetArea = 3
-						Seg.SetSequence = 144
+						Seg.SetArea = "3"
+						Seg.SetSequence = "0400"
 					ElseIf MyBase.CompareKey(S2.REF01, ";18;1L;1W;3H;49;6P;CE;CT;EA;EJ;F6;GH;HJ;IF;IG;N6;NQ;Q4;SY;Y4;") AndAlso String.Compare(args.Implementation, "_271B1__2000C__2100C", StringComparison.OrdinalIgnoreCase) = 0 Then
-						Seg.SetArea = 4
-						Seg.SetSequence = 144
+						Seg.SetArea = "4"
+						Seg.SetSequence = "0400"
 					ElseIf MyBase.CompareKey(S2.REF01, ";18;1L;1W;49;6P;CE;CT;EA;EJ;F6;GH;HJ;IF;IG;MRC;N6;NQ;Q4;SY;Y4;") AndAlso String.Compare(args.Implementation, "_271B1__2000D__2100D", StringComparison.OrdinalIgnoreCase) = 0 Then
-						Seg.SetArea = 5
-						Seg.SetSequence = 144
+						Seg.SetArea = "5"
+						Seg.SetSequence = "0400"
 					End If
 				ElseIf String.Compare(SegmentName, "N2", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.N2_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.N2_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					N2_Obj = Seg
 				ElseIf String.Compare(SegmentName, "N3", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.N3_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.N3_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					N3_Obj = Seg
 				ElseIf String.Compare(SegmentName, "N4", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.N4_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.N4_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					N4_Obj = Seg
 				ElseIf String.Compare(SegmentName, "PER", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.PER_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.PER_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					PER_Obj.Add(Seg)
 				ElseIf String.Compare(SegmentName, "AAA", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.AAA_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.AAA_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					AAA_Obj.Add(Seg)
 				ElseIf String.Compare(SegmentName, "PRV", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.PRV_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.PRV_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					PRV_Obj = Seg
-					Dim S2 = CType(Seg, Dom.Segments.PRV_Obj)
+					Dim S2 = CType(Seg, Edi.Dom.Segments.PRV_Obj)
 					If MyBase.CompareKey(S2.PRV01, ";AD;AT;BI;CO;CV;H;HH;LA;OT;P1;P2;PC;PE;R;RF;SB;SK;SU;") AndAlso String.Compare(args.Implementation, "_271B1__2000B__2100B", StringComparison.OrdinalIgnoreCase) = 0 Then
-						Seg.SetArea = 3
-						Seg.SetSequence = 324
+						Seg.SetArea = "3"
+						Seg.SetSequence = "0900"
 					ElseIf MyBase.CompareKey(S2.PRV01, ";AD;AT;BI;CO;CV;H;HH;LA;OT;P1;P2;PC;PE;R;RF;SK;SU;") AndAlso String.Compare(args.Implementation, "_271B1__2000C__2100C", StringComparison.OrdinalIgnoreCase) = 0 Then
-						Seg.SetArea = 4
-						Seg.SetSequence = 324
+						Seg.SetArea = "4"
+						Seg.SetSequence = "0900"
 					ElseIf MyBase.CompareKey(S2.PRV01, ";AD;AT;BI;CO;CV;H;HH;LA;OT;P1;P2;PC;PE;R;RF;SK;SU;") AndAlso String.Compare(args.Implementation, "_271B1__2000D__2100D", StringComparison.OrdinalIgnoreCase) = 0 Then
-						Seg.SetArea = 5
-						Seg.SetSequence = 324
+						Seg.SetArea = "5"
+						Seg.SetSequence = "0900"
 					End If
 				ElseIf String.Compare(SegmentName, "DMG", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.DMG_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.DMG_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					DMG_Obj = Seg
 				ElseIf String.Compare(SegmentName, "INS", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.INS_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.INS_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					INS_Obj = Seg
 				ElseIf String.Compare(SegmentName, "HI", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.HI_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.HI_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					HI_Obj = Seg
-					Dim S2 = CType(Seg, Dom.Segments.HI_Obj)
+					Dim S2 = CType(Seg, Edi.Dom.Segments.HI_Obj)
 					If MyBase.CompareKey(If(S2.HI01 IsNot Nothing, S2.HI01.C022_01, String.Empty), ";ABK;BK;") AndAlso String.Compare(args.Implementation, "_271B1__2000C__2100C", StringComparison.OrdinalIgnoreCase) = 0 Then
-						Seg.SetArea = 4
-						Seg.SetSequence = 6517
+						Seg.SetArea = "4"
+						Seg.SetSequence = "1150"
 					ElseIf MyBase.CompareKey(If(S2.HI01 IsNot Nothing, S2.HI01.C022_01, String.Empty), ";ABK;BK;") AndAlso String.Compare(args.Implementation, "_271B1__2000D__2100D", StringComparison.OrdinalIgnoreCase) = 0 Then
-						Seg.SetArea = 5
-						Seg.SetSequence = 6517
+						Seg.SetArea = "5"
+						Seg.SetSequence = "1150"
 					End If
 				ElseIf String.Compare(SegmentName, "DTP", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.DTP_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.DTP_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					DTP_Obj.Add(Seg)
-					Dim S2 = CType(Seg, Dom.Segments.DTP_Obj)
+					Dim S2 = CType(Seg, Edi.Dom.Segments.DTP_Obj)
 					If MyBase.CompareKey(S2.DTP01, ";096;102;152;291;307;318;340;341;342;343;346;347;356;357;382;435;442;458;472;539;540;636;771;") AndAlso String.Compare(args.Implementation, "_271B1__2000C__2100C", StringComparison.OrdinalIgnoreCase) = 0 Then
-						Seg.SetArea = 4
-						Seg.SetSequence = 73
+						Seg.SetArea = "4"
+						Seg.SetSequence = "1200"
 					ElseIf MyBase.CompareKey(S2.DTP01, ";096;102;152;291;307;318;340;341;342;343;346;347;356;357;382;435;442;458;472;539;540;636;771;") AndAlso String.Compare(args.Implementation, "_271B1__2000D__2100D", StringComparison.OrdinalIgnoreCase) = 0 Then
-						Seg.SetArea = 5
-						Seg.SetSequence = 73
+						Seg.SetArea = "5"
+						Seg.SetSequence = "1200"
 					End If
 				ElseIf String.Compare(SegmentName, "LUI", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.LUI_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.LUI_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					LUI_Obj.Add(Seg)
 				ElseIf String.Compare(SegmentName, "MPI", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.MPI_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.MPI_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					MPI_Obj.Add(Seg)
 				End If
 			End Sub
@@ -779,14 +779,18 @@
 				Dim Temp = args.Implementation
 
 				If String.Compare(args.DataSegment.SegmentID, "EB", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Dim NewLoop As LoopBase = New Dom.Transactions.Transaction271.Loop2110_Obj
+					Dim NewLoop As LoopBase = New Edi.Dom.Transactions.Transaction271.Loop2110_Obj
 					Dim LoopKey As String = args.DataSegment.ToStringValue(0)
 					Loop2110_Obj.Add(NewLoop)
 					If String.Compare(args.Implementation, "_271B1__2000C__2100C", StringComparison.OrdinalIgnoreCase) = 0 Then
 						args.Implementation = "_271B1__2000C__2100C__2110C"
+						NewLoop.SetArea = "4"
+						NewLoop.SetSequence = "1300"
 						Await NewLoop.ReadAsync(args).ConfigureAwait(False)
 					ElseIf String.Compare(args.Implementation, "_271B1__2000D__2100D", StringComparison.OrdinalIgnoreCase) = 0 Then
 						args.Implementation = "_271B1__2000D__2100D__2110D"
+						NewLoop.SetArea = "5"
+						NewLoop.SetSequence = "1300"
 						Await NewLoop.ReadAsync(args).ConfigureAwait(False)
 					Else
 						Await NewLoop.ReadAsync(args).ConfigureAwait(False)
@@ -794,443 +798,443 @@
 				End If
 				args.Implementation = Temp
 			End Function
-			Friend Property NM1_Obj As Dom.Segments.NM1_Obj
+			Friend Property NM1_Obj As Edi.Dom.Segments.NM1_Obj
 				Get
-					Return CType(Children(0), Dom.Segments.NM1_Obj)
+					Return CType(Children(0), Edi.Dom.Segments.NM1_Obj)
 				End Get
-				Set(value As Dom.Segments.NM1_Obj)
+				Set(value As Edi.Dom.Segments.NM1_Obj)
 					Children(0) = value
 				End Set
 			End Property
 
-			Private Property NM1_Std As Dom.Segments.NM1 Implements Dom.Transactions.Transaction271.Loops.Loop2100.NM1
+			Private Property NM1_Std As Edi.Dom.Segments.NM1 Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2100.NM1
 				Get
-					Return CType(Children(0), Dom.Segments.NM1_Obj)
+					Return CType(Children(0), Edi.Dom.Segments.NM1_Obj)
 				End Get
-				Set(value As Dom.Segments.NM1)
+				Set(value As Edi.Dom.Segments.NM1)
 					Children(0) = value
 				End Set
 			End Property
 
-			Private Property NM1_IFace_Loop2100A_Obj As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100A.NM1 Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100A.NM1
+			Private Property NM1_IFace_Loop2100A_Obj As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100A.NM1 Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100A.NM1
 				Get
-					Return CType(Children(0), Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100A.NM1)
+					Return CType(Children(0), Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100A.NM1)
 				End Get
-				Set(value As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100A.NM1)
+				Set(value As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100A.NM1)
 					Children(0) = value
 				End Set
 			End Property
-			Private Property NM1_IFace_1_Loop2100B_Obj As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100B.NM1 Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100B.NM1
+			Private Property NM1_IFace_1_Loop2100B_Obj As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100B.NM1 Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100B.NM1
 				Get
-					Return CType(Children(0), Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100B.NM1)
+					Return CType(Children(0), Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100B.NM1)
 				End Get
-				Set(value As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100B.NM1)
+				Set(value As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100B.NM1)
 					Children(0) = value
 				End Set
 			End Property
-			Private Property NM1_IFace_2_Loop2100C_Obj As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.NM1 Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100C.NM1
+			Private Property NM1_IFace_2_Loop2100C_Obj As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.NM1 Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100C.NM1
 				Get
-					Return CType(Children(0), Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.NM1)
+					Return CType(Children(0), Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.NM1)
 				End Get
-				Set(value As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.NM1)
+				Set(value As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.NM1)
 					Children(0) = value
 				End Set
 			End Property
-			Private Property NM1_IFace_3_Loop2100D_Obj As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.NM1 Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100D.NM1
+			Private Property NM1_IFace_3_Loop2100D_Obj As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.NM1 Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100D.NM1
 				Get
-					Return CType(Children(0), Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.NM1)
+					Return CType(Children(0), Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.NM1)
 				End Get
-				Set(value As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.NM1)
+				Set(value As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.NM1)
 					Children(0) = value
 				End Set
 			End Property
-			Friend ReadOnly Property REF_Obj As SegmentContainer(Of Dom.Segments.REF) Implements Dom.Transactions.Transaction271.Loops.Loop2100.REF
+			Friend ReadOnly Property REF_Obj As SegmentContainer(Of Edi.Dom.Segments.REF) Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2100.REF
 				Get
-					Return CType(Children(1), SegmentContainer(Of Dom.Segments.REF))
+					Return CType(Children(1), SegmentContainer(Of Edi.Dom.Segments.REF))
 				End Get
 			End Property
 
-			Private REFSubset_Loop2100B_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100B.REF, Dom.Segments.REF)
-			Private ReadOnly Property REF_Loop2100B_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100B.REF, Dom.Segments.REF) Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100B.REF
+			Private REFSubset_Loop2100B_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100B.REF, Edi.Dom.Segments.REF)
+			Private ReadOnly Property REF_Loop2100B_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100B.REF, Edi.Dom.Segments.REF) Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100B.REF
 				Get
 					If REFSubset_Loop2100B_Obj Is Nothing Then
-						REFSubset_Loop2100B_Obj = New SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100B.REF, Dom.Segments.REF)(Children(1), 9, 3, 144)
+						REFSubset_Loop2100B_Obj = New SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100B.REF, Edi.Dom.Segments.REF)(Children(1), 9, "3", "0400")
 					End If
 
 					Return REFSubset_Loop2100B_Obj
 				End Get
 			End Property
-			Private REFSubset_1_Loop2100C_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.REF, Dom.Segments.REF)
-			Private ReadOnly Property REF_Loop2100C_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.REF, Dom.Segments.REF) Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100C.REF
+			Private REFSubset_1_Loop2100C_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.REF, Edi.Dom.Segments.REF)
+			Private ReadOnly Property REF_Loop2100C_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.REF, Edi.Dom.Segments.REF) Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100C.REF
 				Get
 					If REFSubset_1_Loop2100C_Obj Is Nothing Then
-						REFSubset_1_Loop2100C_Obj = New SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.REF, Dom.Segments.REF)(Children(1), 9, 4, 144)
+						REFSubset_1_Loop2100C_Obj = New SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.REF, Edi.Dom.Segments.REF)(Children(1), 9, "4", "0400")
 					End If
 
 					Return REFSubset_1_Loop2100C_Obj
 				End Get
 			End Property
-			Private REFSubset_2_Loop2100D_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.REF, Dom.Segments.REF)
-			Private ReadOnly Property REF_Loop2100D_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.REF, Dom.Segments.REF) Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100D.REF
+			Private REFSubset_2_Loop2100D_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.REF, Edi.Dom.Segments.REF)
+			Private ReadOnly Property REF_Loop2100D_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.REF, Edi.Dom.Segments.REF) Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100D.REF
 				Get
 					If REFSubset_2_Loop2100D_Obj Is Nothing Then
-						REFSubset_2_Loop2100D_Obj = New SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.REF, Dom.Segments.REF)(Children(1), 9, 5, 144)
+						REFSubset_2_Loop2100D_Obj = New SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.REF, Edi.Dom.Segments.REF)(Children(1), 9, "5", "0400")
 					End If
 
 					Return REFSubset_2_Loop2100D_Obj
 				End Get
 			End Property
-			Friend Property N2_Obj As Dom.Segments.N2_Obj
+			Friend Property N2_Obj As Edi.Dom.Segments.N2_Obj
 				Get
-					Return CType(Children(2), Dom.Segments.N2_Obj)
+					Return CType(Children(2), Edi.Dom.Segments.N2_Obj)
 				End Get
-				Set(value As Dom.Segments.N2_Obj)
+				Set(value As Edi.Dom.Segments.N2_Obj)
 					Children(2) = value
 				End Set
 			End Property
 
-			Private Property N2_Std As Dom.Segments.N2 Implements Dom.Transactions.Transaction271.Loops.Loop2100.N2
+			Private Property N2_Std As Edi.Dom.Segments.N2 Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2100.N2
 				Get
-					Return CType(Children(2), Dom.Segments.N2_Obj)
+					Return CType(Children(2), Edi.Dom.Segments.N2_Obj)
 				End Get
-				Set(value As Dom.Segments.N2)
+				Set(value As Edi.Dom.Segments.N2)
 					Children(2) = value
 				End Set
 			End Property
 
-			Friend Property N3_Obj As Dom.Segments.N3_Obj
+			Friend Property N3_Obj As Edi.Dom.Segments.N3_Obj
 				Get
-					Return CType(Children(3), Dom.Segments.N3_Obj)
+					Return CType(Children(3), Edi.Dom.Segments.N3_Obj)
 				End Get
-				Set(value As Dom.Segments.N3_Obj)
+				Set(value As Edi.Dom.Segments.N3_Obj)
 					Children(3) = value
 				End Set
 			End Property
 
-			Private Property N3_Std As Dom.Segments.N3 Implements Dom.Transactions.Transaction271.Loops.Loop2100.N3
+			Private Property N3_Std As Edi.Dom.Segments.N3 Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2100.N3
 				Get
-					Return CType(Children(3), Dom.Segments.N3_Obj)
+					Return CType(Children(3), Edi.Dom.Segments.N3_Obj)
 				End Get
-				Set(value As Dom.Segments.N3)
+				Set(value As Edi.Dom.Segments.N3)
 					Children(3) = value
 				End Set
 			End Property
 
-			Private Property N3_IFace_Loop2100B_Obj As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100B.N3 Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100B.N3
+			Private Property N3_IFace_Loop2100B_Obj As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100B.N3 Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100B.N3
 				Get
-					Return CType(Children(3), Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100B.N3)
+					Return CType(Children(3), Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100B.N3)
 				End Get
-				Set(value As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100B.N3)
+				Set(value As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100B.N3)
 					Children(3) = value
 				End Set
 			End Property
-			Private Property N3_IFace_1_Loop2100C_Obj As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.N3 Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100C.N3
+			Private Property N3_IFace_1_Loop2100C_Obj As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.N3 Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100C.N3
 				Get
-					Return CType(Children(3), Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.N3)
+					Return CType(Children(3), Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.N3)
 				End Get
-				Set(value As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.N3)
+				Set(value As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.N3)
 					Children(3) = value
 				End Set
 			End Property
-			Private Property N3_IFace_2_Loop2100D_Obj As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.N3 Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100D.N3
+			Private Property N3_IFace_2_Loop2100D_Obj As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.N3 Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100D.N3
 				Get
-					Return CType(Children(3), Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.N3)
+					Return CType(Children(3), Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.N3)
 				End Get
-				Set(value As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.N3)
+				Set(value As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.N3)
 					Children(3) = value
 				End Set
 			End Property
-			Friend Property N4_Obj As Dom.Segments.N4_Obj
+			Friend Property N4_Obj As Edi.Dom.Segments.N4_Obj
 				Get
-					Return CType(Children(4), Dom.Segments.N4_Obj)
+					Return CType(Children(4), Edi.Dom.Segments.N4_Obj)
 				End Get
-				Set(value As Dom.Segments.N4_Obj)
+				Set(value As Edi.Dom.Segments.N4_Obj)
 					Children(4) = value
 				End Set
 			End Property
 
-			Private Property N4_Std As Dom.Segments.N4 Implements Dom.Transactions.Transaction271.Loops.Loop2100.N4
+			Private Property N4_Std As Edi.Dom.Segments.N4 Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2100.N4
 				Get
-					Return CType(Children(4), Dom.Segments.N4_Obj)
+					Return CType(Children(4), Edi.Dom.Segments.N4_Obj)
 				End Get
-				Set(value As Dom.Segments.N4)
+				Set(value As Edi.Dom.Segments.N4)
 					Children(4) = value
 				End Set
 			End Property
 
-			Private Property N4_IFace_Loop2100B_Obj As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100B.N4 Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100B.N4
+			Private Property N4_IFace_Loop2100B_Obj As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100B.N4 Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100B.N4
 				Get
-					Return CType(Children(4), Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100B.N4)
+					Return CType(Children(4), Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100B.N4)
 				End Get
-				Set(value As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100B.N4)
+				Set(value As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100B.N4)
 					Children(4) = value
 				End Set
 			End Property
-			Private Property N4_IFace_1_Loop2100C_Obj As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.N4 Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100C.N4
+			Private Property N4_IFace_1_Loop2100C_Obj As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.N4 Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100C.N4
 				Get
-					Return CType(Children(4), Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.N4)
+					Return CType(Children(4), Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.N4)
 				End Get
-				Set(value As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.N4)
+				Set(value As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.N4)
 					Children(4) = value
 				End Set
 			End Property
-			Private Property N4_IFace_2_Loop2100D_Obj As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.N4 Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100D.N4
+			Private Property N4_IFace_2_Loop2100D_Obj As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.N4 Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100D.N4
 				Get
-					Return CType(Children(4), Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.N4)
+					Return CType(Children(4), Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.N4)
 				End Get
-				Set(value As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.N4)
+				Set(value As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.N4)
 					Children(4) = value
 				End Set
 			End Property
-			Friend ReadOnly Property PER_Obj As SegmentContainer(Of Dom.Segments.PER) Implements Dom.Transactions.Transaction271.Loops.Loop2100.PER
+			Friend ReadOnly Property PER_Obj As SegmentContainer(Of Edi.Dom.Segments.PER) Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2100.PER
 				Get
-					Return CType(Children(5), SegmentContainer(Of Dom.Segments.PER))
+					Return CType(Children(5), SegmentContainer(Of Edi.Dom.Segments.PER))
 				End Get
 			End Property
 
-			Private PERSubset_Loop2100A_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100A.PER, Dom.Segments.PER)
-			Private ReadOnly Property PER_Loop2100A_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100A.PER, Dom.Segments.PER) Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100A.PER
+			Private PERSubset_Loop2100A_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100A.PER, Edi.Dom.Segments.PER)
+			Private ReadOnly Property PER_Loop2100A_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100A.PER, Edi.Dom.Segments.PER) Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100A.PER
 				Get
 					If PERSubset_Loop2100A_Obj Is Nothing Then
-						PERSubset_Loop2100A_Obj = New SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100A.PER, Dom.Segments.PER)(Children(5), 3, 2, 288)
+						PERSubset_Loop2100A_Obj = New SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100A.PER, Edi.Dom.Segments.PER)(Children(5), 3, "2", "0800")
 					End If
 
 					Return PERSubset_Loop2100A_Obj
 				End Get
 			End Property
-			Friend ReadOnly Property AAA_Obj As SegmentContainer(Of Dom.Segments.AAA) Implements Dom.Transactions.Transaction271.Loops.Loop2100.AAA
+			Friend ReadOnly Property AAA_Obj As SegmentContainer(Of Edi.Dom.Segments.AAA) Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2100.AAA
 				Get
-					Return CType(Children(6), SegmentContainer(Of Dom.Segments.AAA))
+					Return CType(Children(6), SegmentContainer(Of Edi.Dom.Segments.AAA))
 				End Get
 			End Property
 
-			Private AAASubset_Loop2100A_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100A.AAA, Dom.Segments.AAA)
-			Private ReadOnly Property AAA_Loop2100A_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100A.AAA, Dom.Segments.AAA) Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100A.AAA
+			Private AAASubset_Loop2100A_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100A.AAA, Edi.Dom.Segments.AAA)
+			Private ReadOnly Property AAA_Loop2100A_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100A.AAA, Edi.Dom.Segments.AAA) Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100A.AAA
 				Get
 					If AAASubset_Loop2100A_Obj Is Nothing Then
-						AAASubset_Loop2100A_Obj = New SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100A.AAA, Dom.Segments.AAA)(Children(6), 9, 2, 6768)
+						AAASubset_Loop2100A_Obj = New SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100A.AAA, Edi.Dom.Segments.AAA)(Children(6), 9, "2", "0850")
 					End If
 
 					Return AAASubset_Loop2100A_Obj
 				End Get
 			End Property
-			Private AAASubset_1_Loop2100B_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100B.AAA, Dom.Segments.AAA)
-			Private ReadOnly Property AAA_Loop2100B_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100B.AAA, Dom.Segments.AAA) Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100B.AAA
+			Private AAASubset_1_Loop2100B_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100B.AAA, Edi.Dom.Segments.AAA)
+			Private ReadOnly Property AAA_Loop2100B_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100B.AAA, Edi.Dom.Segments.AAA) Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100B.AAA
 				Get
 					If AAASubset_1_Loop2100B_Obj Is Nothing Then
-						AAASubset_1_Loop2100B_Obj = New SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100B.AAA, Dom.Segments.AAA)(Children(6), 9, 3, 6768)
+						AAASubset_1_Loop2100B_Obj = New SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100B.AAA, Edi.Dom.Segments.AAA)(Children(6), 9, "3", "0850")
 					End If
 
 					Return AAASubset_1_Loop2100B_Obj
 				End Get
 			End Property
-			Private AAASubset_2_Loop2100C_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.AAA, Dom.Segments.AAA)
-			Private ReadOnly Property AAA_Loop2100C_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.AAA, Dom.Segments.AAA) Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100C.AAA
+			Private AAASubset_2_Loop2100C_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.AAA, Edi.Dom.Segments.AAA)
+			Private ReadOnly Property AAA_Loop2100C_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.AAA, Edi.Dom.Segments.AAA) Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100C.AAA
 				Get
 					If AAASubset_2_Loop2100C_Obj Is Nothing Then
-						AAASubset_2_Loop2100C_Obj = New SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.AAA, Dom.Segments.AAA)(Children(6), 9, 4, 6768)
+						AAASubset_2_Loop2100C_Obj = New SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.AAA, Edi.Dom.Segments.AAA)(Children(6), 9, "4", "0850")
 					End If
 
 					Return AAASubset_2_Loop2100C_Obj
 				End Get
 			End Property
-			Private AAASubset_3_Loop2100D_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.AAA, Dom.Segments.AAA)
-			Private ReadOnly Property AAA_Loop2100D_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.AAA, Dom.Segments.AAA) Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100D.AAA
+			Private AAASubset_3_Loop2100D_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.AAA, Edi.Dom.Segments.AAA)
+			Private ReadOnly Property AAA_Loop2100D_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.AAA, Edi.Dom.Segments.AAA) Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100D.AAA
 				Get
 					If AAASubset_3_Loop2100D_Obj Is Nothing Then
-						AAASubset_3_Loop2100D_Obj = New SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.AAA, Dom.Segments.AAA)(Children(6), 9, 5, 6768)
+						AAASubset_3_Loop2100D_Obj = New SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.AAA, Edi.Dom.Segments.AAA)(Children(6), 9, "5", "0850")
 					End If
 
 					Return AAASubset_3_Loop2100D_Obj
 				End Get
 			End Property
-			Friend Property PRV_Obj As Dom.Segments.PRV_Obj
+			Friend Property PRV_Obj As Edi.Dom.Segments.PRV_Obj
 				Get
-					Return CType(Children(7), Dom.Segments.PRV_Obj)
+					Return CType(Children(7), Edi.Dom.Segments.PRV_Obj)
 				End Get
-				Set(value As Dom.Segments.PRV_Obj)
+				Set(value As Edi.Dom.Segments.PRV_Obj)
 					Children(7) = value
 				End Set
 			End Property
 
-			Private Property PRV_Std As Dom.Segments.PRV Implements Dom.Transactions.Transaction271.Loops.Loop2100.PRV
+			Private Property PRV_Std As Edi.Dom.Segments.PRV Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2100.PRV
 				Get
-					Return CType(Children(7), Dom.Segments.PRV_Obj)
+					Return CType(Children(7), Edi.Dom.Segments.PRV_Obj)
 				End Get
-				Set(value As Dom.Segments.PRV)
+				Set(value As Edi.Dom.Segments.PRV)
 					Children(7) = value
 				End Set
 			End Property
 
-			Private Property PRV_IFace_Loop2100B_Obj As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100B.PRV Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100B.PRV
+			Private Property PRV_IFace_Loop2100B_Obj As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100B.PRV Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100B.PRV
 				Get
-					Return CType(Children(7), Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100B.PRV)
+					Return CType(Children(7), Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100B.PRV)
 				End Get
-				Set(value As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100B.PRV)
+				Set(value As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100B.PRV)
 					Children(7) = value
 				End Set
 			End Property
-			Private Property PRV_IFace_1_Loop2100C_Obj As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.PRV Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100C.PRV
+			Private Property PRV_IFace_1_Loop2100C_Obj As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.PRV Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100C.PRV
 				Get
-					Return CType(Children(7), Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.PRV)
+					Return CType(Children(7), Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.PRV)
 				End Get
-				Set(value As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.PRV)
+				Set(value As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.PRV)
 					Children(7) = value
 				End Set
 			End Property
-			Private Property PRV_IFace_2_Loop2100D_Obj As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.PRV Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100D.PRV
+			Private Property PRV_IFace_2_Loop2100D_Obj As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.PRV Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100D.PRV
 				Get
-					Return CType(Children(7), Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.PRV)
+					Return CType(Children(7), Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.PRV)
 				End Get
-				Set(value As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.PRV)
+				Set(value As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.PRV)
 					Children(7) = value
 				End Set
 			End Property
-			Friend Property DMG_Obj As Dom.Segments.DMG_Obj
+			Friend Property DMG_Obj As Edi.Dom.Segments.DMG_Obj
 				Get
-					Return CType(Children(8), Dom.Segments.DMG_Obj)
+					Return CType(Children(8), Edi.Dom.Segments.DMG_Obj)
 				End Get
-				Set(value As Dom.Segments.DMG_Obj)
+				Set(value As Edi.Dom.Segments.DMG_Obj)
 					Children(8) = value
 				End Set
 			End Property
 
-			Private Property DMG_Std As Dom.Segments.DMG Implements Dom.Transactions.Transaction271.Loops.Loop2100.DMG
+			Private Property DMG_Std As Edi.Dom.Segments.DMG Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2100.DMG
 				Get
-					Return CType(Children(8), Dom.Segments.DMG_Obj)
+					Return CType(Children(8), Edi.Dom.Segments.DMG_Obj)
 				End Get
-				Set(value As Dom.Segments.DMG)
+				Set(value As Edi.Dom.Segments.DMG)
 					Children(8) = value
 				End Set
 			End Property
 
-			Private Property DMG_IFace_Loop2100C_Obj As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.DMG Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100C.DMG
+			Private Property DMG_IFace_Loop2100C_Obj As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.DMG Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100C.DMG
 				Get
-					Return CType(Children(8), Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.DMG)
+					Return CType(Children(8), Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.DMG)
 				End Get
-				Set(value As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.DMG)
+				Set(value As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.DMG)
 					Children(8) = value
 				End Set
 			End Property
-			Private Property DMG_IFace_1_Loop2100D_Obj As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.DMG Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100D.DMG
+			Private Property DMG_IFace_1_Loop2100D_Obj As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.DMG Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100D.DMG
 				Get
-					Return CType(Children(8), Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.DMG)
+					Return CType(Children(8), Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.DMG)
 				End Get
-				Set(value As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.DMG)
+				Set(value As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.DMG)
 					Children(8) = value
 				End Set
 			End Property
-			Friend Property INS_Obj As Dom.Segments.INS_Obj
+			Friend Property INS_Obj As Edi.Dom.Segments.INS_Obj
 				Get
-					Return CType(Children(9), Dom.Segments.INS_Obj)
+					Return CType(Children(9), Edi.Dom.Segments.INS_Obj)
 				End Get
-				Set(value As Dom.Segments.INS_Obj)
+				Set(value As Edi.Dom.Segments.INS_Obj)
 					Children(9) = value
 				End Set
 			End Property
 
-			Private Property INS_Std As Dom.Segments.INS Implements Dom.Transactions.Transaction271.Loops.Loop2100.INS
+			Private Property INS_Std As Edi.Dom.Segments.INS Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2100.INS
 				Get
-					Return CType(Children(9), Dom.Segments.INS_Obj)
+					Return CType(Children(9), Edi.Dom.Segments.INS_Obj)
 				End Get
-				Set(value As Dom.Segments.INS)
+				Set(value As Edi.Dom.Segments.INS)
 					Children(9) = value
 				End Set
 			End Property
 
-			Private Property INS_IFace_Loop2100C_Obj As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.INS Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100C.INS
+			Private Property INS_IFace_Loop2100C_Obj As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.INS Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100C.INS
 				Get
-					Return CType(Children(9), Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.INS)
+					Return CType(Children(9), Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.INS)
 				End Get
-				Set(value As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.INS)
+				Set(value As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.INS)
 					Children(9) = value
 				End Set
 			End Property
-			Private Property INS_IFace_1_Loop2100D_Obj As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.INS Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100D.INS
+			Private Property INS_IFace_1_Loop2100D_Obj As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.INS Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100D.INS
 				Get
-					Return CType(Children(9), Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.INS)
+					Return CType(Children(9), Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.INS)
 				End Get
-				Set(value As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.INS)
+				Set(value As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.INS)
 					Children(9) = value
 				End Set
 			End Property
-			Friend Property HI_Obj As Dom.Segments.HI_Obj
+			Friend Property HI_Obj As Edi.Dom.Segments.HI_Obj
 				Get
-					Return CType(Children(10), Dom.Segments.HI_Obj)
+					Return CType(Children(10), Edi.Dom.Segments.HI_Obj)
 				End Get
-				Set(value As Dom.Segments.HI_Obj)
+				Set(value As Edi.Dom.Segments.HI_Obj)
 					Children(10) = value
 				End Set
 			End Property
 
-			Private Property HI_Std As Dom.Segments.HI Implements Dom.Transactions.Transaction271.Loops.Loop2100.HI
+			Private Property HI_Std As Edi.Dom.Segments.HI Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2100.HI
 				Get
-					Return CType(Children(10), Dom.Segments.HI_Obj)
+					Return CType(Children(10), Edi.Dom.Segments.HI_Obj)
 				End Get
-				Set(value As Dom.Segments.HI)
+				Set(value As Edi.Dom.Segments.HI)
 					Children(10) = value
 				End Set
 			End Property
 
-			Private Property HI_IFace_Loop2100C_Obj As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.HI Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100C.HI
+			Private Property HI_IFace_Loop2100C_Obj As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.HI Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100C.HI
 				Get
-					Return CType(Children(10), Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.HI)
+					Return CType(Children(10), Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.HI)
 				End Get
-				Set(value As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.HI)
+				Set(value As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.HI)
 					Children(10) = value
 				End Set
 			End Property
-			Private Property HI_IFace_1_Loop2100D_Obj As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.HI Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100D.HI
+			Private Property HI_IFace_1_Loop2100D_Obj As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.HI Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100D.HI
 				Get
-					Return CType(Children(10), Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.HI)
+					Return CType(Children(10), Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.HI)
 				End Get
-				Set(value As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.HI)
+				Set(value As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.HI)
 					Children(10) = value
 				End Set
 			End Property
-			Friend ReadOnly Property DTP_Obj As SegmentContainer(Of Dom.Segments.DTP) Implements Dom.Transactions.Transaction271.Loops.Loop2100.DTP
+			Friend ReadOnly Property DTP_Obj As SegmentContainer(Of Edi.Dom.Segments.DTP) Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2100.DTP
 				Get
-					Return CType(Children(11), SegmentContainer(Of Dom.Segments.DTP))
+					Return CType(Children(11), SegmentContainer(Of Edi.Dom.Segments.DTP))
 				End Get
 			End Property
 
-			Private DTPSubset_Loop2100C_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.DTP, Dom.Segments.DTP)
-			Private ReadOnly Property DTP_Loop2100C_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.DTP, Dom.Segments.DTP) Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100C.DTP
+			Private DTPSubset_Loop2100C_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.DTP, Edi.Dom.Segments.DTP)
+			Private ReadOnly Property DTP_Loop2100C_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.DTP, Edi.Dom.Segments.DTP) Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100C.DTP
 				Get
 					If DTPSubset_Loop2100C_Obj Is Nothing Then
-						DTPSubset_Loop2100C_Obj = New SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.DTP, Dom.Segments.DTP)(Children(11), 9, 4, 73)
+						DTPSubset_Loop2100C_Obj = New SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.DTP, Edi.Dom.Segments.DTP)(Children(11), 9, "4", "1200")
 					End If
 
 					Return DTPSubset_Loop2100C_Obj
 				End Get
 			End Property
-			Private DTPSubset_1_Loop2100D_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.DTP, Dom.Segments.DTP)
-			Private ReadOnly Property DTP_Loop2100D_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.DTP, Dom.Segments.DTP) Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100D.DTP
+			Private DTPSubset_1_Loop2100D_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.DTP, Edi.Dom.Segments.DTP)
+			Private ReadOnly Property DTP_Loop2100D_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.DTP, Edi.Dom.Segments.DTP) Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100D.DTP
 				Get
 					If DTPSubset_1_Loop2100D_Obj Is Nothing Then
-						DTPSubset_1_Loop2100D_Obj = New SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.DTP, Dom.Segments.DTP)(Children(11), 9, 5, 73)
+						DTPSubset_1_Loop2100D_Obj = New SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.DTP, Edi.Dom.Segments.DTP)(Children(11), 9, "5", "1200")
 					End If
 
 					Return DTPSubset_1_Loop2100D_Obj
 				End Get
 			End Property
-			Friend ReadOnly Property LUI_Obj As SegmentContainer(Of Dom.Segments.LUI) Implements Dom.Transactions.Transaction271.Loops.Loop2100.LUI
+			Friend ReadOnly Property LUI_Obj As SegmentContainer(Of Edi.Dom.Segments.LUI) Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2100.LUI
 				Get
-					Return CType(Children(12), SegmentContainer(Of Dom.Segments.LUI))
+					Return CType(Children(12), SegmentContainer(Of Edi.Dom.Segments.LUI))
 				End Get
 			End Property
 
-			Friend ReadOnly Property MPI_Obj As SegmentContainer(Of Dom.Segments.MPI) Implements Dom.Transactions.Transaction271.Loops.Loop2100.MPI
+			Friend ReadOnly Property MPI_Obj As SegmentContainer(Of Edi.Dom.Segments.MPI) Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2100.MPI
 				Get
-					Return CType(Children(13), SegmentContainer(Of Dom.Segments.MPI))
+					Return CType(Children(13), SegmentContainer(Of Edi.Dom.Segments.MPI))
 				End Get
 			End Property
 
-			Private MPISubset_Loop2100C_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.MPI, Dom.Segments.MPI)
-			Private Property MPI_IFace_Loop2100C_Obj As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.MPI Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100C.MPI
+			Private MPISubset_Loop2100C_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.MPI, Edi.Dom.Segments.MPI)
+			Private Property MPI_IFace_Loop2100C_Obj As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.MPI Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100C.MPI
 				Get
 					If MPISubset_Loop2100C_Obj Is Nothing Then
-						MPISubset_Loop2100C_Obj = New SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.MPI, Dom.Segments.MPI)(Children(13), 1, 4, 242425)
+						MPISubset_Loop2100C_Obj = New SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.MPI, Edi.Dom.Segments.MPI)(Children(13), 1, "4", "1275")
 					End If
 
 					If MPISubset_Loop2100C_Obj.Count > 0 Then
@@ -1239,9 +1243,9 @@
 						Return Nothing
 					End If
 				End Get
-				Set(value As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.MPI)
+				Set(value As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.MPI)
 					If MPISubset_Loop2100C_Obj Is Nothing Then
-						MPISubset_Loop2100C_Obj = New SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.MPI, Dom.Segments.MPI)(Children(13), 1, 4, 242425)
+						MPISubset_Loop2100C_Obj = New SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.MPI, Edi.Dom.Segments.MPI)(Children(13), 1, "4", "1275")
 					End If
 
 					If MPISubset_Loop2100C_Obj.Count = 0 Then
@@ -1251,11 +1255,11 @@
 					End If
 				End Set
 			End Property
-			Private MPISubset_1_Loop2100D_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.MPI, Dom.Segments.MPI)
-			Private Property MPI_IFace_1_Loop2100D_Obj As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.MPI Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100D.MPI
+			Private MPISubset_1_Loop2100D_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.MPI, Edi.Dom.Segments.MPI)
+			Private Property MPI_IFace_1_Loop2100D_Obj As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.MPI Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100D.MPI
 				Get
 					If MPISubset_1_Loop2100D_Obj Is Nothing Then
-						MPISubset_1_Loop2100D_Obj = New SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.MPI, Dom.Segments.MPI)(Children(13), 1, 5, 242425)
+						MPISubset_1_Loop2100D_Obj = New SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.MPI, Edi.Dom.Segments.MPI)(Children(13), 1, "5", "1275")
 					End If
 
 					If MPISubset_1_Loop2100D_Obj.Count > 0 Then
@@ -1264,9 +1268,9 @@
 						Return Nothing
 					End If
 				End Get
-				Set(value As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.MPI)
+				Set(value As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.MPI)
 					If MPISubset_1_Loop2100D_Obj Is Nothing Then
-						MPISubset_1_Loop2100D_Obj = New SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.MPI, Dom.Segments.MPI)(Children(13), 1, 5, 242425)
+						MPISubset_1_Loop2100D_Obj = New SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.MPI, Edi.Dom.Segments.MPI)(Children(13), 1, "5", "1275")
 					End If
 
 					If MPISubset_1_Loop2100D_Obj.Count = 0 Then
@@ -1276,27 +1280,27 @@
 					End If
 				End Set
 			End Property
-			Friend ReadOnly Property Loop2110_Obj As LoopContainer(Of Dom.Transactions.Transaction271.Loops.Loop2110) Implements Dom.Transactions.Transaction271.Loops.Loop2100.Loop2110
+			Friend ReadOnly Property Loop2110_Obj As LoopContainer(Of Edi.Dom.Transactions.Transaction271.Loops.Loop2110) Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2100.Loop2110
 				Get
-					Return CType(Children(14), LoopContainer(Of Dom.Transactions.Transaction271.Loops.Loop2110))
+					Return CType(Children(14), LoopContainer(Of Edi.Dom.Transactions.Transaction271.Loops.Loop2110))
 				End Get
 			End Property
 
-			Private Loop2110CSubset_Loop2100C_Obj As LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110C, Dom.Transactions.Transaction271.Loops.Loop2110)
-			Private ReadOnly Property Loop2110C_Obj_Loop2100C_Obj As LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110C, Dom.Transactions.Transaction271.Loops.Loop2110) Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100C.Loop2110C
+			Private Loop2110CSubset_Loop2100C_Obj As LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110C, Edi.Dom.Transactions.Transaction271.Loops.Loop2110)
+			Private ReadOnly Property Loop2110C_Obj_Loop2100C_Obj As LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110C, Edi.Dom.Transactions.Transaction271.Loops.Loop2110) Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100C.Loop2110C
 				Get
 					If Loop2110CSubset_Loop2100C_Obj Is Nothing Then
-						Loop2110CSubset_Loop2100C_Obj = New LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110C, Dom.Transactions.Transaction271.Loops.Loop2110)(Children(14), 0, 4, 109)
+						Loop2110CSubset_Loop2100C_Obj = New LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110C, Edi.Dom.Transactions.Transaction271.Loops.Loop2110)(Children(14), 0, "4", "1300")
 					End If
 
 					Return Loop2110CSubset_Loop2100C_Obj
 				End Get
 			End Property
-			Private Loop2110DSubset_Loop2100D_Obj As LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110D, Dom.Transactions.Transaction271.Loops.Loop2110)
-			Private ReadOnly Property Loop2110D_Obj_Loop2100D_Obj As LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110D, Dom.Transactions.Transaction271.Loops.Loop2110) Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100D.Loop2110D
+			Private Loop2110DSubset_Loop2100D_Obj As LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110D, Edi.Dom.Transactions.Transaction271.Loops.Loop2110)
+			Private ReadOnly Property Loop2110D_Obj_Loop2100D_Obj As LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110D, Edi.Dom.Transactions.Transaction271.Loops.Loop2110) Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100D.Loop2110D
 				Get
 					If Loop2110DSubset_Loop2100D_Obj Is Nothing Then
-						Loop2110DSubset_Loop2100D_Obj = New LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110D, Dom.Transactions.Transaction271.Loops.Loop2110)(Children(14), 0, 5, 109)
+						Loop2110DSubset_Loop2100D_Obj = New LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110D, Edi.Dom.Transactions.Transaction271.Loops.Loop2110)(Children(14), 0, "5", "1300")
 					End If
 
 					Return Loop2110DSubset_Loop2100D_Obj
@@ -1306,30 +1310,30 @@
 		End Class
 		Partial Friend Class Loop2110_Obj
 			Inherits LoopBase
-			Implements Dom.Transactions.Transaction271.Loops.Loop2110,
-									Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110C,
-									Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110D
+			Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2110,
+									Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110C,
+									Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110D
 			Friend Sub New()
 				MyBase.New
 
-				Children.AddRange({CType(Nothing, Dom.Segments.EB_Obj),
-												New SegmentContainer(Of Dom.Segments.HSD)(9, 2, 1350),
-												New SegmentContainer(Of Dom.Segments.REF)(9, 2, 1400),
-												New SegmentContainer(Of Dom.Segments.DTP)(20, 2, 1500),
-												New SegmentContainer(Of Dom.Segments.AAA)(9, 2, 1600),
-												CType(Nothing, Dom.Segments.VEH_Obj),
-												CType(Nothing, Dom.Segments.PID_Obj),
-												CType(Nothing, Dom.Segments.PDR_Obj),
-												CType(Nothing, Dom.Segments.PDP_Obj),
-												CType(Nothing, Dom.Segments.LIN_Obj),
-												CType(Nothing, Dom.Segments.EM_Obj),
-												CType(Nothing, Dom.Segments.SD1_Obj),
-												CType(Nothing, Dom.Segments.PKD_Obj),
-												New SegmentContainer(Of Dom.Segments.MSG)(10, 2, 2500),
-												New LoopContainer(Of Dom.Transactions.Transaction271.Loops.Loop2115)(0, 2, 2600),
-												CType(Nothing, Dom.Segments.LS_Obj),
-												New LoopContainer(Of Dom.Transactions.Transaction271.Loops.Loop2120)(0, 2, 3400),
-												CType(Nothing, Dom.Segments.LE_Obj)})
+				Children.AddRange({CType(Nothing, Edi.Dom.Segments.EB_Obj),
+												New SegmentContainer(Of Edi.Dom.Segments.HSD)(9, "2", "1350"),
+												New SegmentContainer(Of Edi.Dom.Segments.REF)(9, "2", "1400"),
+												New SegmentContainer(Of Edi.Dom.Segments.DTP)(20, "2", "1500"),
+												New SegmentContainer(Of Edi.Dom.Segments.AAA)(9, "2", "1600"),
+												CType(Nothing, Edi.Dom.Segments.VEH_Obj),
+												CType(Nothing, Edi.Dom.Segments.PID_Obj),
+												CType(Nothing, Edi.Dom.Segments.PDR_Obj),
+												CType(Nothing, Edi.Dom.Segments.PDP_Obj),
+												CType(Nothing, Edi.Dom.Segments.LIN_Obj),
+												CType(Nothing, Edi.Dom.Segments.EM_Obj),
+												CType(Nothing, Edi.Dom.Segments.SD1_Obj),
+												CType(Nothing, Edi.Dom.Segments.PKD_Obj),
+												New SegmentContainer(Of Edi.Dom.Segments.MSG)(10, "2", "2500"),
+												New LoopContainer(Of Edi.Dom.Transactions.Transaction271.Loops.Loop2115)(0, "2", "2600"),
+												CType(Nothing, Edi.Dom.Segments.LS_Obj),
+												New LoopContainer(Of Edi.Dom.Transactions.Transaction271.Loops.Loop2120)(0, "2", "3400"),
+												CType(Nothing, Edi.Dom.Segments.LE_Obj)})
 
 				Initialize()
 			End Sub
@@ -1450,53 +1454,33 @@
 								New ReaderState(17, "III", ReadAction.PopulateLoop, 20, False),
 								New ReaderState(18, "III", ReadAction.PopulateLoop, 20, False),
 								New ReaderState(20, "III", ReadAction.PopulateLoop, 20, False),
-								New ReaderState(1, "LS", ReadAction.PopulateSegment, 22, False),
-								New ReaderState(2, "LS", ReadAction.PopulateSegment, 22, False),
-								New ReaderState(4, "LS", ReadAction.PopulateSegment, 22, False),
-								New ReaderState(6, "LS", ReadAction.PopulateSegment, 22, False),
-								New ReaderState(8, "LS", ReadAction.PopulateSegment, 22, False),
-								New ReaderState(10, "LS", ReadAction.PopulateSegment, 22, False),
-								New ReaderState(11, "LS", ReadAction.PopulateSegment, 22, False),
-								New ReaderState(12, "LS", ReadAction.PopulateSegment, 22, False),
-								New ReaderState(13, "LS", ReadAction.PopulateSegment, 22, False),
-								New ReaderState(14, "LS", ReadAction.PopulateSegment, 22, False),
-								New ReaderState(15, "LS", ReadAction.PopulateSegment, 22, False),
-								New ReaderState(16, "LS", ReadAction.PopulateSegment, 22, False),
-								New ReaderState(17, "LS", ReadAction.PopulateSegment, 22, False),
-								New ReaderState(18, "LS", ReadAction.PopulateSegment, 22, False),
-								New ReaderState(20, "LS", ReadAction.PopulateSegment, 22, False),
-								New ReaderState(1, "NM1", ReadAction.PopulateLoop, 23, False),
-								New ReaderState(2, "NM1", ReadAction.PopulateLoop, 23, False),
-								New ReaderState(4, "NM1", ReadAction.PopulateLoop, 23, False),
-								New ReaderState(6, "NM1", ReadAction.PopulateLoop, 23, False),
-								New ReaderState(8, "NM1", ReadAction.PopulateLoop, 23, False),
-								New ReaderState(10, "NM1", ReadAction.PopulateLoop, 23, False),
-								New ReaderState(11, "NM1", ReadAction.PopulateLoop, 23, False),
-								New ReaderState(12, "NM1", ReadAction.PopulateLoop, 23, False),
-								New ReaderState(13, "NM1", ReadAction.PopulateLoop, 23, False),
-								New ReaderState(14, "NM1", ReadAction.PopulateLoop, 23, False),
-								New ReaderState(15, "NM1", ReadAction.PopulateLoop, 23, False),
-								New ReaderState(16, "NM1", ReadAction.PopulateLoop, 23, False),
-								New ReaderState(17, "NM1", ReadAction.PopulateLoop, 23, False),
-								New ReaderState(18, "NM1", ReadAction.PopulateLoop, 23, False),
-								New ReaderState(20, "NM1", ReadAction.PopulateLoop, 23, False),
+								New ReaderState(1, "LS", ReadAction.PopulateSegmentAndStartBoundedLoop, 22, False),
+								New ReaderState(2, "LS", ReadAction.PopulateSegmentAndStartBoundedLoop, 22, False),
+								New ReaderState(4, "LS", ReadAction.PopulateSegmentAndStartBoundedLoop, 22, False),
+								New ReaderState(6, "LS", ReadAction.PopulateSegmentAndStartBoundedLoop, 22, False),
+								New ReaderState(8, "LS", ReadAction.PopulateSegmentAndStartBoundedLoop, 22, False),
+								New ReaderState(10, "LS", ReadAction.PopulateSegmentAndStartBoundedLoop, 22, False),
+								New ReaderState(11, "LS", ReadAction.PopulateSegmentAndStartBoundedLoop, 22, False),
+								New ReaderState(12, "LS", ReadAction.PopulateSegmentAndStartBoundedLoop, 22, False),
+								New ReaderState(13, "LS", ReadAction.PopulateSegmentAndStartBoundedLoop, 22, False),
+								New ReaderState(14, "LS", ReadAction.PopulateSegmentAndStartBoundedLoop, 22, False),
+								New ReaderState(15, "LS", ReadAction.PopulateSegmentAndStartBoundedLoop, 22, False),
+								New ReaderState(16, "LS", ReadAction.PopulateSegmentAndStartBoundedLoop, 22, False),
+								New ReaderState(17, "LS", ReadAction.PopulateSegmentAndStartBoundedLoop, 22, False),
+								New ReaderState(18, "LS", ReadAction.PopulateSegmentAndStartBoundedLoop, 22, False),
+								New ReaderState(20, "LS", ReadAction.PopulateSegmentAndStartBoundedLoop, 22, False),
 								New ReaderState(22, "NM1", ReadAction.PopulateLoop, 23, False),
+								New ReaderState(22, "N2", ReadAction.PopulateLoop, 23, False),
+								New ReaderState(22, "N3", ReadAction.PopulateLoop, 23, False),
+								New ReaderState(22, "N4", ReadAction.PopulateLoop, 23, False),
+								New ReaderState(22, "PER", ReadAction.PopulateLoop, 23, False),
+								New ReaderState(22, "PRV", ReadAction.PopulateLoop, 23, False),
 								New ReaderState(23, "NM1", ReadAction.PopulateLoop, 23, False),
-								New ReaderState(1, "LE", ReadAction.PopulateSegment, 25, False),
-								New ReaderState(2, "LE", ReadAction.PopulateSegment, 25, False),
-								New ReaderState(4, "LE", ReadAction.PopulateSegment, 25, False),
-								New ReaderState(6, "LE", ReadAction.PopulateSegment, 25, False),
-								New ReaderState(8, "LE", ReadAction.PopulateSegment, 25, False),
-								New ReaderState(10, "LE", ReadAction.PopulateSegment, 25, False),
-								New ReaderState(11, "LE", ReadAction.PopulateSegment, 25, False),
-								New ReaderState(12, "LE", ReadAction.PopulateSegment, 25, False),
-								New ReaderState(13, "LE", ReadAction.PopulateSegment, 25, False),
-								New ReaderState(14, "LE", ReadAction.PopulateSegment, 25, False),
-								New ReaderState(15, "LE", ReadAction.PopulateSegment, 25, False),
-								New ReaderState(16, "LE", ReadAction.PopulateSegment, 25, False),
-								New ReaderState(17, "LE", ReadAction.PopulateSegment, 25, False),
-								New ReaderState(18, "LE", ReadAction.PopulateSegment, 25, False),
-								New ReaderState(20, "LE", ReadAction.PopulateSegment, 25, False),
+								New ReaderState(23, "N2", ReadAction.PopulateLoop, 23, False),
+								New ReaderState(23, "N3", ReadAction.PopulateLoop, 23, False),
+								New ReaderState(23, "N4", ReadAction.PopulateLoop, 23, False),
+								New ReaderState(23, "PER", ReadAction.PopulateLoop, 23, False),
+								New ReaderState(23, "PRV", ReadAction.PopulateLoop, 23, False),
 								New ReaderState(22, "LE", ReadAction.PopulateSegment, 25, False),
 								New ReaderState(23, "LE", ReadAction.PopulateSegment, 25, False)})
 
@@ -1509,76 +1493,75 @@
 				Dim Implementation As String = args.Implementation
 				Dim Seg As Segment
 				If String.Compare(SegmentName, "EB", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.EB_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.EB_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					EB_Obj = Seg
 				ElseIf String.Compare(SegmentName, "HSD", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.HSD_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.HSD_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					HSD_Obj.Add(Seg)
 				ElseIf String.Compare(SegmentName, "REF", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.REF_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.REF_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					REF_Obj.Add(Seg)
-					Dim S2 = CType(Seg, Dom.Segments.REF_Obj)
+					Dim S2 = CType(Seg, Edi.Dom.Segments.REF_Obj)
 					If MyBase.CompareKey(S2.REF01, ";18;1L;1W;49;6P;9F;ALS;CLI;F6;FO;G1;IG;M7;N6;NQ;") AndAlso String.Compare(args.Implementation, "_271B1__2000C__2100C__2110C", StringComparison.OrdinalIgnoreCase) = 0 Then
-						Seg.SetArea = 4
-						Seg.SetSequence = 145
+						Seg.SetArea = "4"
+						Seg.SetSequence = "1400"
 					ElseIf MyBase.CompareKey(S2.REF01, ";18;1L;1W;49;6P;9F;ALS;CLI;F6;FO;G1;IG;N6;NQ;") AndAlso String.Compare(args.Implementation, "_271B1__2000D__2100D__2110D", StringComparison.OrdinalIgnoreCase) = 0 Then
-						Seg.SetArea = 5
-						Seg.SetSequence = 145
+						Seg.SetArea = "5"
+						Seg.SetSequence = "1400"
 					End If
 				ElseIf String.Compare(SegmentName, "DTP", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.DTP_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.DTP_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					DTP_Obj.Add(Seg)
-					Dim S2 = CType(Seg, Dom.Segments.DTP_Obj)
+					Dim S2 = CType(Seg, Edi.Dom.Segments.DTP_Obj)
 					If MyBase.CompareKey(S2.DTP01, ";096;193;194;198;290;291;292;295;304;307;318;346;348;349;356;357;435;472;636;771;") AndAlso String.Compare(args.Implementation, "_271B1__2000C__2100C__2110C", StringComparison.OrdinalIgnoreCase) = 0 Then
-						Seg.SetArea = 4
-						Seg.SetSequence = 181
+						Seg.SetArea = "4"
+						Seg.SetSequence = "1500"
 					ElseIf MyBase.CompareKey(S2.DTP01, ";096;193;194;198;290;291;292;295;304;307;318;346;348;349;356;357;435;472;636;771;") AndAlso String.Compare(args.Implementation, "_271B1__2000D__2100D__2110D", StringComparison.OrdinalIgnoreCase) = 0 Then
-						Seg.SetArea = 5
-						Seg.SetSequence = 181
+						Seg.SetArea = "5"
+						Seg.SetSequence = "1500"
 					End If
 				ElseIf String.Compare(SegmentName, "AAA", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.AAA_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.AAA_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					AAA_Obj.Add(Seg)
 				ElseIf String.Compare(SegmentName, "VEH", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.VEH_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.VEH_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					VEH_Obj = Seg
 				ElseIf String.Compare(SegmentName, "PID", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.PID_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.PID_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					PID_Obj = Seg
 				ElseIf String.Compare(SegmentName, "PDR", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.PDR_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.PDR_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					PDR_Obj = Seg
 				ElseIf String.Compare(SegmentName, "PDP", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.PDP_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.PDP_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					PDP_Obj = Seg
 				ElseIf String.Compare(SegmentName, "LIN", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.LIN_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.LIN_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					LIN_Obj = Seg
 				ElseIf String.Compare(SegmentName, "EM", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.EM_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.EM_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					EM_Obj = Seg
 				ElseIf String.Compare(SegmentName, "SD1", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.SD1_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.SD1_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					SD1_Obj = Seg
 				ElseIf String.Compare(SegmentName, "PKD", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.PKD_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.PKD_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					PKD_Obj = Seg
 				ElseIf String.Compare(SegmentName, "MSG", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.MSG_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.MSG_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					MSG_Obj.Add(Seg)
 				ElseIf String.Compare(SegmentName, "LS", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.LS_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.LS_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					LS_Obj = Seg
-					Dim S2 = CType(Seg, Dom.Segments.LS_Obj)
-					If MyBase.CompareKey(S2.LS01, ";") AndAlso String.Compare(args.Implementation, "_271B1__2000C__2100C__2110C", StringComparison.OrdinalIgnoreCase) = 0 Then
-						Seg.SetArea = 4
-						Seg.SetSequence = 10621
-					ElseIf MyBase.CompareKey(S2.LS01, ";") AndAlso String.Compare(args.Implementation, "_271B1__2000D__2100D__2110D", StringComparison.OrdinalIgnoreCase) = 0 Then
-						Seg.SetArea = 5
-						Seg.SetSequence = 10621
+					If String.Compare(args.Implementation, "_271B1__2000C__2100C__2110C", StringComparison.OrdinalIgnoreCase) = 0 Then
+						Seg.SetArea = "4"
+						Seg.SetSequence = "1780"
+					ElseIf String.Compare(args.Implementation, "_271B1__2000D__2100D__2110D", StringComparison.OrdinalIgnoreCase) = 0 Then
+						Seg.SetArea = "5"
+						Seg.SetSequence = "1780"
 					End If
 				ElseIf String.Compare(SegmentName, "LE", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.LE_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.LE_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					LE_Obj = Seg
 				End If
 			End Sub
@@ -1589,31 +1572,40 @@
 				Dim Temp = args.Implementation
 
 				If String.Compare(args.DataSegment.SegmentID, "III", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Dim NewLoop As LoopBase = New Dom.Transactions.Transaction271.Loop2115_Obj
+					Dim NewLoop As LoopBase = New Edi.Dom.Transactions.Transaction271.Loop2115_Obj
 					Dim LoopKey As String = args.DataSegment.ToStringValue(0)
 					Loop2115_Obj.Add(NewLoop)
 					If String.Compare(args.Implementation, "_271B1__2000C__2100C__2110C", StringComparison.OrdinalIgnoreCase) = 0 Then
 						args.Implementation = "_271B1__2000C__2100C__2110C__2115C"
+						NewLoop.SetArea = "4"
+						NewLoop.SetSequence = "1710"
 						Await NewLoop.ReadAsync(args).ConfigureAwait(False)
 					ElseIf String.Compare(args.Implementation, "_271B1__2000D__2100D__2110D", StringComparison.OrdinalIgnoreCase) = 0 Then
 						args.Implementation = "_271B1__2000D__2100D__2110D__2115D"
+						NewLoop.SetArea = "5"
+						NewLoop.SetSequence = "1710"
 						Await NewLoop.ReadAsync(args).ConfigureAwait(False)
 					Else
 						Await NewLoop.ReadAsync(args).ConfigureAwait(False)
 					End If
-				ElseIf String.Compare(args.DataSegment.SegmentID, "NM1", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Dim NewLoop As LoopBase = New Dom.Transactions.Transaction271.Loop2120_Obj
+				ElseIf String.Compare(args.DataSegment.SegmentID, "NM1", StringComparison.OrdinalIgnoreCase) = 0 OrElse
+					String.Compare(args.DataSegment.SegmentID, "N2", StringComparison.OrdinalIgnoreCase) = 0 OrElse
+					String.Compare(args.DataSegment.SegmentID, "N3", StringComparison.OrdinalIgnoreCase) = 0 OrElse
+					String.Compare(args.DataSegment.SegmentID, "N4", StringComparison.OrdinalIgnoreCase) = 0 OrElse
+					String.Compare(args.DataSegment.SegmentID, "PER", StringComparison.OrdinalIgnoreCase) = 0 OrElse
+					String.Compare(args.DataSegment.SegmentID, "PRV", StringComparison.OrdinalIgnoreCase) = 0 Then
+					Dim NewLoop As LoopBase = New Edi.Dom.Transactions.Transaction271.Loop2120_Obj
 					Dim LoopKey As String = args.DataSegment.ToStringValue(0)
 					Loop2120_Obj.Add(NewLoop)
-					If MyBase.CompareKey(LoopKey, ";13;1I;1P;2B;36;73;FA;GP;GW;I3;IL;LR;OC;P3;P4;P5;PR;PRP;SEP;TTP;VER;VN;VY;X3;Y2;") AndAlso String.Compare(args.Implementation, "_271B1__2000C__2100C__2110C", StringComparison.OrdinalIgnoreCase) = 0 Then
+					If String.Compare(args.Implementation, "_271B1__2000C__2100C__2110C", StringComparison.OrdinalIgnoreCase) = 0 Then
 						args.Implementation = "_271B1__2000C__2100C__2110C__2120C"
-						NewLoop.SetArea = 4
-						NewLoop.SetSequence = 289
+						NewLoop.SetArea = "4"
+						NewLoop.SetSequence = "1800"
 						Await NewLoop.ReadAsync(args).ConfigureAwait(False)
-					ElseIf MyBase.CompareKey(LoopKey, ";13;1I;1P;2B;36;73;FA;GP;GW;I3;IL;LR;OC;P3;P4;P5;PR;PRP;SEP;TTP;VER;VN;VY;X3;Y2;") AndAlso String.Compare(args.Implementation, "_271B1__2000D__2100D__2110D", StringComparison.OrdinalIgnoreCase) = 0 Then
+					ElseIf String.Compare(args.Implementation, "_271B1__2000D__2100D__2110D", StringComparison.OrdinalIgnoreCase) = 0 Then
 						args.Implementation = "_271B1__2000D__2100D__2110D__2120D"
-						NewLoop.SetArea = 5
-						NewLoop.SetSequence = 289
+						NewLoop.SetArea = "5"
+						NewLoop.SetSequence = "1800"
 						Await NewLoop.ReadAsync(args).ConfigureAwait(False)
 					Else
 						Await NewLoop.ReadAsync(args).ConfigureAwait(False)
@@ -1621,431 +1613,431 @@
 				End If
 				args.Implementation = Temp
 			End Function
-			Friend Property EB_Obj As Dom.Segments.EB_Obj
+			Friend Property EB_Obj As Edi.Dom.Segments.EB_Obj
 				Get
-					Return CType(Children(0), Dom.Segments.EB_Obj)
+					Return CType(Children(0), Edi.Dom.Segments.EB_Obj)
 				End Get
-				Set(value As Dom.Segments.EB_Obj)
+				Set(value As Edi.Dom.Segments.EB_Obj)
 					Children(0) = value
 				End Set
 			End Property
 
-			Private Property EB_Std As Dom.Segments.EB Implements Dom.Transactions.Transaction271.Loops.Loop2110.EB
+			Private Property EB_Std As Edi.Dom.Segments.EB Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2110.EB
 				Get
-					Return CType(Children(0), Dom.Segments.EB_Obj)
+					Return CType(Children(0), Edi.Dom.Segments.EB_Obj)
 				End Get
-				Set(value As Dom.Segments.EB)
+				Set(value As Edi.Dom.Segments.EB)
 					Children(0) = value
 				End Set
 			End Property
 
-			Private Property EB_IFace_Loop2110C_Obj As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.EB Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110C.EB
+			Private Property EB_IFace_Loop2110C_Obj As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.EB Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110C.EB
 				Get
-					Return CType(Children(0), Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.EB)
+					Return CType(Children(0), Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.EB)
 				End Get
-				Set(value As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.EB)
+				Set(value As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.EB)
 					Children(0) = value
 				End Set
 			End Property
-			Private Property EB_IFace_1_Loop2110D_Obj As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.EB Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110D.EB
+			Private Property EB_IFace_1_Loop2110D_Obj As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.EB Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110D.EB
 				Get
-					Return CType(Children(0), Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.EB)
+					Return CType(Children(0), Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.EB)
 				End Get
-				Set(value As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.EB)
+				Set(value As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.EB)
 					Children(0) = value
 				End Set
 			End Property
-			Friend ReadOnly Property HSD_Obj As SegmentContainer(Of Dom.Segments.HSD) Implements Dom.Transactions.Transaction271.Loops.Loop2110.HSD
+			Friend ReadOnly Property HSD_Obj As SegmentContainer(Of Edi.Dom.Segments.HSD) Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2110.HSD
 				Get
-					Return CType(Children(1), SegmentContainer(Of Dom.Segments.HSD))
+					Return CType(Children(1), SegmentContainer(Of Edi.Dom.Segments.HSD))
 				End Get
 			End Property
 
-			Private HSDSubset_Loop2110C_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.HSD, Dom.Segments.HSD)
-			Private ReadOnly Property HSD_Loop2110C_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.HSD, Dom.Segments.HSD) Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110C.HSD
+			Private HSDSubset_Loop2110C_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.HSD, Edi.Dom.Segments.HSD)
+			Private ReadOnly Property HSD_Loop2110C_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.HSD, Edi.Dom.Segments.HSD) Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110C.HSD
 				Get
 					If HSDSubset_Loop2110C_Obj Is Nothing Then
-						HSDSubset_Loop2110C_Obj = New SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.HSD, Dom.Segments.HSD)(Children(1), 9, 4, 6589)
+						HSDSubset_Loop2110C_Obj = New SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.HSD, Edi.Dom.Segments.HSD)(Children(1), 9, "4", "1350")
 					End If
 
 					Return HSDSubset_Loop2110C_Obj
 				End Get
 			End Property
-			Private HSDSubset_1_Loop2110D_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.HSD, Dom.Segments.HSD)
-			Private ReadOnly Property HSD_Loop2110D_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.HSD, Dom.Segments.HSD) Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110D.HSD
+			Private HSDSubset_1_Loop2110D_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.HSD, Edi.Dom.Segments.HSD)
+			Private ReadOnly Property HSD_Loop2110D_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.HSD, Edi.Dom.Segments.HSD) Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110D.HSD
 				Get
 					If HSDSubset_1_Loop2110D_Obj Is Nothing Then
-						HSDSubset_1_Loop2110D_Obj = New SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.HSD, Dom.Segments.HSD)(Children(1), 9, 5, 6589)
+						HSDSubset_1_Loop2110D_Obj = New SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.HSD, Edi.Dom.Segments.HSD)(Children(1), 9, "5", "1350")
 					End If
 
 					Return HSDSubset_1_Loop2110D_Obj
 				End Get
 			End Property
-			Friend ReadOnly Property REF_Obj As SegmentContainer(Of Dom.Segments.REF) Implements Dom.Transactions.Transaction271.Loops.Loop2110.REF
+			Friend ReadOnly Property REF_Obj As SegmentContainer(Of Edi.Dom.Segments.REF) Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2110.REF
 				Get
-					Return CType(Children(2), SegmentContainer(Of Dom.Segments.REF))
+					Return CType(Children(2), SegmentContainer(Of Edi.Dom.Segments.REF))
 				End Get
 			End Property
 
-			Private REFSubset_Loop2110C_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.REF, Dom.Segments.REF)
-			Private ReadOnly Property REF_Loop2110C_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.REF, Dom.Segments.REF) Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110C.REF
+			Private REFSubset_Loop2110C_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.REF, Edi.Dom.Segments.REF)
+			Private ReadOnly Property REF_Loop2110C_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.REF, Edi.Dom.Segments.REF) Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110C.REF
 				Get
 					If REFSubset_Loop2110C_Obj Is Nothing Then
-						REFSubset_Loop2110C_Obj = New SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.REF, Dom.Segments.REF)(Children(2), 9, 4, 145)
+						REFSubset_Loop2110C_Obj = New SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.REF, Edi.Dom.Segments.REF)(Children(2), 9, "4", "1400")
 					End If
 
 					Return REFSubset_Loop2110C_Obj
 				End Get
 			End Property
-			Private REFSubset_1_Loop2110D_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.REF, Dom.Segments.REF)
-			Private ReadOnly Property REF_Loop2110D_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.REF, Dom.Segments.REF) Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110D.REF
+			Private REFSubset_1_Loop2110D_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.REF, Edi.Dom.Segments.REF)
+			Private ReadOnly Property REF_Loop2110D_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.REF, Edi.Dom.Segments.REF) Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110D.REF
 				Get
 					If REFSubset_1_Loop2110D_Obj Is Nothing Then
-						REFSubset_1_Loop2110D_Obj = New SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.REF, Dom.Segments.REF)(Children(2), 9, 5, 145)
+						REFSubset_1_Loop2110D_Obj = New SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.REF, Edi.Dom.Segments.REF)(Children(2), 9, "5", "1400")
 					End If
 
 					Return REFSubset_1_Loop2110D_Obj
 				End Get
 			End Property
-			Friend ReadOnly Property DTP_Obj As SegmentContainer(Of Dom.Segments.DTP) Implements Dom.Transactions.Transaction271.Loops.Loop2110.DTP
+			Friend ReadOnly Property DTP_Obj As SegmentContainer(Of Edi.Dom.Segments.DTP) Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2110.DTP
 				Get
-					Return CType(Children(3), SegmentContainer(Of Dom.Segments.DTP))
+					Return CType(Children(3), SegmentContainer(Of Edi.Dom.Segments.DTP))
 				End Get
 			End Property
 
-			Private DTPSubset_Loop2110C_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.DTP, Dom.Segments.DTP)
-			Private ReadOnly Property DTP_Loop2110C_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.DTP, Dom.Segments.DTP) Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110C.DTP
+			Private DTPSubset_Loop2110C_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.DTP, Edi.Dom.Segments.DTP)
+			Private ReadOnly Property DTP_Loop2110C_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.DTP, Edi.Dom.Segments.DTP) Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110C.DTP
 				Get
 					If DTPSubset_Loop2110C_Obj Is Nothing Then
-						DTPSubset_Loop2110C_Obj = New SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.DTP, Dom.Segments.DTP)(Children(3), 20, 4, 181)
+						DTPSubset_Loop2110C_Obj = New SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.DTP, Edi.Dom.Segments.DTP)(Children(3), 20, "4", "1500")
 					End If
 
 					Return DTPSubset_Loop2110C_Obj
 				End Get
 			End Property
-			Private DTPSubset_1_Loop2110D_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.DTP, Dom.Segments.DTP)
-			Private ReadOnly Property DTP_Loop2110D_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.DTP, Dom.Segments.DTP) Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110D.DTP
+			Private DTPSubset_1_Loop2110D_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.DTP, Edi.Dom.Segments.DTP)
+			Private ReadOnly Property DTP_Loop2110D_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.DTP, Edi.Dom.Segments.DTP) Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110D.DTP
 				Get
 					If DTPSubset_1_Loop2110D_Obj Is Nothing Then
-						DTPSubset_1_Loop2110D_Obj = New SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.DTP, Dom.Segments.DTP)(Children(3), 20, 5, 181)
+						DTPSubset_1_Loop2110D_Obj = New SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.DTP, Edi.Dom.Segments.DTP)(Children(3), 20, "5", "1500")
 					End If
 
 					Return DTPSubset_1_Loop2110D_Obj
 				End Get
 			End Property
-			Friend ReadOnly Property AAA_Obj As SegmentContainer(Of Dom.Segments.AAA) Implements Dom.Transactions.Transaction271.Loops.Loop2110.AAA
+			Friend ReadOnly Property AAA_Obj As SegmentContainer(Of Edi.Dom.Segments.AAA) Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2110.AAA
 				Get
-					Return CType(Children(4), SegmentContainer(Of Dom.Segments.AAA))
+					Return CType(Children(4), SegmentContainer(Of Edi.Dom.Segments.AAA))
 				End Get
 			End Property
 
-			Private AAASubset_Loop2110C_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.AAA, Dom.Segments.AAA)
-			Private ReadOnly Property AAA_Loop2110C_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.AAA, Dom.Segments.AAA) Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110C.AAA
+			Private AAASubset_Loop2110C_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.AAA, Edi.Dom.Segments.AAA)
+			Private ReadOnly Property AAA_Loop2110C_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.AAA, Edi.Dom.Segments.AAA) Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110C.AAA
 				Get
 					If AAASubset_Loop2110C_Obj Is Nothing Then
-						AAASubset_Loop2110C_Obj = New SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.AAA, Dom.Segments.AAA)(Children(4), 9, 4, 217)
+						AAASubset_Loop2110C_Obj = New SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.AAA, Edi.Dom.Segments.AAA)(Children(4), 9, "4", "1600")
 					End If
 
 					Return AAASubset_Loop2110C_Obj
 				End Get
 			End Property
-			Private AAASubset_1_Loop2110D_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.AAA, Dom.Segments.AAA)
-			Private ReadOnly Property AAA_Loop2110D_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.AAA, Dom.Segments.AAA) Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110D.AAA
+			Private AAASubset_1_Loop2110D_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.AAA, Edi.Dom.Segments.AAA)
+			Private ReadOnly Property AAA_Loop2110D_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.AAA, Edi.Dom.Segments.AAA) Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110D.AAA
 				Get
 					If AAASubset_1_Loop2110D_Obj Is Nothing Then
-						AAASubset_1_Loop2110D_Obj = New SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.AAA, Dom.Segments.AAA)(Children(4), 9, 5, 217)
+						AAASubset_1_Loop2110D_Obj = New SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.AAA, Edi.Dom.Segments.AAA)(Children(4), 9, "5", "1600")
 					End If
 
 					Return AAASubset_1_Loop2110D_Obj
 				End Get
 			End Property
-			Friend Property VEH_Obj As Dom.Segments.VEH_Obj
+			Friend Property VEH_Obj As Edi.Dom.Segments.VEH_Obj
 				Get
-					Return CType(Children(5), Dom.Segments.VEH_Obj)
+					Return CType(Children(5), Edi.Dom.Segments.VEH_Obj)
 				End Get
-				Set(value As Dom.Segments.VEH_Obj)
+				Set(value As Edi.Dom.Segments.VEH_Obj)
 					Children(5) = value
 				End Set
 			End Property
 
-			Private Property VEH_Std As Dom.Segments.VEH Implements Dom.Transactions.Transaction271.Loops.Loop2110.VEH
+			Private Property VEH_Std As Edi.Dom.Segments.VEH Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2110.VEH
 				Get
-					Return CType(Children(5), Dom.Segments.VEH_Obj)
+					Return CType(Children(5), Edi.Dom.Segments.VEH_Obj)
 				End Get
-				Set(value As Dom.Segments.VEH)
+				Set(value As Edi.Dom.Segments.VEH)
 					Children(5) = value
 				End Set
 			End Property
 
-			Friend Property PID_Obj As Dom.Segments.PID_Obj
+			Friend Property PID_Obj As Edi.Dom.Segments.PID_Obj
 				Get
-					Return CType(Children(6), Dom.Segments.PID_Obj)
+					Return CType(Children(6), Edi.Dom.Segments.PID_Obj)
 				End Get
-				Set(value As Dom.Segments.PID_Obj)
+				Set(value As Edi.Dom.Segments.PID_Obj)
 					Children(6) = value
 				End Set
 			End Property
 
-			Private Property PID_Std As Dom.Segments.PID Implements Dom.Transactions.Transaction271.Loops.Loop2110.PID
+			Private Property PID_Std As Edi.Dom.Segments.PID Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2110.PID
 				Get
-					Return CType(Children(6), Dom.Segments.PID_Obj)
+					Return CType(Children(6), Edi.Dom.Segments.PID_Obj)
 				End Get
-				Set(value As Dom.Segments.PID)
+				Set(value As Edi.Dom.Segments.PID)
 					Children(6) = value
 				End Set
 			End Property
 
-			Friend Property PDR_Obj As Dom.Segments.PDR_Obj
+			Friend Property PDR_Obj As Edi.Dom.Segments.PDR_Obj
 				Get
-					Return CType(Children(7), Dom.Segments.PDR_Obj)
+					Return CType(Children(7), Edi.Dom.Segments.PDR_Obj)
 				End Get
-				Set(value As Dom.Segments.PDR_Obj)
+				Set(value As Edi.Dom.Segments.PDR_Obj)
 					Children(7) = value
 				End Set
 			End Property
 
-			Private Property PDR_Std As Dom.Segments.PDR Implements Dom.Transactions.Transaction271.Loops.Loop2110.PDR
+			Private Property PDR_Std As Edi.Dom.Segments.PDR Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2110.PDR
 				Get
-					Return CType(Children(7), Dom.Segments.PDR_Obj)
+					Return CType(Children(7), Edi.Dom.Segments.PDR_Obj)
 				End Get
-				Set(value As Dom.Segments.PDR)
+				Set(value As Edi.Dom.Segments.PDR)
 					Children(7) = value
 				End Set
 			End Property
 
-			Friend Property PDP_Obj As Dom.Segments.PDP_Obj
+			Friend Property PDP_Obj As Edi.Dom.Segments.PDP_Obj
 				Get
-					Return CType(Children(8), Dom.Segments.PDP_Obj)
+					Return CType(Children(8), Edi.Dom.Segments.PDP_Obj)
 				End Get
-				Set(value As Dom.Segments.PDP_Obj)
+				Set(value As Edi.Dom.Segments.PDP_Obj)
 					Children(8) = value
 				End Set
 			End Property
 
-			Private Property PDP_Std As Dom.Segments.PDP Implements Dom.Transactions.Transaction271.Loops.Loop2110.PDP
+			Private Property PDP_Std As Edi.Dom.Segments.PDP Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2110.PDP
 				Get
-					Return CType(Children(8), Dom.Segments.PDP_Obj)
+					Return CType(Children(8), Edi.Dom.Segments.PDP_Obj)
 				End Get
-				Set(value As Dom.Segments.PDP)
+				Set(value As Edi.Dom.Segments.PDP)
 					Children(8) = value
 				End Set
 			End Property
 
-			Friend Property LIN_Obj As Dom.Segments.LIN_Obj
+			Friend Property LIN_Obj As Edi.Dom.Segments.LIN_Obj
 				Get
-					Return CType(Children(9), Dom.Segments.LIN_Obj)
+					Return CType(Children(9), Edi.Dom.Segments.LIN_Obj)
 				End Get
-				Set(value As Dom.Segments.LIN_Obj)
+				Set(value As Edi.Dom.Segments.LIN_Obj)
 					Children(9) = value
 				End Set
 			End Property
 
-			Private Property LIN_Std As Dom.Segments.LIN Implements Dom.Transactions.Transaction271.Loops.Loop2110.LIN
+			Private Property LIN_Std As Edi.Dom.Segments.LIN Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2110.LIN
 				Get
-					Return CType(Children(9), Dom.Segments.LIN_Obj)
+					Return CType(Children(9), Edi.Dom.Segments.LIN_Obj)
 				End Get
-				Set(value As Dom.Segments.LIN)
+				Set(value As Edi.Dom.Segments.LIN)
 					Children(9) = value
 				End Set
 			End Property
 
-			Friend Property EM_Obj As Dom.Segments.EM_Obj
+			Friend Property EM_Obj As Edi.Dom.Segments.EM_Obj
 				Get
-					Return CType(Children(10), Dom.Segments.EM_Obj)
+					Return CType(Children(10), Edi.Dom.Segments.EM_Obj)
 				End Get
-				Set(value As Dom.Segments.EM_Obj)
+				Set(value As Edi.Dom.Segments.EM_Obj)
 					Children(10) = value
 				End Set
 			End Property
 
-			Private Property EM_Std As Dom.Segments.EM Implements Dom.Transactions.Transaction271.Loops.Loop2110.EM
+			Private Property EM_Std As Edi.Dom.Segments.EM Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2110.EM
 				Get
-					Return CType(Children(10), Dom.Segments.EM_Obj)
+					Return CType(Children(10), Edi.Dom.Segments.EM_Obj)
 				End Get
-				Set(value As Dom.Segments.EM)
+				Set(value As Edi.Dom.Segments.EM)
 					Children(10) = value
 				End Set
 			End Property
 
-			Friend Property SD1_Obj As Dom.Segments.SD1_Obj
+			Friend Property SD1_Obj As Edi.Dom.Segments.SD1_Obj
 				Get
-					Return CType(Children(11), Dom.Segments.SD1_Obj)
+					Return CType(Children(11), Edi.Dom.Segments.SD1_Obj)
 				End Get
-				Set(value As Dom.Segments.SD1_Obj)
+				Set(value As Edi.Dom.Segments.SD1_Obj)
 					Children(11) = value
 				End Set
 			End Property
 
-			Private Property SD1_Std As Dom.Segments.SD1 Implements Dom.Transactions.Transaction271.Loops.Loop2110.SD1
+			Private Property SD1_Std As Edi.Dom.Segments.SD1 Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2110.SD1
 				Get
-					Return CType(Children(11), Dom.Segments.SD1_Obj)
+					Return CType(Children(11), Edi.Dom.Segments.SD1_Obj)
 				End Get
-				Set(value As Dom.Segments.SD1)
+				Set(value As Edi.Dom.Segments.SD1)
 					Children(11) = value
 				End Set
 			End Property
 
-			Friend Property PKD_Obj As Dom.Segments.PKD_Obj
+			Friend Property PKD_Obj As Edi.Dom.Segments.PKD_Obj
 				Get
-					Return CType(Children(12), Dom.Segments.PKD_Obj)
+					Return CType(Children(12), Edi.Dom.Segments.PKD_Obj)
 				End Get
-				Set(value As Dom.Segments.PKD_Obj)
+				Set(value As Edi.Dom.Segments.PKD_Obj)
 					Children(12) = value
 				End Set
 			End Property
 
-			Private Property PKD_Std As Dom.Segments.PKD Implements Dom.Transactions.Transaction271.Loops.Loop2110.PKD
+			Private Property PKD_Std As Edi.Dom.Segments.PKD Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2110.PKD
 				Get
-					Return CType(Children(12), Dom.Segments.PKD_Obj)
+					Return CType(Children(12), Edi.Dom.Segments.PKD_Obj)
 				End Get
-				Set(value As Dom.Segments.PKD)
+				Set(value As Edi.Dom.Segments.PKD)
 					Children(12) = value
 				End Set
 			End Property
 
-			Friend ReadOnly Property MSG_Obj As SegmentContainer(Of Dom.Segments.MSG) Implements Dom.Transactions.Transaction271.Loops.Loop2110.MSG
+			Friend ReadOnly Property MSG_Obj As SegmentContainer(Of Edi.Dom.Segments.MSG) Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2110.MSG
 				Get
-					Return CType(Children(13), SegmentContainer(Of Dom.Segments.MSG))
+					Return CType(Children(13), SegmentContainer(Of Edi.Dom.Segments.MSG))
 				End Get
 			End Property
 
-			Private MSGSubset_Loop2110C_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.MSG, Dom.Segments.MSG)
-			Private ReadOnly Property MSG_Loop2110C_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.MSG, Dom.Segments.MSG) Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110C.MSG
+			Private MSGSubset_Loop2110C_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.MSG, Edi.Dom.Segments.MSG)
+			Private ReadOnly Property MSG_Loop2110C_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.MSG, Edi.Dom.Segments.MSG) Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110C.MSG
 				Get
 					If MSGSubset_Loop2110C_Obj Is Nothing Then
-						MSGSubset_Loop2110C_Obj = New SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.MSG, Dom.Segments.MSG)(Children(13), 10, 4, 253)
+						MSGSubset_Loop2110C_Obj = New SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.MSG, Edi.Dom.Segments.MSG)(Children(13), 10, "4", "1700")
 					End If
 
 					Return MSGSubset_Loop2110C_Obj
 				End Get
 			End Property
-			Private MSGSubset_1_Loop2110D_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.MSG, Dom.Segments.MSG)
-			Private ReadOnly Property MSG_Loop2110D_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.MSG, Dom.Segments.MSG) Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110D.MSG
+			Private MSGSubset_1_Loop2110D_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.MSG, Edi.Dom.Segments.MSG)
+			Private ReadOnly Property MSG_Loop2110D_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.MSG, Edi.Dom.Segments.MSG) Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110D.MSG
 				Get
 					If MSGSubset_1_Loop2110D_Obj Is Nothing Then
-						MSGSubset_1_Loop2110D_Obj = New SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.MSG, Dom.Segments.MSG)(Children(13), 10, 5, 253)
+						MSGSubset_1_Loop2110D_Obj = New SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.MSG, Edi.Dom.Segments.MSG)(Children(13), 10, "5", "1700")
 					End If
 
 					Return MSGSubset_1_Loop2110D_Obj
 				End Get
 			End Property
-			Friend ReadOnly Property Loop2115_Obj As LoopContainer(Of Dom.Transactions.Transaction271.Loops.Loop2115) Implements Dom.Transactions.Transaction271.Loops.Loop2110.Loop2115
+			Friend ReadOnly Property Loop2115_Obj As LoopContainer(Of Edi.Dom.Transactions.Transaction271.Loops.Loop2115) Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2110.Loop2115
 				Get
-					Return CType(Children(14), LoopContainer(Of Dom.Transactions.Transaction271.Loops.Loop2115))
+					Return CType(Children(14), LoopContainer(Of Edi.Dom.Transactions.Transaction271.Loops.Loop2115))
 				End Get
 			End Property
 
-			Private Loop2115CSubset_Loop2110C_Obj As LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2115C, Dom.Transactions.Transaction271.Loops.Loop2115)
-			Private ReadOnly Property Loop2115C_Obj_Loop2110C_Obj As LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2115C, Dom.Transactions.Transaction271.Loops.Loop2115) Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110C.Loop2115C
+			Private Loop2115CSubset_Loop2110C_Obj As LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2115C, Edi.Dom.Transactions.Transaction271.Loops.Loop2115)
+			Private ReadOnly Property Loop2115C_Obj_Loop2110C_Obj As LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2115C, Edi.Dom.Transactions.Transaction271.Loops.Loop2115) Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110C.Loop2115C
 				Get
 					If Loop2115CSubset_Loop2110C_Obj Is Nothing Then
-						Loop2115CSubset_Loop2110C_Obj = New LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2115C, Dom.Transactions.Transaction271.Loops.Loop2115)(Children(14), 10, 4, 1549)
+						Loop2115CSubset_Loop2110C_Obj = New LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2115C, Edi.Dom.Transactions.Transaction271.Loops.Loop2115)(Children(14), 10, "4", "1710")
 					End If
 
 					Return Loop2115CSubset_Loop2110C_Obj
 				End Get
 			End Property
-			Private Loop2115DSubset_Loop2110D_Obj As LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2115D, Dom.Transactions.Transaction271.Loops.Loop2115)
-			Private ReadOnly Property Loop2115D_Obj_Loop2110D_Obj As LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2115D, Dom.Transactions.Transaction271.Loops.Loop2115) Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110D.Loop2115D
+			Private Loop2115DSubset_Loop2110D_Obj As LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2115D, Edi.Dom.Transactions.Transaction271.Loops.Loop2115)
+			Private ReadOnly Property Loop2115D_Obj_Loop2110D_Obj As LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2115D, Edi.Dom.Transactions.Transaction271.Loops.Loop2115) Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110D.Loop2115D
 				Get
 					If Loop2115DSubset_Loop2110D_Obj Is Nothing Then
-						Loop2115DSubset_Loop2110D_Obj = New LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2115D, Dom.Transactions.Transaction271.Loops.Loop2115)(Children(14), 10, 5, 1549)
+						Loop2115DSubset_Loop2110D_Obj = New LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2115D, Edi.Dom.Transactions.Transaction271.Loops.Loop2115)(Children(14), 10, "5", "1710")
 					End If
 
 					Return Loop2115DSubset_Loop2110D_Obj
 				End Get
 			End Property
-			Friend Property LS_Obj As Dom.Segments.LS_Obj
+			Friend Property LS_Obj As Edi.Dom.Segments.LS_Obj
 				Get
-					Return CType(Children(15), Dom.Segments.LS_Obj)
+					Return CType(Children(15), Edi.Dom.Segments.LS_Obj)
 				End Get
-				Set(value As Dom.Segments.LS_Obj)
+				Set(value As Edi.Dom.Segments.LS_Obj)
 					Children(15) = value
 				End Set
 			End Property
 
-			Private Property LS_Std As Dom.Segments.LS Implements Dom.Transactions.Transaction271.Loops.Loop2110.LS
+			Private Property LS_Std As Edi.Dom.Segments.LS Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2110.LS
 				Get
-					Return CType(Children(15), Dom.Segments.LS_Obj)
+					Return CType(Children(15), Edi.Dom.Segments.LS_Obj)
 				End Get
-				Set(value As Dom.Segments.LS)
+				Set(value As Edi.Dom.Segments.LS)
 					Children(15) = value
 				End Set
 			End Property
 
-			Private Property LS_IFace_Loop2110C_Obj As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.LS Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110C.LS
+			Private Property LS_IFace_Loop2110C_Obj As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.LS Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110C.LS
 				Get
-					Return CType(Children(15), Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.LS)
+					Return CType(Children(15), Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.LS)
 				End Get
-				Set(value As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.LS)
+				Set(value As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.LS)
 					Children(15) = value
 				End Set
 			End Property
-			Private Property LS_IFace_1_Loop2110D_Obj As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.LS Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110D.LS
+			Private Property LS_IFace_1_Loop2110D_Obj As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.LS Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110D.LS
 				Get
-					Return CType(Children(15), Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.LS)
+					Return CType(Children(15), Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.LS)
 				End Get
-				Set(value As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.LS)
+				Set(value As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.LS)
 					Children(15) = value
 				End Set
 			End Property
-			Friend ReadOnly Property Loop2120_Obj As LoopContainer(Of Dom.Transactions.Transaction271.Loops.Loop2120) Implements Dom.Transactions.Transaction271.Loops.Loop2110.Loop2120
+			Friend ReadOnly Property Loop2120_Obj As LoopContainer(Of Edi.Dom.Transactions.Transaction271.Loops.Loop2120) Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2110.Loop2120
 				Get
-					Return CType(Children(16), LoopContainer(Of Dom.Transactions.Transaction271.Loops.Loop2120))
+					Return CType(Children(16), LoopContainer(Of Edi.Dom.Transactions.Transaction271.Loops.Loop2120))
 				End Get
 			End Property
 
-			Private Loop2120CSubset_Loop2110C_Obj As LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2120C, Dom.Transactions.Transaction271.Loops.Loop2120)
-			Private ReadOnly Property Loop2120C_Obj_Loop2110C_Obj As LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2120C, Dom.Transactions.Transaction271.Loops.Loop2120) Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110C.Loop2120C
+			Private Loop2120CSubset_Loop2110C_Obj As LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2120C, Edi.Dom.Transactions.Transaction271.Loops.Loop2120)
+			Private ReadOnly Property Loop2120C_Obj_Loop2110C_Obj As LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2120C, Edi.Dom.Transactions.Transaction271.Loops.Loop2120) Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110C.Loop2120C
 				Get
 					If Loop2120CSubset_Loop2110C_Obj Is Nothing Then
-						Loop2120CSubset_Loop2110C_Obj = New LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2120C, Dom.Transactions.Transaction271.Loops.Loop2120)(Children(16), 23, 4, 289)
+						Loop2120CSubset_Loop2110C_Obj = New LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2120C, Edi.Dom.Transactions.Transaction271.Loops.Loop2120)(Children(16), 23, "4", "1800")
 					End If
 
 					Return Loop2120CSubset_Loop2110C_Obj
 				End Get
 			End Property
-			Private Loop2120DSubset_Loop2110D_Obj As LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2120D, Dom.Transactions.Transaction271.Loops.Loop2120)
-			Private ReadOnly Property Loop2120D_Obj_Loop2110D_Obj As LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2120D, Dom.Transactions.Transaction271.Loops.Loop2120) Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110D.Loop2120D
+			Private Loop2120DSubset_Loop2110D_Obj As LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2120D, Edi.Dom.Transactions.Transaction271.Loops.Loop2120)
+			Private ReadOnly Property Loop2120D_Obj_Loop2110D_Obj As LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2120D, Edi.Dom.Transactions.Transaction271.Loops.Loop2120) Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110D.Loop2120D
 				Get
 					If Loop2120DSubset_Loop2110D_Obj Is Nothing Then
-						Loop2120DSubset_Loop2110D_Obj = New LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2120D, Dom.Transactions.Transaction271.Loops.Loop2120)(Children(16), 23, 5, 289)
+						Loop2120DSubset_Loop2110D_Obj = New LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2120D, Edi.Dom.Transactions.Transaction271.Loops.Loop2120)(Children(16), 23, "5", "1800")
 					End If
 
 					Return Loop2120DSubset_Loop2110D_Obj
 				End Get
 			End Property
-			Friend Property LE_Obj As Dom.Segments.LE_Obj
+			Friend Property LE_Obj As Edi.Dom.Segments.LE_Obj
 				Get
-					Return CType(Children(17), Dom.Segments.LE_Obj)
+					Return CType(Children(17), Edi.Dom.Segments.LE_Obj)
 				End Get
-				Set(value As Dom.Segments.LE_Obj)
+				Set(value As Edi.Dom.Segments.LE_Obj)
 					Children(17) = value
 				End Set
 			End Property
 
-			Private Property LE_Std As Dom.Segments.LE Implements Dom.Transactions.Transaction271.Loops.Loop2110.LE
+			Private Property LE_Std As Edi.Dom.Segments.LE Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2110.LE
 				Get
-					Return CType(Children(17), Dom.Segments.LE_Obj)
+					Return CType(Children(17), Edi.Dom.Segments.LE_Obj)
 				End Get
-				Set(value As Dom.Segments.LE)
+				Set(value As Edi.Dom.Segments.LE)
 					Children(17) = value
 				End Set
 			End Property
 
-			Private Property LE_IFace_Loop2110C_Obj As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.LE Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110C.LE
+			Private Property LE_IFace_Loop2110C_Obj As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.LE Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110C.LE
 				Get
-					Return CType(Children(17), Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.LE)
+					Return CType(Children(17), Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.LE)
 				End Get
-				Set(value As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.LE)
+				Set(value As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.LE)
 					Children(17) = value
 				End Set
 			End Property
-			Private Property LE_IFace_1_Loop2110D_Obj As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.LE Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110D.LE
+			Private Property LE_IFace_1_Loop2110D_Obj As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.LE Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110D.LE
 				Get
-					Return CType(Children(17), Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.LE)
+					Return CType(Children(17), Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.LE)
 				End Get
-				Set(value As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.LE)
+				Set(value As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.LE)
 					Children(17) = value
 				End Set
 			End Property
@@ -2053,17 +2045,17 @@
 		End Class
 		Partial Friend Class Loop2115_Obj
 			Inherits LoopBase
-			Implements Dom.Transactions.Transaction271.Loops.Loop2115,
-									Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2115C,
-									Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2115D
+			Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2115,
+									Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2115C,
+									Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2115D
 			Friend Sub New()
 				MyBase.New
 
-				Children.AddRange({CType(Nothing, Dom.Segments.III_Obj),
-												New SegmentContainer(Of Dom.Segments.DTP)(5, 2, 2700),
-												New SegmentContainer(Of Dom.Segments.AMT)(5, 2, 2800),
-												New SegmentContainer(Of Dom.Segments.PCT)(5, 2, 2900),
-												New LoopContainer(Of Dom.Transactions.Transaction271.Loops.Loop2117)(0, 2, 3000)})
+				Children.AddRange({CType(Nothing, Edi.Dom.Segments.III_Obj),
+												New SegmentContainer(Of Edi.Dom.Segments.DTP)(5, "2", "2700"),
+												New SegmentContainer(Of Edi.Dom.Segments.AMT)(5, "2", "2800"),
+												New SegmentContainer(Of Edi.Dom.Segments.PCT)(5, "2", "2900"),
+												New LoopContainer(Of Edi.Dom.Transactions.Transaction271.Loops.Loop2117)(0, "2", "3000")})
 
 				Initialize()
 			End Sub
@@ -2097,16 +2089,16 @@
 				Dim Implementation As String = args.Implementation
 				Dim Seg As Segment
 				If String.Compare(SegmentName, "III", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.III_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.III_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					III_Obj = Seg
 				ElseIf String.Compare(SegmentName, "DTP", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.DTP_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.DTP_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					DTP_Obj.Add(Seg)
 				ElseIf String.Compare(SegmentName, "AMT", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.AMT_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.AMT_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					AMT_Obj.Add(Seg)
 				ElseIf String.Compare(SegmentName, "PCT", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.PCT_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.PCT_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					PCT_Obj.Add(Seg)
 				End If
 			End Sub
@@ -2117,68 +2109,68 @@
 				Dim Temp = args.Implementation
 
 				If String.Compare(args.DataSegment.SegmentID, "LQ", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Dim NewLoop As LoopBase = New Dom.Transactions.Transaction271.Loop2117_Obj
+					Dim NewLoop As LoopBase = New Edi.Dom.Transactions.Transaction271.Loop2117_Obj
 					Dim LoopKey As String = args.DataSegment.ToStringValue(0)
 					Loop2117_Obj.Add(NewLoop)
 					Await NewLoop.ReadAsync(args).ConfigureAwait(False) 'TODO: this code should not be reached as this is for a loop not represented by any implementation (and should cause some kind of validation error).
 				End If
 				args.Implementation = Temp
 			End Function
-			Friend Property III_Obj As Dom.Segments.III_Obj
+			Friend Property III_Obj As Edi.Dom.Segments.III_Obj
 				Get
-					Return CType(Children(0), Dom.Segments.III_Obj)
+					Return CType(Children(0), Edi.Dom.Segments.III_Obj)
 				End Get
-				Set(value As Dom.Segments.III_Obj)
+				Set(value As Edi.Dom.Segments.III_Obj)
 					Children(0) = value
 				End Set
 			End Property
 
-			Private Property III_Std As Dom.Segments.III Implements Dom.Transactions.Transaction271.Loops.Loop2115.III
+			Private Property III_Std As Edi.Dom.Segments.III Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2115.III
 				Get
-					Return CType(Children(0), Dom.Segments.III_Obj)
+					Return CType(Children(0), Edi.Dom.Segments.III_Obj)
 				End Get
-				Set(value As Dom.Segments.III)
+				Set(value As Edi.Dom.Segments.III)
 					Children(0) = value
 				End Set
 			End Property
 
-			Private Property III_IFace_Loop2115C_Obj As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2115C.III Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2115C.III
+			Private Property III_IFace_Loop2115C_Obj As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2115C.III Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2115C.III
 				Get
-					Return CType(Children(0), Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2115C.III)
+					Return CType(Children(0), Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2115C.III)
 				End Get
-				Set(value As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2115C.III)
+				Set(value As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2115C.III)
 					Children(0) = value
 				End Set
 			End Property
-			Private Property III_IFace_1_Loop2115D_Obj As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2115D.III Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2115D.III
+			Private Property III_IFace_1_Loop2115D_Obj As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2115D.III Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2115D.III
 				Get
-					Return CType(Children(0), Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2115D.III)
+					Return CType(Children(0), Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2115D.III)
 				End Get
-				Set(value As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2115D.III)
+				Set(value As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2115D.III)
 					Children(0) = value
 				End Set
 			End Property
-			Friend ReadOnly Property DTP_Obj As SegmentContainer(Of Dom.Segments.DTP) Implements Dom.Transactions.Transaction271.Loops.Loop2115.DTP
+			Friend ReadOnly Property DTP_Obj As SegmentContainer(Of Edi.Dom.Segments.DTP) Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2115.DTP
 				Get
-					Return CType(Children(1), SegmentContainer(Of Dom.Segments.DTP))
+					Return CType(Children(1), SegmentContainer(Of Edi.Dom.Segments.DTP))
 				End Get
 			End Property
 
-			Friend ReadOnly Property AMT_Obj As SegmentContainer(Of Dom.Segments.AMT) Implements Dom.Transactions.Transaction271.Loops.Loop2115.AMT
+			Friend ReadOnly Property AMT_Obj As SegmentContainer(Of Edi.Dom.Segments.AMT) Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2115.AMT
 				Get
-					Return CType(Children(2), SegmentContainer(Of Dom.Segments.AMT))
+					Return CType(Children(2), SegmentContainer(Of Edi.Dom.Segments.AMT))
 				End Get
 			End Property
 
-			Friend ReadOnly Property PCT_Obj As SegmentContainer(Of Dom.Segments.PCT) Implements Dom.Transactions.Transaction271.Loops.Loop2115.PCT
+			Friend ReadOnly Property PCT_Obj As SegmentContainer(Of Edi.Dom.Segments.PCT) Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2115.PCT
 				Get
-					Return CType(Children(3), SegmentContainer(Of Dom.Segments.PCT))
+					Return CType(Children(3), SegmentContainer(Of Edi.Dom.Segments.PCT))
 				End Get
 			End Property
 
-			Friend ReadOnly Property Loop2117_Obj As LoopContainer(Of Dom.Transactions.Transaction271.Loops.Loop2117) Implements Dom.Transactions.Transaction271.Loops.Loop2115.Loop2117
+			Friend ReadOnly Property Loop2117_Obj As LoopContainer(Of Edi.Dom.Transactions.Transaction271.Loops.Loop2117) Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2115.Loop2117
 				Get
-					Return CType(Children(4), LoopContainer(Of Dom.Transactions.Transaction271.Loops.Loop2117))
+					Return CType(Children(4), LoopContainer(Of Edi.Dom.Transactions.Transaction271.Loops.Loop2117))
 				End Get
 			End Property
 
@@ -2186,13 +2178,13 @@
 		End Class
 		Partial Friend Class Loop2117_Obj
 			Inherits LoopBase
-			Implements Dom.Transactions.Transaction271.Loops.Loop2117
+			Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2117
 			Friend Sub New()
 				MyBase.New
 
-				Children.AddRange({CType(Nothing, Dom.Segments.LQ_Obj),
-												New SegmentContainer(Of Dom.Segments.AMT)(5, 2, 3100),
-												New SegmentContainer(Of Dom.Segments.PCT)(5, 2, 3200)})
+				Children.AddRange({CType(Nothing, Edi.Dom.Segments.LQ_Obj),
+												New SegmentContainer(Of Edi.Dom.Segments.AMT)(5, "2", "3100"),
+												New SegmentContainer(Of Edi.Dom.Segments.PCT)(5, "2", "3200")})
 
 				Initialize()
 			End Sub
@@ -2217,53 +2209,47 @@
 				Dim Implementation As String = args.Implementation
 				Dim Seg As Segment
 				If String.Compare(SegmentName, "LQ", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.LQ_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.LQ_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					LQ_Obj = Seg
 				ElseIf String.Compare(SegmentName, "AMT", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.AMT_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.AMT_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					AMT_Obj.Add(Seg)
 				ElseIf String.Compare(SegmentName, "PCT", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.PCT_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.PCT_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					PCT_Obj.Add(Seg)
 				End If
 			End Sub
 
 			Private Function PopulateChildLoop(ByVal args As ReaderArgs) As Task
-				Dim LoopID As String = args.ParentLoopID
-				Dim Implementation As String = args.Implementation
-				Dim Temp = args.Implementation
-
-				args.Implementation = Temp
-
 				Return Task.CompletedTask
 			End Function
-			Friend Property LQ_Obj As Dom.Segments.LQ_Obj
+			Friend Property LQ_Obj As Edi.Dom.Segments.LQ_Obj
 				Get
-					Return CType(Children(0), Dom.Segments.LQ_Obj)
+					Return CType(Children(0), Edi.Dom.Segments.LQ_Obj)
 				End Get
-				Set(value As Dom.Segments.LQ_Obj)
+				Set(value As Edi.Dom.Segments.LQ_Obj)
 					Children(0) = value
 				End Set
 			End Property
 
-			Private Property LQ_Std As Dom.Segments.LQ Implements Dom.Transactions.Transaction271.Loops.Loop2117.LQ
+			Private Property LQ_Std As Edi.Dom.Segments.LQ Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2117.LQ
 				Get
-					Return CType(Children(0), Dom.Segments.LQ_Obj)
+					Return CType(Children(0), Edi.Dom.Segments.LQ_Obj)
 				End Get
-				Set(value As Dom.Segments.LQ)
+				Set(value As Edi.Dom.Segments.LQ)
 					Children(0) = value
 				End Set
 			End Property
 
-			Friend ReadOnly Property AMT_Obj As SegmentContainer(Of Dom.Segments.AMT) Implements Dom.Transactions.Transaction271.Loops.Loop2117.AMT
+			Friend ReadOnly Property AMT_Obj As SegmentContainer(Of Edi.Dom.Segments.AMT) Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2117.AMT
 				Get
-					Return CType(Children(1), SegmentContainer(Of Dom.Segments.AMT))
+					Return CType(Children(1), SegmentContainer(Of Edi.Dom.Segments.AMT))
 				End Get
 			End Property
 
-			Friend ReadOnly Property PCT_Obj As SegmentContainer(Of Dom.Segments.PCT) Implements Dom.Transactions.Transaction271.Loops.Loop2117.PCT
+			Friend ReadOnly Property PCT_Obj As SegmentContainer(Of Edi.Dom.Segments.PCT) Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2117.PCT
 				Get
-					Return CType(Children(2), SegmentContainer(Of Dom.Segments.PCT))
+					Return CType(Children(2), SegmentContainer(Of Edi.Dom.Segments.PCT))
 				End Get
 			End Property
 
@@ -2271,18 +2257,18 @@
 		End Class
 		Partial Friend Class Loop2120_Obj
 			Inherits LoopBase
-			Implements Dom.Transactions.Transaction271.Loops.Loop2120,
-									Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2120C,
-									Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2120D
+			Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2120,
+									Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2120C,
+									Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2120D
 			Friend Sub New()
 				MyBase.New
 
-				Children.AddRange({CType(Nothing, Dom.Segments.NM1_Obj),
-												CType(Nothing, Dom.Segments.N2_Obj),
-												CType(Nothing, Dom.Segments.N3_Obj),
-												CType(Nothing, Dom.Segments.N4_Obj),
-												New SegmentContainer(Of Dom.Segments.PER)(3, 2, 3800),
-												CType(Nothing, Dom.Segments.PRV_Obj)})
+				Children.AddRange({CType(Nothing, Edi.Dom.Segments.NM1_Obj),
+												CType(Nothing, Edi.Dom.Segments.N2_Obj),
+												CType(Nothing, Edi.Dom.Segments.N3_Obj),
+												CType(Nothing, Edi.Dom.Segments.N4_Obj),
+												New SegmentContainer(Of Edi.Dom.Segments.PER)(3, "2", "3800"),
+												CType(Nothing, Edi.Dom.Segments.PRV_Obj)})
 
 				Initialize()
 			End Sub
@@ -2292,17 +2278,22 @@
 			End Sub
 
 			Private Shared StateMan As New ReaderStateMachine({New ReaderState(0, "NM1", ReadAction.PopulateSegment, 1, False),
+								New ReaderState(0, "N2", ReadAction.PopulateSegment, 2, False),
 								New ReaderState(1, "N2", ReadAction.PopulateSegment, 2, False),
+								New ReaderState(0, "N3", ReadAction.PopulateSegment, 3, False),
 								New ReaderState(1, "N3", ReadAction.PopulateSegment, 3, False),
 								New ReaderState(2, "N3", ReadAction.PopulateSegment, 3, False),
+								New ReaderState(0, "N4", ReadAction.PopulateSegment, 4, False),
 								New ReaderState(1, "N4", ReadAction.PopulateSegment, 4, False),
 								New ReaderState(2, "N4", ReadAction.PopulateSegment, 4, False),
 								New ReaderState(3, "N4", ReadAction.PopulateSegment, 4, False),
+								New ReaderState(0, "PER", ReadAction.PopulateSegment, 5, False),
 								New ReaderState(1, "PER", ReadAction.PopulateSegment, 5, False),
 								New ReaderState(2, "PER", ReadAction.PopulateSegment, 5, False),
 								New ReaderState(3, "PER", ReadAction.PopulateSegment, 5, False),
 								New ReaderState(4, "PER", ReadAction.PopulateSegment, 5, False),
 								New ReaderState(5, "PER", ReadAction.PopulateSegment, 5, False),
+								New ReaderState(0, "PRV", ReadAction.PopulateSegment, 7, False),
 								New ReaderState(1, "PRV", ReadAction.PopulateSegment, 7, False),
 								New ReaderState(2, "PRV", ReadAction.PopulateSegment, 7, False),
 								New ReaderState(3, "PRV", ReadAction.PopulateSegment, 7, False),
@@ -2318,228 +2309,221 @@
 				Dim Implementation As String = args.Implementation
 				Dim Seg As Segment
 				If String.Compare(SegmentName, "NM1", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.NM1_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.NM1_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					NM1_Obj = Seg
-					Dim S2 = CType(Seg, Dom.Segments.NM1_Obj)
+					Dim S2 = CType(Seg, Edi.Dom.Segments.NM1_Obj)
 					If MyBase.CompareKey(S2.NM101, ";13;1I;1P;2B;36;73;FA;GP;GW;I3;IL;LR;OC;P3;P4;P5;PR;PRP;SEP;TTP;VER;VN;VY;X3;Y2;") AndAlso String.Compare(args.Implementation, "_271B1__2000C__2100C__2110C__2120C", StringComparison.OrdinalIgnoreCase) = 0 Then
-						Seg.SetArea = 4
-						Seg.SetSequence = 289
+						Seg.SetArea = "4"
+						Seg.SetSequence = "1800"
 					ElseIf MyBase.CompareKey(S2.NM101, ";13;1I;1P;2B;36;73;FA;GP;GW;I3;IL;LR;OC;P3;P4;P5;PR;PRP;SEP;TTP;VER;VN;VY;X3;Y2;") AndAlso String.Compare(args.Implementation, "_271B1__2000D__2100D__2110D__2120D", StringComparison.OrdinalIgnoreCase) = 0 Then
-						Seg.SetArea = 5
-						Seg.SetSequence = 289
+						Seg.SetArea = "5"
+						Seg.SetSequence = "1800"
 					End If
 				ElseIf String.Compare(SegmentName, "N2", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.N2_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.N2_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					N2_Obj = Seg
 				ElseIf String.Compare(SegmentName, "N3", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.N3_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.N3_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					N3_Obj = Seg
 				ElseIf String.Compare(SegmentName, "N4", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.N4_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.N4_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					N4_Obj = Seg
 				ElseIf String.Compare(SegmentName, "PER", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.PER_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.PER_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					PER_Obj.Add(Seg)
 				ElseIf String.Compare(SegmentName, "PRV", StringComparison.OrdinalIgnoreCase) = 0 Then
-					Seg = Dom.Segments.PRV_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
+					Seg = Edi.Dom.Segments.PRV_Obj.FromGenericSegment(args.DataSegment, args.Reader.Reader)
 					PRV_Obj = Seg
-					Dim S2 = CType(Seg, Dom.Segments.PRV_Obj)
-					If MyBase.CompareKey(S2.PRV01, ";AD;AT;BI;CO;CV;H;HH;LA;OT;P1;P2;PC;PE;R;RF;SB;SK;SU;") AndAlso String.Compare(args.Implementation, "_271B1__2000C__2100C__2110C__2120C", StringComparison.OrdinalIgnoreCase) = 0 Then
-						Seg.SetArea = 4
-						Seg.SetSequence = 3962
-					ElseIf MyBase.CompareKey(S2.PRV01, ";AD;AT;BI;CO;CV;H;HH;LA;OT;P1;P2;PC;PE;R;RF;SB;SK;SU;") AndAlso String.Compare(args.Implementation, "_271B1__2000D__2100D__2110D__2120D", StringComparison.OrdinalIgnoreCase) = 0 Then
-						Seg.SetArea = 5
-						Seg.SetSequence = 3962
+					If String.Compare(args.Implementation, "_271B1__2000C__2100C__2110C__2120C", StringComparison.OrdinalIgnoreCase) = 0 Then
+						Seg.SetArea = "4"
+						Seg.SetSequence = "2230"
+					ElseIf String.Compare(args.Implementation, "_271B1__2000D__2100D__2110D__2120D", StringComparison.OrdinalIgnoreCase) = 0 Then
+						Seg.SetArea = "5"
+						Seg.SetSequence = "2230"
 					End If
 				End If
 			End Sub
 
 			Private Function PopulateChildLoop(ByVal args As ReaderArgs) As Task
-				Dim LoopID As String = args.ParentLoopID
-				Dim Implementation As String = args.Implementation
-				Dim Temp = args.Implementation
-
-				args.Implementation = Temp
-
 				Return Task.CompletedTask
 			End Function
-			Friend Property NM1_Obj As Dom.Segments.NM1_Obj
+			Friend Property NM1_Obj As Edi.Dom.Segments.NM1_Obj
 				Get
-					Return CType(Children(0), Dom.Segments.NM1_Obj)
+					Return CType(Children(0), Edi.Dom.Segments.NM1_Obj)
 				End Get
-				Set(value As Dom.Segments.NM1_Obj)
+				Set(value As Edi.Dom.Segments.NM1_Obj)
 					Children(0) = value
 				End Set
 			End Property
 
-			Private Property NM1_Std As Dom.Segments.NM1 Implements Dom.Transactions.Transaction271.Loops.Loop2120.NM1
+			Private Property NM1_Std As Edi.Dom.Segments.NM1 Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2120.NM1
 				Get
-					Return CType(Children(0), Dom.Segments.NM1_Obj)
+					Return CType(Children(0), Edi.Dom.Segments.NM1_Obj)
 				End Get
-				Set(value As Dom.Segments.NM1)
+				Set(value As Edi.Dom.Segments.NM1)
 					Children(0) = value
 				End Set
 			End Property
 
-			Private Property NM1_IFace_Loop2120C_Obj As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120C.NM1 Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2120C.NM1
+			Private Property NM1_IFace_Loop2120C_Obj As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120C.NM1 Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2120C.NM1
 				Get
-					Return CType(Children(0), Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120C.NM1)
+					Return CType(Children(0), Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120C.NM1)
 				End Get
-				Set(value As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120C.NM1)
+				Set(value As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120C.NM1)
 					Children(0) = value
 				End Set
 			End Property
-			Private Property NM1_IFace_1_Loop2120D_Obj As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120D.NM1 Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2120D.NM1
+			Private Property NM1_IFace_1_Loop2120D_Obj As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120D.NM1 Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2120D.NM1
 				Get
-					Return CType(Children(0), Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120D.NM1)
+					Return CType(Children(0), Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120D.NM1)
 				End Get
-				Set(value As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120D.NM1)
+				Set(value As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120D.NM1)
 					Children(0) = value
 				End Set
 			End Property
-			Friend Property N2_Obj As Dom.Segments.N2_Obj
+			Friend Property N2_Obj As Edi.Dom.Segments.N2_Obj
 				Get
-					Return CType(Children(1), Dom.Segments.N2_Obj)
+					Return CType(Children(1), Edi.Dom.Segments.N2_Obj)
 				End Get
-				Set(value As Dom.Segments.N2_Obj)
+				Set(value As Edi.Dom.Segments.N2_Obj)
 					Children(1) = value
 				End Set
 			End Property
 
-			Private Property N2_Std As Dom.Segments.N2 Implements Dom.Transactions.Transaction271.Loops.Loop2120.N2
+			Private Property N2_Std As Edi.Dom.Segments.N2 Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2120.N2
 				Get
-					Return CType(Children(1), Dom.Segments.N2_Obj)
+					Return CType(Children(1), Edi.Dom.Segments.N2_Obj)
 				End Get
-				Set(value As Dom.Segments.N2)
+				Set(value As Edi.Dom.Segments.N2)
 					Children(1) = value
 				End Set
 			End Property
 
-			Friend Property N3_Obj As Dom.Segments.N3_Obj
+			Friend Property N3_Obj As Edi.Dom.Segments.N3_Obj
 				Get
-					Return CType(Children(2), Dom.Segments.N3_Obj)
+					Return CType(Children(2), Edi.Dom.Segments.N3_Obj)
 				End Get
-				Set(value As Dom.Segments.N3_Obj)
+				Set(value As Edi.Dom.Segments.N3_Obj)
 					Children(2) = value
 				End Set
 			End Property
 
-			Private Property N3_Std As Dom.Segments.N3 Implements Dom.Transactions.Transaction271.Loops.Loop2120.N3
+			Private Property N3_Std As Edi.Dom.Segments.N3 Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2120.N3
 				Get
-					Return CType(Children(2), Dom.Segments.N3_Obj)
+					Return CType(Children(2), Edi.Dom.Segments.N3_Obj)
 				End Get
-				Set(value As Dom.Segments.N3)
+				Set(value As Edi.Dom.Segments.N3)
 					Children(2) = value
 				End Set
 			End Property
 
-			Private Property N3_IFace_Loop2120C_Obj As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120C.N3 Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2120C.N3
+			Private Property N3_IFace_Loop2120C_Obj As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120C.N3 Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2120C.N3
 				Get
-					Return CType(Children(2), Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120C.N3)
+					Return CType(Children(2), Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120C.N3)
 				End Get
-				Set(value As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120C.N3)
+				Set(value As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120C.N3)
 					Children(2) = value
 				End Set
 			End Property
-			Private Property N3_IFace_1_Loop2120D_Obj As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120D.N3 Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2120D.N3
+			Private Property N3_IFace_1_Loop2120D_Obj As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120D.N3 Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2120D.N3
 				Get
-					Return CType(Children(2), Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120D.N3)
+					Return CType(Children(2), Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120D.N3)
 				End Get
-				Set(value As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120D.N3)
+				Set(value As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120D.N3)
 					Children(2) = value
 				End Set
 			End Property
-			Friend Property N4_Obj As Dom.Segments.N4_Obj
+			Friend Property N4_Obj As Edi.Dom.Segments.N4_Obj
 				Get
-					Return CType(Children(3), Dom.Segments.N4_Obj)
+					Return CType(Children(3), Edi.Dom.Segments.N4_Obj)
 				End Get
-				Set(value As Dom.Segments.N4_Obj)
+				Set(value As Edi.Dom.Segments.N4_Obj)
 					Children(3) = value
 				End Set
 			End Property
 
-			Private Property N4_Std As Dom.Segments.N4 Implements Dom.Transactions.Transaction271.Loops.Loop2120.N4
+			Private Property N4_Std As Edi.Dom.Segments.N4 Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2120.N4
 				Get
-					Return CType(Children(3), Dom.Segments.N4_Obj)
+					Return CType(Children(3), Edi.Dom.Segments.N4_Obj)
 				End Get
-				Set(value As Dom.Segments.N4)
+				Set(value As Edi.Dom.Segments.N4)
 					Children(3) = value
 				End Set
 			End Property
 
-			Private Property N4_IFace_Loop2120C_Obj As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120C.N4 Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2120C.N4
+			Private Property N4_IFace_Loop2120C_Obj As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120C.N4 Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2120C.N4
 				Get
-					Return CType(Children(3), Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120C.N4)
+					Return CType(Children(3), Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120C.N4)
 				End Get
-				Set(value As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120C.N4)
+				Set(value As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120C.N4)
 					Children(3) = value
 				End Set
 			End Property
-			Private Property N4_IFace_1_Loop2120D_Obj As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120D.N4 Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2120D.N4
+			Private Property N4_IFace_1_Loop2120D_Obj As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120D.N4 Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2120D.N4
 				Get
-					Return CType(Children(3), Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120D.N4)
+					Return CType(Children(3), Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120D.N4)
 				End Get
-				Set(value As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120D.N4)
+				Set(value As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120D.N4)
 					Children(3) = value
 				End Set
 			End Property
-			Friend ReadOnly Property PER_Obj As SegmentContainer(Of Dom.Segments.PER) Implements Dom.Transactions.Transaction271.Loops.Loop2120.PER
+			Friend ReadOnly Property PER_Obj As SegmentContainer(Of Edi.Dom.Segments.PER) Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2120.PER
 				Get
-					Return CType(Children(4), SegmentContainer(Of Dom.Segments.PER))
+					Return CType(Children(4), SegmentContainer(Of Edi.Dom.Segments.PER))
 				End Get
 			End Property
 
-			Private PERSubset_Loop2120C_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120C.PER, Dom.Segments.PER)
-			Private ReadOnly Property PER_Loop2120C_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120C.PER, Dom.Segments.PER) Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2120C.PER
+			Private PERSubset_Loop2120C_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120C.PER, Edi.Dom.Segments.PER)
+			Private ReadOnly Property PER_Loop2120C_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120C.PER, Edi.Dom.Segments.PER) Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2120C.PER
 				Get
 					If PERSubset_Loop2120C_Obj Is Nothing Then
-						PERSubset_Loop2120C_Obj = New SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120C.PER, Dom.Segments.PER)(Children(4), 3, 4, 74)
+						PERSubset_Loop2120C_Obj = New SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120C.PER, Edi.Dom.Segments.PER)(Children(4), 3, "4", "2200")
 					End If
 
 					Return PERSubset_Loop2120C_Obj
 				End Get
 			End Property
-			Private PERSubset_1_Loop2120D_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120D.PER, Dom.Segments.PER)
-			Private ReadOnly Property PER_Loop2120D_Obj As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120D.PER, Dom.Segments.PER) Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2120D.PER
+			Private PERSubset_1_Loop2120D_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120D.PER, Edi.Dom.Segments.PER)
+			Private ReadOnly Property PER_Loop2120D_Obj As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120D.PER, Edi.Dom.Segments.PER) Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2120D.PER
 				Get
 					If PERSubset_1_Loop2120D_Obj Is Nothing Then
-						PERSubset_1_Loop2120D_Obj = New SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120D.PER, Dom.Segments.PER)(Children(4), 3, 5, 74)
+						PERSubset_1_Loop2120D_Obj = New SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120D.PER, Edi.Dom.Segments.PER)(Children(4), 3, "5", "2200")
 					End If
 
 					Return PERSubset_1_Loop2120D_Obj
 				End Get
 			End Property
-			Friend Property PRV_Obj As Dom.Segments.PRV_Obj
+			Friend Property PRV_Obj As Edi.Dom.Segments.PRV_Obj
 				Get
-					Return CType(Children(5), Dom.Segments.PRV_Obj)
+					Return CType(Children(5), Edi.Dom.Segments.PRV_Obj)
 				End Get
-				Set(value As Dom.Segments.PRV_Obj)
+				Set(value As Edi.Dom.Segments.PRV_Obj)
 					Children(5) = value
 				End Set
 			End Property
 
-			Private Property PRV_Std As Dom.Segments.PRV Implements Dom.Transactions.Transaction271.Loops.Loop2120.PRV
+			Private Property PRV_Std As Edi.Dom.Segments.PRV Implements Edi.Dom.Transactions.Transaction271.Loops.Loop2120.PRV
 				Get
-					Return CType(Children(5), Dom.Segments.PRV_Obj)
+					Return CType(Children(5), Edi.Dom.Segments.PRV_Obj)
 				End Get
-				Set(value As Dom.Segments.PRV)
+				Set(value As Edi.Dom.Segments.PRV)
 					Children(5) = value
 				End Set
 			End Property
 
-			Private Property PRV_IFace_Loop2120C_Obj As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120C.PRV Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2120C.PRV
+			Private Property PRV_IFace_Loop2120C_Obj As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120C.PRV Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2120C.PRV
 				Get
-					Return CType(Children(5), Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120C.PRV)
+					Return CType(Children(5), Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120C.PRV)
 				End Get
-				Set(value As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120C.PRV)
+				Set(value As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120C.PRV)
 					Children(5) = value
 				End Set
 			End Property
-			Private Property PRV_IFace_1_Loop2120D_Obj As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120D.PRV Implements Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2120D.PRV
+			Private Property PRV_IFace_1_Loop2120D_Obj As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120D.PRV Implements Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2120D.PRV
 				Get
-					Return CType(Children(5), Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120D.PRV)
+					Return CType(Children(5), Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120D.PRV)
 				End Get
-				Set(value As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120D.PRV)
+				Set(value As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120D.PRV)
 					Children(5) = value
 				End Set
 			End Property
@@ -2549,13 +2533,13 @@
 		'''<remarks></remarks>
 		Public Interface Standard
 			'''<summary>Transaction Set Header</summary>
-			Property ST As Dom.Segments.ST
+			Property ST As Edi.Dom.Segments.ST
 			'''<summary>Beginning of Hierarchical Transaction</summary>
-			Property BHT As Dom.Segments.BHT
+			Property BHT As Edi.Dom.Segments.BHT
 			'''<summary>Hierarchical Level</summary>
-			ReadOnly Property Loop2000 As LoopContainer(Of Dom.Transactions.Transaction271.Loops.Loop2000)
+			ReadOnly Property Loop2000 As LoopContainer(Of Edi.Dom.Transactions.Transaction271.Loops.Loop2000)
 			'''<summary>Transaction Set Trailer</summary>
-			Property SE As Dom.Segments.SE
+			Property SE As Edi.Dom.Segments.SE
 		End Interface
 		Namespace Loops
 
@@ -2564,132 +2548,132 @@
 			Public Interface Loop2000
 				Inherits ILoop
 				'''<summary>Hierarchical Level</summary>
-				Property HL As Dom.Segments.HL
+				Property HL As Edi.Dom.Segments.HL
 				'''<summary>Trace</summary>
-				ReadOnly Property TRN As SegmentContainer(Of Dom.Segments.TRN)
+				ReadOnly Property TRN As SegmentContainer(Of Edi.Dom.Segments.TRN)
 				'''<summary>Request Validation</summary>
-				ReadOnly Property AAA As SegmentContainer(Of Dom.Segments.AAA)
+				ReadOnly Property AAA As SegmentContainer(Of Edi.Dom.Segments.AAA)
 				'''<summary>Individual or Organizational Name</summary>
-				ReadOnly Property Loop2100 As LoopContainer(Of Dom.Transactions.Transaction271.Loops.Loop2100)
+				ReadOnly Property Loop2100 As LoopContainer(Of Edi.Dom.Transactions.Transaction271.Loops.Loop2100)
 			End Interface
 			'''<summary></summary>
 			'''<remarks></remarks>
 			Public Interface Loop2100
 				Inherits ILoop
 				'''<summary>Individual or Organizational Name</summary>
-				Property NM1 As Dom.Segments.NM1
+				Property NM1 As Edi.Dom.Segments.NM1
 				'''<summary>Reference Information</summary>
-				ReadOnly Property REF As SegmentContainer(Of Dom.Segments.REF)
+				ReadOnly Property REF As SegmentContainer(Of Edi.Dom.Segments.REF)
 				'''<summary>Additional Name Information</summary>
-				Property N2 As Dom.Segments.N2
+				Property N2 As Edi.Dom.Segments.N2
 				'''<summary>Party Location</summary>
-				Property N3 As Dom.Segments.N3
+				Property N3 As Edi.Dom.Segments.N3
 				'''<summary>Geographic Location</summary>
-				Property N4 As Dom.Segments.N4
+				Property N4 As Edi.Dom.Segments.N4
 				'''<summary>Administrative Communications Contact</summary>
-				ReadOnly Property PER As SegmentContainer(Of Dom.Segments.PER)
+				ReadOnly Property PER As SegmentContainer(Of Edi.Dom.Segments.PER)
 				'''<summary>Request Validation</summary>
-				ReadOnly Property AAA As SegmentContainer(Of Dom.Segments.AAA)
+				ReadOnly Property AAA As SegmentContainer(Of Edi.Dom.Segments.AAA)
 				'''<summary>Provider Information</summary>
-				Property PRV As Dom.Segments.PRV
+				Property PRV As Edi.Dom.Segments.PRV
 				'''<summary>Demographic Information</summary>
-				Property DMG As Dom.Segments.DMG
+				Property DMG As Edi.Dom.Segments.DMG
 				'''<summary>Insured Benefit</summary>
-				Property INS As Dom.Segments.INS
+				Property INS As Edi.Dom.Segments.INS
 				'''<summary>Health Care Information Codes</summary>
-				Property HI As Dom.Segments.HI
+				Property HI As Edi.Dom.Segments.HI
 				'''<summary>Date or Time or Period</summary>
-				ReadOnly Property DTP As SegmentContainer(Of Dom.Segments.DTP)
+				ReadOnly Property DTP As SegmentContainer(Of Edi.Dom.Segments.DTP)
 				'''<summary>Language Use</summary>
-				ReadOnly Property LUI As SegmentContainer(Of Dom.Segments.LUI)
+				ReadOnly Property LUI As SegmentContainer(Of Edi.Dom.Segments.LUI)
 				'''<summary>Military Personnel Information</summary>
-				ReadOnly Property MPI As SegmentContainer(Of Dom.Segments.MPI)
+				ReadOnly Property MPI As SegmentContainer(Of Edi.Dom.Segments.MPI)
 				'''<summary>Eligibility or Benefit Information</summary>
-				ReadOnly Property Loop2110 As LoopContainer(Of Dom.Transactions.Transaction271.Loops.Loop2110)
+				ReadOnly Property Loop2110 As LoopContainer(Of Edi.Dom.Transactions.Transaction271.Loops.Loop2110)
 			End Interface
 			'''<summary></summary>
 			'''<remarks></remarks>
 			Public Interface Loop2110
 				Inherits ILoop
 				'''<summary>Eligibility or Benefit Information</summary>
-				Property EB As Dom.Segments.EB
+				Property EB As Edi.Dom.Segments.EB
 				'''<summary>Health Care Services Delivery</summary>
-				ReadOnly Property HSD As SegmentContainer(Of Dom.Segments.HSD)
+				ReadOnly Property HSD As SegmentContainer(Of Edi.Dom.Segments.HSD)
 				'''<summary>Reference Information</summary>
-				ReadOnly Property REF As SegmentContainer(Of Dom.Segments.REF)
+				ReadOnly Property REF As SegmentContainer(Of Edi.Dom.Segments.REF)
 				'''<summary>Date or Time or Period</summary>
-				ReadOnly Property DTP As SegmentContainer(Of Dom.Segments.DTP)
+				ReadOnly Property DTP As SegmentContainer(Of Edi.Dom.Segments.DTP)
 				'''<summary>Request Validation</summary>
-				ReadOnly Property AAA As SegmentContainer(Of Dom.Segments.AAA)
+				ReadOnly Property AAA As SegmentContainer(Of Edi.Dom.Segments.AAA)
 				'''<summary>Vehicle Information</summary>
-				Property VEH As Dom.Segments.VEH
+				Property VEH As Edi.Dom.Segments.VEH
 				'''<summary>Product/Item Description</summary>
-				Property PID As Dom.Segments.PID
+				Property PID As Edi.Dom.Segments.PID
 				'''<summary>Property Description - Real</summary>
-				Property PDR As Dom.Segments.PDR
+				Property PDR As Edi.Dom.Segments.PDR
 				'''<summary>Property Description - Personal</summary>
-				Property PDP As Dom.Segments.PDP
+				Property PDP As Edi.Dom.Segments.PDP
 				'''<summary>Item Identification</summary>
-				Property LIN As Dom.Segments.LIN
+				Property LIN As Edi.Dom.Segments.LIN
 				'''<summary>Equipment Characteristics</summary>
-				Property EM As Dom.Segments.EM
+				Property EM As Edi.Dom.Segments.EM
 				'''<summary>Safety Data</summary>
-				Property SD1 As Dom.Segments.SD1
+				Property SD1 As Edi.Dom.Segments.SD1
 				'''<summary>Packaging Description</summary>
-				Property PKD As Dom.Segments.PKD
+				Property PKD As Edi.Dom.Segments.PKD
 				'''<summary>Message Text</summary>
-				ReadOnly Property MSG As SegmentContainer(Of Dom.Segments.MSG)
+				ReadOnly Property MSG As SegmentContainer(Of Edi.Dom.Segments.MSG)
 				'''<summary>Information</summary>
-				ReadOnly Property Loop2115 As LoopContainer(Of Dom.Transactions.Transaction271.Loops.Loop2115)
+				ReadOnly Property Loop2115 As LoopContainer(Of Edi.Dom.Transactions.Transaction271.Loops.Loop2115)
 				'''<summary>Loop Header</summary>
-				Property LS As Dom.Segments.LS
+				Property LS As Edi.Dom.Segments.LS
 				'''<summary>Individual or Organizational Name</summary>
-				ReadOnly Property Loop2120 As LoopContainer(Of Dom.Transactions.Transaction271.Loops.Loop2120)
+				ReadOnly Property Loop2120 As LoopContainer(Of Edi.Dom.Transactions.Transaction271.Loops.Loop2120)
 				'''<summary>Loop Trailer</summary>
-				Property LE As Dom.Segments.LE
+				Property LE As Edi.Dom.Segments.LE
 			End Interface
 			'''<summary></summary>
 			'''<remarks></remarks>
 			Public Interface Loop2115
 				Inherits ILoop
 				'''<summary>Information</summary>
-				Property III As Dom.Segments.III
+				Property III As Edi.Dom.Segments.III
 				'''<summary>Date or Time or Period</summary>
-				ReadOnly Property DTP As SegmentContainer(Of Dom.Segments.DTP)
+				ReadOnly Property DTP As SegmentContainer(Of Edi.Dom.Segments.DTP)
 				'''<summary>Monetary Amount Information</summary>
-				ReadOnly Property AMT As SegmentContainer(Of Dom.Segments.AMT)
+				ReadOnly Property AMT As SegmentContainer(Of Edi.Dom.Segments.AMT)
 				'''<summary>Percent Amounts</summary>
-				ReadOnly Property PCT As SegmentContainer(Of Dom.Segments.PCT)
+				ReadOnly Property PCT As SegmentContainer(Of Edi.Dom.Segments.PCT)
 				'''<summary>Industry Code Identification</summary>
-				ReadOnly Property Loop2117 As LoopContainer(Of Dom.Transactions.Transaction271.Loops.Loop2117)
+				ReadOnly Property Loop2117 As LoopContainer(Of Edi.Dom.Transactions.Transaction271.Loops.Loop2117)
 			End Interface
 			'''<summary></summary>
 			'''<remarks></remarks>
 			Public Interface Loop2117
 				Inherits ILoop
 				'''<summary>Industry Code Identification</summary>
-				Property LQ As Dom.Segments.LQ
+				Property LQ As Edi.Dom.Segments.LQ
 				'''<summary>Monetary Amount Information</summary>
-				ReadOnly Property AMT As SegmentContainer(Of Dom.Segments.AMT)
+				ReadOnly Property AMT As SegmentContainer(Of Edi.Dom.Segments.AMT)
 				'''<summary>Percent Amounts</summary>
-				ReadOnly Property PCT As SegmentContainer(Of Dom.Segments.PCT)
+				ReadOnly Property PCT As SegmentContainer(Of Edi.Dom.Segments.PCT)
 			End Interface
 			'''<summary></summary>
 			'''<remarks></remarks>
 			Public Interface Loop2120
 				Inherits ILoop
 				'''<summary>Individual or Organizational Name</summary>
-				Property NM1 As Dom.Segments.NM1
+				Property NM1 As Edi.Dom.Segments.NM1
 				'''<summary>Additional Name Information</summary>
-				Property N2 As Dom.Segments.N2
+				Property N2 As Edi.Dom.Segments.N2
 				'''<summary>Party Location</summary>
-				Property N3 As Dom.Segments.N3
+				Property N3 As Edi.Dom.Segments.N3
 				'''<summary>Geographic Location</summary>
-				Property N4 As Dom.Segments.N4
+				Property N4 As Edi.Dom.Segments.N4
 				'''<summary>Administrative Communications Contact</summary>
-				ReadOnly Property PER As SegmentContainer(Of Dom.Segments.PER)
+				ReadOnly Property PER As SegmentContainer(Of Edi.Dom.Segments.PER)
 				'''<summary>Provider Information</summary>
-				Property PRV As Dom.Segments.PRV
+				Property PRV As Edi.Dom.Segments.PRV
 			End Interface
 
 		End Namespace 'Loops
@@ -2734,7 +2718,7 @@
 						Property NM101 As String
 						'''<summary>Use this code to indicate whether the entity is an individual person or an organization.</summary>
 						Property NM102 As String
-						'''<summary>Use this name for the organization name if NM102 is &lt;169>2&lt;170>. Otherwise, this will be the individual's last name.</summary>
+						'''<summary>Use this name for the organization name if NM102 is &lt;169&gt;2&lt;170&gt;. Otherwise, this will be the individual's last name.</summary>
 						Property NM103 As String
 						'''<summary>Information Source First Name</summary>
 						Property NM104 As String
@@ -2829,7 +2813,7 @@
 						Property REF01 As String
 						'''<summary>Use this information for the reference number as qualified by the preceding data element (REF01).;</summary>
 						Property REF02 As String
-						'''<summary>Use this element for the two character state code of the state assigning the identifier supplied in REF02.<R><br />See Code source 22: States and Outlying Areas of the U.S.</summary>
+						'''<summary>Use this element for the two character state code of the state assigning the identifier supplied in REF02.&lt;R&gt;<br />See Code source 22: States and Outlying Areas of the U.S.</summary>
 						Property REF03 As String
 					End Interface
 					'''<summary>Information Receiver Address</summary>
@@ -3021,21 +3005,21 @@
 						Inherits ISegment
 
 						'''<summary></summary>
-						Property HI01 As Dom.Transactions.Transaction271.Transaction271_B1.Composites.Loop2100C.HI.HI_01.C022
+						Property HI01 As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Composites.Loop2100C.HI.HI_01.C022
 						'''<summary></summary>
-						Property HI02 As Dom.Transactions.Transaction271.Transaction271_B1.Composites.Loop2100C.HI.HI_02.C022
+						Property HI02 As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Composites.Loop2100C.HI.HI_02.C022
 						'''<summary></summary>
-						Property HI03 As Dom.Transactions.Transaction271.Transaction271_B1.Composites.Loop2100C.HI.HI_03.C022
+						Property HI03 As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Composites.Loop2100C.HI.HI_03.C022
 						'''<summary></summary>
-						Property HI04 As Dom.Transactions.Transaction271.Transaction271_B1.Composites.Loop2100C.HI.HI_04.C022
+						Property HI04 As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Composites.Loop2100C.HI.HI_04.C022
 						'''<summary></summary>
-						Property HI05 As Dom.Transactions.Transaction271.Transaction271_B1.Composites.Loop2100C.HI.HI_05.C022
+						Property HI05 As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Composites.Loop2100C.HI.HI_05.C022
 						'''<summary></summary>
-						Property HI06 As Dom.Transactions.Transaction271.Transaction271_B1.Composites.Loop2100C.HI.HI_06.C022
+						Property HI06 As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Composites.Loop2100C.HI.HI_06.C022
 						'''<summary></summary>
-						Property HI07 As Dom.Transactions.Transaction271.Transaction271_B1.Composites.Loop2100C.HI.HI_07.C022
+						Property HI07 As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Composites.Loop2100C.HI.HI_07.C022
 						'''<summary></summary>
-						Property HI08 As Dom.Transactions.Transaction271.Transaction271_B1.Composites.Loop2100C.HI.HI_08.C022
+						Property HI08 As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Composites.Loop2100C.HI.HI_08.C022
 					End Interface
 					'''<summary>Subscriber Date</summary>
 					Public Interface DTP
@@ -3100,9 +3084,9 @@
 						'''<summary>In Plan Network Indicator</summary>
 						Property EB12 As String
 						'''<summary>Use this composite data element only if an information source can support this high level of functionality. The EB13 allows for a very specific response.</summary>
-						Property EB13 As Dom.Transactions.Transaction271.Transaction271_B1.Composites.Loop2110C.EB.EB_13.C003
+						Property EB13 As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Composites.Loop2110C.EB.EB_13.C003
 						'''<summary></summary>
-						Property EB14 As Dom.DataElements.Composite.C004
+						Property EB14 As Edi.Dom.DataElements.Composite.C004
 					End Interface
 					'''<summary>Health Care Services Delivery</summary>
 					Public Interface HSD
@@ -3422,21 +3406,21 @@
 						Inherits ISegment
 
 						'''<summary></summary>
-						Property HI01 As Dom.Transactions.Transaction271.Transaction271_B1.Composites.Loop2100D.HI.HI_01.C022
+						Property HI01 As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Composites.Loop2100D.HI.HI_01.C022
 						'''<summary></summary>
-						Property HI02 As Dom.Transactions.Transaction271.Transaction271_B1.Composites.Loop2100D.HI.HI_02.C022
+						Property HI02 As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Composites.Loop2100D.HI.HI_02.C022
 						'''<summary></summary>
-						Property HI03 As Dom.Transactions.Transaction271.Transaction271_B1.Composites.Loop2100D.HI.HI_03.C022
+						Property HI03 As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Composites.Loop2100D.HI.HI_03.C022
 						'''<summary></summary>
-						Property HI04 As Dom.Transactions.Transaction271.Transaction271_B1.Composites.Loop2100D.HI.HI_04.C022
+						Property HI04 As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Composites.Loop2100D.HI.HI_04.C022
 						'''<summary></summary>
-						Property HI05 As Dom.Transactions.Transaction271.Transaction271_B1.Composites.Loop2100D.HI.HI_05.C022
+						Property HI05 As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Composites.Loop2100D.HI.HI_05.C022
 						'''<summary></summary>
-						Property HI06 As Dom.Transactions.Transaction271.Transaction271_B1.Composites.Loop2100D.HI.HI_06.C022
+						Property HI06 As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Composites.Loop2100D.HI.HI_06.C022
 						'''<summary></summary>
-						Property HI07 As Dom.Transactions.Transaction271.Transaction271_B1.Composites.Loop2100D.HI.HI_07.C022
+						Property HI07 As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Composites.Loop2100D.HI.HI_07.C022
 						'''<summary></summary>
-						Property HI08 As Dom.Transactions.Transaction271.Transaction271_B1.Composites.Loop2100D.HI.HI_08.C022
+						Property HI08 As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Composites.Loop2100D.HI.HI_08.C022
 					End Interface
 					'''<summary>Dependent Date</summary>
 					Public Interface DTP
@@ -3501,9 +3485,9 @@
 						'''<summary>In Plan Network Indicator</summary>
 						Property EB12 As String
 						'''<summary>Use this composite data element only if an information source can support this high level of functionality. The EB13 allows for a very specific response.</summary>
-						Property EB13 As Dom.Transactions.Transaction271.Transaction271_B1.Composites.Loop2110D.EB.EB_13.C003
+						Property EB13 As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Composites.Loop2110D.EB.EB_13.C003
 						'''<summary></summary>
-						Property EB14 As Dom.DataElements.Composite.C004
+						Property EB14 As Edi.Dom.DataElements.Composite.C004
 					End Interface
 					'''<summary>Health Care Services Delivery</summary>
 					Public Interface HSD
@@ -3915,13 +3899,13 @@
 
 
 					'''<summary>Information Source Level</summary>
-					Property HL As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000A.HL
+					Property HL As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000A.HL
 
 					'''<summary>Request Validation</summary>
-					ReadOnly Property AAA As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000A.AAA, Dom.Segments.AAA)
+					ReadOnly Property AAA As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000A.AAA, Edi.Dom.Segments.AAA)
 
 					'''<summary>Information Source Name</summary>
-					Property Loop2100A As Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100A
+					Property Loop2100A As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100A
 				End Interface
 				'''<summary>Information Source Name</summary>
 				Public Interface Loop2100A
@@ -3929,13 +3913,13 @@
 
 
 					'''<summary>Information Source Name</summary>
-					Property NM1 As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100A.NM1
+					Property NM1 As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100A.NM1
 
 					'''<summary>Information Source Contact Information</summary>
-					ReadOnly Property PER As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100A.PER, Dom.Segments.PER)
+					ReadOnly Property PER As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100A.PER, Edi.Dom.Segments.PER)
 
 					'''<summary>Request Validation</summary>
-					ReadOnly Property AAA As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100A.AAA, Dom.Segments.AAA)
+					ReadOnly Property AAA As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100A.AAA, Edi.Dom.Segments.AAA)
 				End Interface
 				'''<summary>Information Receiver Level</summary>
 				Public Interface Loop2000B
@@ -3943,10 +3927,10 @@
 
 
 					'''<summary>Information Receiver Level</summary>
-					Property HL As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000B.HL
+					Property HL As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000B.HL
 
 					'''<summary>Information Receiver Name</summary>
-					Property Loop2100B As Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100B
+					Property Loop2100B As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100B
 				End Interface
 				'''<summary>Information Receiver Name</summary>
 				Public Interface Loop2100B
@@ -3954,22 +3938,22 @@
 
 
 					'''<summary>Information Receiver Name</summary>
-					Property NM1 As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100B.NM1
+					Property NM1 As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100B.NM1
 
 					'''<summary>Information Receiver Additional Identification</summary>
-					ReadOnly Property REF As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100B.REF, Dom.Segments.REF)
+					ReadOnly Property REF As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100B.REF, Edi.Dom.Segments.REF)
 
 					'''<summary>Information Receiver Address</summary>
-					Property N3 As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100B.N3
+					Property N3 As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100B.N3
 
 					'''<summary>Information Receiver City, State, ZIP Code</summary>
-					Property N4 As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100B.N4
+					Property N4 As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100B.N4
 
 					'''<summary>Information Receiver Request Validation</summary>
-					ReadOnly Property AAA As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100B.AAA, Dom.Segments.AAA)
+					ReadOnly Property AAA As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100B.AAA, Edi.Dom.Segments.AAA)
 
 					'''<summary>Information Receiver Provider Information</summary>
-					Property PRV As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100B.PRV
+					Property PRV As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100B.PRV
 				End Interface
 				'''<summary>Subscriber Level</summary>
 				Public Interface Loop2000C
@@ -3977,13 +3961,13 @@
 
 
 					'''<summary>Subscriber Level</summary>
-					Property HL As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000C.HL
+					Property HL As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000C.HL
 
 					'''<summary>Subscriber Trace Number</summary>
-					ReadOnly Property TRN As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000C.TRN, Dom.Segments.TRN)
+					ReadOnly Property TRN As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000C.TRN, Edi.Dom.Segments.TRN)
 
 					'''<summary>Subscriber Name</summary>
-					Property Loop2100C As Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100C
+					Property Loop2100C As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100C
 				End Interface
 				'''<summary>Subscriber Name</summary>
 				Public Interface Loop2100C
@@ -3991,40 +3975,40 @@
 
 
 					'''<summary>Subscriber Name</summary>
-					Property NM1 As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.NM1
+					Property NM1 As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.NM1
 
 					'''<summary>Subscriber Additional Identification</summary>
-					ReadOnly Property REF As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.REF, Dom.Segments.REF)
+					ReadOnly Property REF As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.REF, Edi.Dom.Segments.REF)
 
 					'''<summary>Subscriber Address</summary>
-					Property N3 As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.N3
+					Property N3 As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.N3
 
 					'''<summary>Subscriber City, State, ZIP Code</summary>
-					Property N4 As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.N4
+					Property N4 As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.N4
 
 					'''<summary>Subscriber Request Validation</summary>
-					ReadOnly Property AAA As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.AAA, Dom.Segments.AAA)
+					ReadOnly Property AAA As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.AAA, Edi.Dom.Segments.AAA)
 
 					'''<summary>Provider Information</summary>
-					Property PRV As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.PRV
+					Property PRV As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.PRV
 
 					'''<summary>Subscriber Demographic Information</summary>
-					Property DMG As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.DMG
+					Property DMG As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.DMG
 
 					'''<summary>Subscriber Relationship</summary>
-					Property INS As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.INS
+					Property INS As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.INS
 
 					'''<summary>Subscriber Health Care Diagnosis Code</summary>
-					Property HI As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.HI
+					Property HI As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.HI
 
 					'''<summary>Subscriber Date</summary>
-					ReadOnly Property DTP As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.DTP, Dom.Segments.DTP)
+					ReadOnly Property DTP As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.DTP, Edi.Dom.Segments.DTP)
 
 					'''<summary>Subscriber Military Personnel Information</summary>
-					Property MPI As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.MPI
+					Property MPI As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100C.MPI
 
 					'''<summary>Subscriber Eligibility or Benefit Information</summary>
-					ReadOnly Property Loop2110C As LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110C, Dom.Transactions.Transaction271.Loops.Loop2110)
+					ReadOnly Property Loop2110C As LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110C, Edi.Dom.Transactions.Transaction271.Loops.Loop2110)
 				End Interface
 				'''<summary>Subscriber Eligibility or Benefit Information</summary>
 				Public Interface Loop2110C
@@ -4032,34 +4016,34 @@
 
 
 					'''<summary>Subscriber Eligibility or Benefit Information</summary>
-					Property EB As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.EB
+					Property EB As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.EB
 
 					'''<summary>Health Care Services Delivery</summary>
-					ReadOnly Property HSD As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.HSD, Dom.Segments.HSD)
+					ReadOnly Property HSD As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.HSD, Edi.Dom.Segments.HSD)
 
 					'''<summary>Subscriber Additional Identification</summary>
-					ReadOnly Property REF As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.REF, Dom.Segments.REF)
+					ReadOnly Property REF As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.REF, Edi.Dom.Segments.REF)
 
 					'''<summary>Subscriber Eligibility/Benefit Date</summary>
-					ReadOnly Property DTP As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.DTP, Dom.Segments.DTP)
+					ReadOnly Property DTP As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.DTP, Edi.Dom.Segments.DTP)
 
 					'''<summary>Subscriber Request Validation</summary>
-					ReadOnly Property AAA As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.AAA, Dom.Segments.AAA)
+					ReadOnly Property AAA As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.AAA, Edi.Dom.Segments.AAA)
 
 					'''<summary>Message Text</summary>
-					ReadOnly Property MSG As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.MSG, Dom.Segments.MSG)
+					ReadOnly Property MSG As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.MSG, Edi.Dom.Segments.MSG)
 
 					'''<summary>Subscriber Eligibility or Benefit Additional Information</summary>
-					ReadOnly Property Loop2115C As LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2115C, Dom.Transactions.Transaction271.Loops.Loop2115)
+					ReadOnly Property Loop2115C As LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2115C, Edi.Dom.Transactions.Transaction271.Loops.Loop2115)
 
 					'''<summary>Loop Header</summary>
-					Property LS As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.LS
+					Property LS As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.LS
 
 					'''<summary>Subscriber Benefit Related Entity Name</summary>
-					ReadOnly Property Loop2120C As LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2120C, Dom.Transactions.Transaction271.Loops.Loop2120)
+					ReadOnly Property Loop2120C As LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2120C, Edi.Dom.Transactions.Transaction271.Loops.Loop2120)
 
 					'''<summary>Loop Trailer</summary>
-					Property LE As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.LE
+					Property LE As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.LE
 				End Interface
 				'''<summary>Subscriber Eligibility or Benefit Additional Information</summary>
 				Public Interface Loop2115C
@@ -4067,7 +4051,7 @@
 
 
 					'''<summary>Subscriber Eligibility or Benefit Additional Information</summary>
-					Property III As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2115C.III
+					Property III As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2115C.III
 				End Interface
 				'''<summary>Subscriber Benefit Related Entity Name</summary>
 				Public Interface Loop2120C
@@ -4075,19 +4059,19 @@
 
 
 					'''<summary>Subscriber Benefit Related Entity Name</summary>
-					Property NM1 As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120C.NM1
+					Property NM1 As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120C.NM1
 
 					'''<summary>Subscriber Benefit Related Entity Address</summary>
-					Property N3 As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120C.N3
+					Property N3 As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120C.N3
 
 					'''<summary>Subscriber Benefit Related Entity City, State, ZIP Code</summary>
-					Property N4 As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120C.N4
+					Property N4 As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120C.N4
 
 					'''<summary>Subscriber Benefit Related Entity Contact Information</summary>
-					ReadOnly Property PER As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120C.PER, Dom.Segments.PER)
+					ReadOnly Property PER As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120C.PER, Edi.Dom.Segments.PER)
 
 					'''<summary>Subscriber Benefit Related Provider Information</summary>
-					Property PRV As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120C.PRV
+					Property PRV As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120C.PRV
 				End Interface
 				'''<summary>Dependent Level</summary>
 				Public Interface Loop2000D
@@ -4095,13 +4079,13 @@
 
 
 					'''<summary>Dependent Level</summary>
-					Property HL As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000D.HL
+					Property HL As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000D.HL
 
 					'''<summary>Dependent Trace Number</summary>
-					ReadOnly Property TRN As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000D.TRN, Dom.Segments.TRN)
+					ReadOnly Property TRN As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2000D.TRN, Edi.Dom.Segments.TRN)
 
 					'''<summary>Dependent Name</summary>
-					Property Loop2100D As Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100D
+					Property Loop2100D As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2100D
 				End Interface
 				'''<summary>Dependent Name</summary>
 				Public Interface Loop2100D
@@ -4109,40 +4093,40 @@
 
 
 					'''<summary>Dependent Name</summary>
-					Property NM1 As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.NM1
+					Property NM1 As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.NM1
 
 					'''<summary>Dependent Additional Identification</summary>
-					ReadOnly Property REF As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.REF, Dom.Segments.REF)
+					ReadOnly Property REF As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.REF, Edi.Dom.Segments.REF)
 
 					'''<summary>Dependent Address</summary>
-					Property N3 As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.N3
+					Property N3 As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.N3
 
 					'''<summary>Dependent City, State, ZIP Code</summary>
-					Property N4 As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.N4
+					Property N4 As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.N4
 
 					'''<summary>Dependent Request Validation</summary>
-					ReadOnly Property AAA As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.AAA, Dom.Segments.AAA)
+					ReadOnly Property AAA As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.AAA, Edi.Dom.Segments.AAA)
 
 					'''<summary>Provider Information</summary>
-					Property PRV As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.PRV
+					Property PRV As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.PRV
 
 					'''<summary>Dependent Demographic Information</summary>
-					Property DMG As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.DMG
+					Property DMG As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.DMG
 
 					'''<summary>Dependent Relationship</summary>
-					Property INS As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.INS
+					Property INS As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.INS
 
 					'''<summary>Dependent Health Care Diagnosis Code</summary>
-					Property HI As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.HI
+					Property HI As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.HI
 
 					'''<summary>Dependent Date</summary>
-					ReadOnly Property DTP As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.DTP, Dom.Segments.DTP)
+					ReadOnly Property DTP As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.DTP, Edi.Dom.Segments.DTP)
 
 					'''<summary>Dependent Military Personnel Information</summary>
-					Property MPI As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.MPI
+					Property MPI As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2100D.MPI
 
 					'''<summary>Dependent Eligibility or Benefit Information</summary>
-					ReadOnly Property Loop2110D As LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110D, Dom.Transactions.Transaction271.Loops.Loop2110)
+					ReadOnly Property Loop2110D As LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2110D, Edi.Dom.Transactions.Transaction271.Loops.Loop2110)
 				End Interface
 				'''<summary>Dependent Eligibility or Benefit Information</summary>
 				Public Interface Loop2110D
@@ -4150,34 +4134,34 @@
 
 
 					'''<summary>Dependent Eligibility or Benefit Information</summary>
-					Property EB As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.EB
+					Property EB As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.EB
 
 					'''<summary>Health Care Services Delivery</summary>
-					ReadOnly Property HSD As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.HSD, Dom.Segments.HSD)
+					ReadOnly Property HSD As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.HSD, Edi.Dom.Segments.HSD)
 
 					'''<summary>Dependent Additional Identification</summary>
-					ReadOnly Property REF As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.REF, Dom.Segments.REF)
+					ReadOnly Property REF As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.REF, Edi.Dom.Segments.REF)
 
 					'''<summary>Dependent Eligibility/Benefit Date</summary>
-					ReadOnly Property DTP As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.DTP, Dom.Segments.DTP)
+					ReadOnly Property DTP As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.DTP, Edi.Dom.Segments.DTP)
 
 					'''<summary>Dependent Request Validation</summary>
-					ReadOnly Property AAA As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.AAA, Dom.Segments.AAA)
+					ReadOnly Property AAA As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.AAA, Edi.Dom.Segments.AAA)
 
 					'''<summary>Message Text</summary>
-					ReadOnly Property MSG As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.MSG, Dom.Segments.MSG)
+					ReadOnly Property MSG As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.MSG, Edi.Dom.Segments.MSG)
 
 					'''<summary>Dependent Eligibility or Benefit Additional Information</summary>
-					ReadOnly Property Loop2115D As LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2115D, Dom.Transactions.Transaction271.Loops.Loop2115)
+					ReadOnly Property Loop2115D As LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2115D, Edi.Dom.Transactions.Transaction271.Loops.Loop2115)
 
 					'''<summary>Loop Header</summary>
-					Property LS As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.LS
+					Property LS As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.LS
 
 					'''<summary>Dependent Benefit Related Entity Name</summary>
-					ReadOnly Property Loop2120D As LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2120D, Dom.Transactions.Transaction271.Loops.Loop2120)
+					ReadOnly Property Loop2120D As LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2120D, Edi.Dom.Transactions.Transaction271.Loops.Loop2120)
 
 					'''<summary>Loop Trailer</summary>
-					Property LE As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.LE
+					Property LE As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.LE
 				End Interface
 				'''<summary>Dependent Eligibility or Benefit Additional Information</summary>
 				Public Interface Loop2115D
@@ -4185,7 +4169,7 @@
 
 
 					'''<summary>Dependent Eligibility or Benefit Additional Information</summary>
-					Property III As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2115D.III
+					Property III As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2115D.III
 				End Interface
 				'''<summary>Dependent Benefit Related Entity Name</summary>
 				Public Interface Loop2120D
@@ -4193,19 +4177,19 @@
 
 
 					'''<summary>Dependent Benefit Related Entity Name</summary>
-					Property NM1 As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120D.NM1
+					Property NM1 As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120D.NM1
 
 					'''<summary>Dependent Benefit Related Entity Address</summary>
-					Property N3 As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120D.N3
+					Property N3 As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120D.N3
 
 					'''<summary>Dependent Benefit Related Entity City, State, ZIP Code</summary>
-					Property N4 As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120D.N4
+					Property N4 As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120D.N4
 
 					'''<summary>Dependent Benefit Related Entity Contact Information</summary>
-					ReadOnly Property PER As SegmentSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120D.PER, Dom.Segments.PER)
+					ReadOnly Property PER As SegmentSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120D.PER, Edi.Dom.Segments.PER)
 
 					'''<summary>Dependent Benefit Related Provider Information</summary>
-					Property PRV As Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120D.PRV
+					Property PRV As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.Loop2120D.PRV
 				End Interface
 
 			End Namespace 'Loops
@@ -4217,25 +4201,25 @@
 			Public Interface TransactionSet
 
 				'''<summary>Transaction Set Header</summary>
-				Property ST As Dom.Transactions.Transaction271.Transaction271_B1.Segments.ST
+				Property ST As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.ST
 
 				'''<summary>Beginning of Hierarchical Transaction</summary>
-				Property BHT As Dom.Transactions.Transaction271.Transaction271_B1.Segments.BHT
+				Property BHT As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.BHT
 
 				'''<summary>Information Source Level</summary>
-				ReadOnly Property Loop2000A As LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000A, Dom.Transactions.Transaction271.Loops.Loop2000)
+				ReadOnly Property Loop2000A As LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000A, Edi.Dom.Transactions.Transaction271.Loops.Loop2000)
 
 				'''<summary>Information Receiver Level</summary>
-				ReadOnly Property Loop2000B As LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000B, Dom.Transactions.Transaction271.Loops.Loop2000)
+				ReadOnly Property Loop2000B As LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000B, Edi.Dom.Transactions.Transaction271.Loops.Loop2000)
 
 				'''<summary>Subscriber Level</summary>
-				ReadOnly Property Loop2000C As LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000C, Dom.Transactions.Transaction271.Loops.Loop2000)
+				ReadOnly Property Loop2000C As LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000C, Edi.Dom.Transactions.Transaction271.Loops.Loop2000)
 
 				'''<summary>Dependent Level</summary>
-				ReadOnly Property Loop2000D As LoopSubsetContainer(Of Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000D, Dom.Transactions.Transaction271.Loops.Loop2000)
+				ReadOnly Property Loop2000D As LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction271.Transaction271_B1.Loops.Loop2000D, Edi.Dom.Transactions.Transaction271.Loops.Loop2000)
 
 				'''<summary>Transaction Set Trailer</summary>
-				Property SE As Dom.Transactions.Transaction271.Transaction271_B1.Segments.SE
+				Property SE As Edi.Dom.Transactions.Transaction271.Transaction271_B1.Segments.SE
 			End Interface
 		End Namespace 'Transaction271_B1
 	End Namespace 'Transaction271

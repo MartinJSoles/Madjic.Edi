@@ -58,44 +58,6 @@ Friend Module HelperRoutines
         Return CType(src, TimeElement)
     End Function
 
-    <Extension>
-    Friend Function ToTimeSpan(src As String) As TimeSpan?
-        Dim Hr As Integer
-        Dim Mi As Integer
-        Dim Se As Integer
-        Dim SubSecond As Integer
-        Dim Value As TimeSpan?
-
-        Dim i As Integer
-
-        If Integer.TryParse(src, i) AndAlso i > -1 Then
-            If src.Length >= 4 Then
-
-                If src.Length < 8 Then
-                    For iterations = src.Length + 1 To 8
-                        i *= 10
-                    Next
-                ElseIf src.Length > 8 Then
-                    For iterations = 9 To src.Length
-                        i \= 10
-                    Next
-                End If
-
-                SubSecond = i Mod 100
-                i \= 100
-
-                Se = i Mod 100
-                i \= 100
-
-                Mi = i Mod 100
-                Hr = i \ 100
-
-                Value = New TimeSpan(0, Hr, Mi, Se, SubSecond)
-            End If
-        End If
-
-        Return Value
-    End Function
 
     ''' <summary>
     ''' Parses the given value as a decimal with an explicit decimal point.

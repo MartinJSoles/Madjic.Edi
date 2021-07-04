@@ -17,7 +17,7 @@ Namespace DataElements
         Friend Shared Function FromReader(fullElement As String, reader As EdiReader.SegmentReader) As Element337
             Dim rval As New Element337
 
-            rval.Value = fullElement.ToTimeSpan
+            rval.FromString(fullElement)
             Return rval
         End Function
     End Class

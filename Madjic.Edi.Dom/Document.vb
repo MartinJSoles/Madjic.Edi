@@ -65,7 +65,7 @@
     ''' <remarks>Setting <paramref name="useForwardOnlyEnumeration">useForwardOnlyEnumeration</paramref> to true will force the document
     ''' and child enumerations to not track the child objects. This enables the document to use a smaller memory footprint as it
     ''' iterates through the EDI file. Note that the underlying stream must remain open until the document has been fully processed.</remarks>
-    Public Shared Function FromStream(stream As IO.Stream, useForwardOnlyEnumeration As Boolean) As Task(Of Document)
+    Public Shared Function FromStreamAsync(stream As IO.Stream, useForwardOnlyEnumeration As Boolean) As Task(Of Document)
         If useForwardOnlyEnumeration Then
             Throw New NotImplementedException("Forward Only Enumeration has not been implemented with the Async/Await pattern yet.")
         End If
@@ -106,10 +106,6 @@
 
             .ISB = rdr.EnvelopeIsbSegment
             .ISE = rdr.EnvelopeIseSegment
-
-            If rdr.EnvelopTA1Segments.Count > 0 Then
-                .TA1.AddRange(rdr.EnvelopTA1Segments)
-            End If
         End With
 
         doc.mEnvelopes.Add(Env)
@@ -124,6 +120,11 @@
             End If
 
         Loop Until rdr.IsAtEndOfEnvelope OrElse G Is Nothing
+
+        If rdr.EnvelopTA1Segments.Count > 0 Then
+            Env.TA1.AddRange(rdr.EnvelopTA1Segments)
+        End If
+
     End Function
 
     ''' <summary>

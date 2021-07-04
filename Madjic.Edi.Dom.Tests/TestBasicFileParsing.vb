@@ -76,29 +76,45 @@ Public Class TestBasicFileParsing
         Assert.AreEqual(2, Doc.Envelopes(1).FunctionalGroups(0).Transactions.Count)
     End Function
 
-    <TestMethod> Async Function DoesTestFileRoundTrip() As Task
+    <TestMethod> Async Function DoTestFilesRoundTrip() As Task
         Dim Source As String
         Dim Output As String
         Dim Doc As Document
 
-        Using stream As New IO.FileStream(AllFiles(3), IO.FileMode.Open, IO.FileAccess.Read, IO.FileShare.Read)
-            Source = ReadStreamToString(stream)
-        End Using
+        For FileID = 2 To 10
+            Source = Nothing
+            Doc = Nothing
+            Output = Nothing
 
-        Using stream As New IO.FileStream(AllFiles(3), IO.FileMode.Open, IO.FileAccess.Read, IO.FileShare.Read)
-            Doc = Await Document.FromStreamAsync(stream)
-        End Using
+            Using stream As New IO.FileStream(AllFiles(FileID), IO.FileMode.Open, IO.FileAccess.Read, IO.FileShare.Read)
+                Source = ReadStreamToString(stream)
+            End Using
 
-        Using stream As New IO.MemoryStream()
-            Dim writer As New IO.StreamWriter(stream, New Text.UTF8Encoding(False, True))
-            Await Doc.ToStreamAsync(writer, False)
+            Try
+                Using stream As New IO.FileStream(AllFiles(FileID), IO.FileMode.Open, IO.FileAccess.Read, IO.FileShare.Read)
+                    Doc = Await Document.FromStreamAsync(stream)
+                End Using
+            Catch ex As Exception
+                Assert.Fail($"Reading File Path: ""{AllFiles(FileID)}""
+{ex.ToString}")
+            End Try
 
-            stream.Seek(0, IO.SeekOrigin.Begin)
-            Output = ReadStreamToString(stream)
-        End Using
+            Try
+                Using stream As New IO.MemoryStream()
+                    Dim writer As New IO.StreamWriter(stream, New Text.UTF8Encoding(False, True))
+                    Await Doc.ToStreamAsync(writer, False)
 
-        'Ensure strings are equal
-        Assert.AreEqual(Source, Output, False)
+                    stream.Seek(0, IO.SeekOrigin.Begin)
+                    Output = ReadStreamToString(stream)
+                End Using
+            Catch ex As Exception
+                Assert.Fail($"Writing File Path: ""{AllFiles(FileID)}""
+{ex.ToString}")
+            End Try
+
+            'Ensure strings are equal
+            Assert.AreEqual(Source, Output, $"File Path: ""{AllFiles(FileID)}""")
+        Next
     End Function
 
     <TestMethod> Async Function ReadImplementation271() As Task
@@ -118,6 +134,67 @@ Public Class TestBasicFileParsing
 
         Assert.IsNotNull(Imp.Loop2000B)
         Assert.IsTrue(Imp.Loop2000B.Count > 0)
+    End Function
+
+    <TestMethod> Async Function TestBoundedLoops() As Task
+        Dim Doc As Document
+
+        Using stream As New IO.FileStream(AllFiles(3), IO.FileMode.Open, IO.FileAccess.Read, IO.FileShare.Read)
+            Doc = Await Document.FromStreamAsync(stream)
+        End Using
+
+        Dim RawTS = Doc.Envelopes(0).FunctionalGroups(0).Transactions(0)
+        Dim Imp = TryCast(RawTS, Transactions.Transaction271.Transaction271_B1.TransactionSet)
+
+        Debug.WriteLine("")
+
+        Dim Count2120 As Integer
+        'Ensure that multiple 2120 loops are showing up
+        For Each lp In Imp.Loop2000C
+            For Each lp2 In lp.Loop2100C.Loop2110C
+                For Each lp3 In lp2.Loop2120C
+                    Debug.WriteLine("LOOP 2120C FOUND")
+
+                    If lp3.NM1 IsNot Nothing Then
+                        Debug.WriteLine("NM103 = " & lp3.NM1.NM103)
+                    Else
+                        Debug.WriteLine("(no NM1)")
+                    End If
+
+                    If lp3.PER IsNot Nothing AndAlso lp3.PER.Count > 0 Then
+                        Debug.WriteLine("PER03 = " * lp3.PER.First().PER03)
+                    Else
+                        Debug.WriteLine("(no PER)")
+                    End If
+
+                    Count2120 += 1
+                Next
+            Next
+        Next
+
+        For Each lp In Imp.Loop2000D
+            For Each lp2 In lp.Loop2100D.Loop2110D
+                For Each lp3 In lp2.Loop2120D
+                    Debug.WriteLine("LOOP 2120D FOUND")
+
+                    If lp3.NM1 IsNot Nothing Then
+                        Debug.WriteLine("NM103 = " & lp3.NM1.NM103)
+                    Else
+                        Debug.WriteLine("(no NM1)")
+                    End If
+
+                    If lp3.PER IsNot Nothing AndAlso lp3.PER.Count > 0 Then
+                        Debug.WriteLine("PER03 = " * lp3.PER.First().PER03)
+                    Else
+                        Debug.WriteLine("(no PER)")
+                    End If
+
+                    Count2120 += 1
+                Next
+            Next
+        Next
+
+        Assert.AreEqual(3, Count2120)
     End Function
 
     ''' <summary>

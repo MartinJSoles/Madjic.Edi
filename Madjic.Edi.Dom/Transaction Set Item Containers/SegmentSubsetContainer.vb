@@ -12,12 +12,12 @@
     ''' Identifies the area for the implementation as an integer.
     ''' </summary>
     ''' <remarks>This is defined in the implementation guides as a single character. Letters A-Z are translated to 10 - 35.</remarks>
-    Public ReadOnly Property Area As Integer
+    Public ReadOnly Property Area As String
 
     ''' <summary>
     ''' Identifies the sequence in the area for the implementation.
     ''' </summary>
-    Public ReadOnly Property Sequence As Integer
+    Public ReadOnly Property Sequence As String
 
     ''' <summary>
     ''' Creates a new instance of the <see cref="SegmentSubsetContainer(Of T, K)">SegmentSubsetContainer</see> class.
@@ -26,7 +26,7 @@
     ''' <param name="area">The area for the implementation.</param>
     ''' <param name="sequence">The segment sequence in the implementation area.</param>
     ''' <remarks>These collections can only be instantiated by the current assembly.</remarks>
-    Friend Sub New(baseCollection As SegmentContainer(Of K), repeat As Integer, area As Integer, sequence As Integer)
+    Friend Sub New(baseCollection As SegmentContainer(Of K), repeat As Integer, area As String, sequence As String)
         mList = baseCollection
         Me.Area = area
         Me.Sequence = sequence
@@ -106,7 +106,7 @@
         For index = mList.Count - 1 To 0 Step -1
             s = TryCast(mList(index), ISegment)
 
-            If s IsNot Nothing AndAlso TypeOf s Is K AndAlso s.SetArea.HasValue AndAlso s.SetSequence.HasValue AndAlso s.SetArea = Area AndAlso s.SetSequence = Sequence Then
+            If s IsNot Nothing AndAlso TypeOf s Is K AndAlso String.Compare(s.SetArea, Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(s.SetSequence, Sequence, StringComparison.OrdinalIgnoreCase) = 0 Then
                 mList.RemoveAt(index)
             End If
         Next
@@ -119,7 +119,7 @@
     Public Function Contains(item As T) As Boolean Implements ICollection(Of T).Contains
         Dim s = TryCast(item, ISegment)
 
-        If s IsNot Nothing AndAlso TypeOf s Is K AndAlso s.SetArea.HasValue AndAlso s.SetSequence.HasValue AndAlso s.SetArea = Area AndAlso s.SetSequence = Sequence Then
+        If s IsNot Nothing AndAlso TypeOf s Is K AndAlso s.SetArea IsNot Nothing AndAlso s.SetSequence IsNot Nothing AndAlso s.SetArea = Area AndAlso s.SetSequence = Sequence Then
             Return mList.Contains(CType(s, K))
         Else
             Return False
@@ -138,7 +138,7 @@
         For Each node In mList
             s = TryCast(node, ISegment)
 
-            If s IsNot Nothing AndAlso TypeOf s Is K AndAlso s.SetArea.HasValue AndAlso s.SetSequence.HasValue AndAlso s.SetArea = Area AndAlso s.SetSequence = Sequence Then
+            If s IsNot Nothing AndAlso TypeOf s Is K AndAlso s.SetArea IsNot Nothing AndAlso s.SetSequence IsNot Nothing AndAlso s.SetArea = Area AndAlso s.SetSequence = Sequence Then
                 array(index) = s
                 index += 1
             End If
@@ -157,7 +157,7 @@
             For Each node In mList
                 s = TryCast(node, Segment)
 
-                If s IsNot Nothing AndAlso TypeOf s Is K AndAlso s.SetArea.HasValue AndAlso s.SetSequence.HasValue AndAlso s.SetArea = Area AndAlso s.SetSequence = Sequence Then
+                If s IsNot Nothing AndAlso TypeOf s Is K AndAlso String.Compare(s.SetArea, Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(s.SetSequence, Sequence, StringComparison.OrdinalIgnoreCase) = 0 Then
                     index += 1
                 End If
             Next
@@ -178,7 +178,7 @@
     Public Function Remove(item As T) As Boolean Implements ICollection(Of T).Remove
         Dim s = TryCast(item, ISegment)
 
-        If s IsNot Nothing AndAlso TypeOf s Is K AndAlso s.SetArea.HasValue AndAlso s.SetSequence.HasValue AndAlso s.SetArea = Area AndAlso s.SetSequence = Sequence Then
+        If s IsNot Nothing AndAlso TypeOf s Is K AndAlso String.Compare(s.SetArea, Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(s.SetSequence, Sequence, StringComparison.OrdinalIgnoreCase) = 0 Then
             Return mList.Remove(s)
         Else
             Return False
@@ -203,7 +203,7 @@
 
             s = TryCast(node, Segment)
 
-            If s IsNot Nothing AndAlso TypeOf s Is K AndAlso s.SetArea.HasValue AndAlso s.SetSequence.HasValue AndAlso s.SetArea = Area AndAlso s.SetSequence = Sequence Then
+            If s IsNot Nothing AndAlso TypeOf s Is K AndAlso s.SetArea IsNot Nothing AndAlso s.SetSequence IsNot Nothing AndAlso s.SetArea = Area AndAlso s.SetSequence = Sequence Then
                 index += 1
             End If
         Next
@@ -232,7 +232,7 @@
             For Each node In mList
                 s = TryCast(node, Segment)
 
-                If s IsNot Nothing AndAlso s.SetArea.HasValue AndAlso s.SetSequence.HasValue AndAlso s.SetArea = Area AndAlso s.SetSequence = Sequence Then
+                If s IsNot Nothing AndAlso String.Compare(s.SetArea, Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(s.SetSequence, Sequence, StringComparison.OrdinalIgnoreCase) = 0 Then
                     If index <= idx Then
                         mList.Insert(Curt, t)
                         Exit Sub
@@ -259,7 +259,7 @@
             For Each node In mList
                 s = TryCast(node, Segment)
 
-                If s IsNot Nothing AndAlso TypeOf s Is K AndAlso s.SetArea.HasValue AndAlso s.SetSequence.HasValue AndAlso s.SetArea = Area AndAlso s.SetSequence = Sequence Then
+                If s IsNot Nothing AndAlso TypeOf s Is K AndAlso String.Compare(s.SetArea, Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(s.SetSequence, Sequence, StringComparison.OrdinalIgnoreCase) = 0 Then
                     If idx = index Then
                         s = CType(node, ISegment)
                         Return CType(s, T)
@@ -281,7 +281,7 @@
                 For Each node In mList
                     s = TryCast(node, ISegment)
 
-                    If s IsNot Nothing AndAlso TypeOf s Is K AndAlso s.SetArea.HasValue AndAlso s.SetSequence.HasValue AndAlso s.SetArea = Area AndAlso s.SetSequence = Sequence Then
+                    If s IsNot Nothing AndAlso TypeOf s Is K AndAlso String.Compare(s.SetArea, Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(s.SetSequence, Sequence, StringComparison.OrdinalIgnoreCase) = 0 Then
                         If idx = index Then
                             If t IsNot Nothing Then
                                 t.SetArea = Area
@@ -314,7 +314,7 @@
         For Each node In mList
             s = TryCast(node, ISegment)
 
-            If s IsNot Nothing AndAlso TypeOf s Is K AndAlso s.SetArea.HasValue AndAlso s.SetSequence.HasValue AndAlso s.SetArea = Area AndAlso s.SetSequence = Sequence Then
+            If s IsNot Nothing AndAlso TypeOf s Is K AndAlso String.Compare(s.SetArea, Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(s.SetSequence, Sequence, StringComparison.OrdinalIgnoreCase) = 0 Then
                 If idx = index Then
                     mList.RemoveAt(curt)
                     Exit Sub
@@ -376,7 +376,7 @@
                     s = GetSegment(mIndex)
 
                     If s IsNot Nothing AndAlso TypeOf s Is K Then
-                        If s.SetArea.HasValue AndAlso s.SetSequence.HasValue AndAlso s.SetArea = mParent.Area AndAlso s.SetSequence = mParent.Sequence Then
+                        If String.Compare(s.SetArea, mParent.Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(s.SetSequence, mParent.Sequence, StringComparison.OrdinalIgnoreCase) = 0 Then
                             Return True
                         End If
                     End If

@@ -6,16 +6,12 @@
         Return $"SegmentContainer, T: {GetType(T).Name}, Count: {Count}, Table: {Table}, Position: {Position}, MaximumStorage: {MaximumStorage}, Parent: {If(Parent, "(null)")}"
     End Function
 
-    Public ReadOnly Property Table As Integer
-    Public ReadOnly Property Position As Integer
+    Public ReadOnly Property Table As Char
+    Public ReadOnly Property Position As String
 
     Public ReadOnly Property MaximumStorage As Integer
 
-    Friend Sub New(table As Integer, position As Integer)
-        Me.New(0, table, position)
-    End Sub
-
-    Friend Sub New(maximumStorage As Integer, table As Integer, position As Integer)
+    Friend Sub New(maximumStorage As Integer, table As Char, position As String)
         MyBase.New()
 
         Me.MaximumStorage = maximumStorage

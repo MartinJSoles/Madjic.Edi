@@ -11,7 +11,10 @@ Friend Class GenericSegment
     End Sub
 
     Friend Function ToTimeSpanValue(index As Integer) As TimeSpan?
-        Return ToStringValue(index).ToTimeSpan
+        Dim T As New TimeElement(2, 8)
+        T.FromString(ToStringValue(index))
+
+        Return T.Value
     End Function
 
     Friend Function ToDateValue(index As Integer) As Date?

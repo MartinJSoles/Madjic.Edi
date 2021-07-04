@@ -2,6 +2,44 @@
     Inherits SimpleElement
 
     Private mValue As TimeSpan?
+
+    Friend Sub FromString(src As String)
+        Dim Hr As Integer
+        Dim Mi As Integer
+        Dim Se As Integer
+        Dim SubSecond As Integer
+        Dim Value As TimeSpan?
+
+        Dim i As Integer
+
+        If Integer.TryParse(src, i) AndAlso i > -1 Then
+            If src.Length >= 4 Then
+                If src.Length < 8 Then
+                    For iterations = src.Length + 1 To 8
+                        i *= 10
+                    Next
+                ElseIf src.Length > 8 Then
+                    For iterations = 9 To src.Length
+                        i \= 10
+                    Next
+                End If
+
+                SubSecond = i Mod 100
+                i \= 100
+
+                Se = i Mod 100
+                i \= 100
+
+                Mi = i Mod 100
+                Hr = i \ 100
+
+                Value = New TimeSpan(0, Hr, Mi, Se, SubSecond)
+            End If
+        End If
+
+        Me.Value = Value
+    End Sub
+
     Public Property Value As TimeSpan?
         Get
             Return mValue
@@ -21,6 +59,7 @@
         Me.New(4, maximumLength)
     End Sub
 
+    Private Shared FormatStrings() As String = {"", "", "hh", "hh", "hhmm", "hhmm", "hhmmss", "hhmmss", "hhmmssff"}
     Public Overrides Function ToString() As String
         If Value.HasValue Then
             If EdiValue Is Nothing OrElse EdiValue.Length = 0 Then
