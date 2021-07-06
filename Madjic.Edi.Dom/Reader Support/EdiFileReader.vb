@@ -49,7 +49,6 @@
 
                 Do While chI > -1
                     ch = Char.ToUpper(ChrW(chI))
-                    Debug.Write(ch)
 
                     Select Case st
                         Case 0

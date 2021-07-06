@@ -161,9 +161,6 @@
                     mcIndex = -1
 
                     atEOF = (mcReadSize = 0)
-                    'If mcReadSize < 1024 Then
-                    '    Debug.WriteLine("We are in the last block of the file.")
-                    'End If
 
                     'check to make sure the EOF hasn't been reached
                     If atEOF Then
@@ -174,10 +171,6 @@
         End Function
 
         Private Shared Function IsControl(ByVal chr As Char) As Boolean
-            If chr = "…"c Then
-                Debug.WriteLine("Got our character.")
-            End If
-
             Return AscW(chr) < 32
         End Function
     End Class
