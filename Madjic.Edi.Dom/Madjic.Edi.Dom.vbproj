@@ -12,9 +12,8 @@
     <PackageTags>HIPAA, EDI, ANSI X12</PackageTags>
     <PackageReleaseNotes>This is an initial release of a class library that supports reading and writing HIPAA compliant ANSI X12 EDI documents. There are issues (but work for my immediate needs right now).</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Version>1.0.4</Version>
-    <AssemblyVersion>1.0.4.0</AssemblyVersion>
+    <Version>1.0.3</Version>
+    <AssemblyVersion>1.0.3.0</AssemblyVersion>
   </PropertyGroup>
   <PropertyGroup>
     <IncludeSymbols>true</IncludeSymbols>
