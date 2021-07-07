@@ -72,7 +72,7 @@ by a single class definition).
 
 ## History
 
-#### V1.0.4
+#### V1.0.4, V1.0.5
 * This release includes the generated XML Documentation file for all supported platforms.
 * Removed debugging statements (the file readers were dumping incoming characters to the debugger output when looking for the envelope information).
 
@@ -83,6 +83,6 @@ with the group code in the GS segment, it will be ignored.
 * This version does not currently enforce segment and loop level validation.
 * Tests have been put in place to verify the transactions can be read and interpreted correctly.
 
-#### V1.01, V1.02
+#### V1.0.1, V1.0.2
 Do not use. These versions do not perform correctly.
 
