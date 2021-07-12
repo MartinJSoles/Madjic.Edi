@@ -13,14 +13,14 @@
     <PackageReleaseNotes>This is an initial release of a class library that supports reading and writing HIPAA compliant ANSI X12 EDI documents. There are issues (but work for my immediate needs right now).</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Version>1.0.5</Version>
-    <AssemblyVersion>1.0.3.0</AssemblyVersion>
+    <Version>1.0.6</Version>
+    <AssemblyVersion>1.0.6.0</AssemblyVersion>
   </PropertyGroup>
   <PropertyGroup>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <PackageProjectUrl>https://github.com/MartinJSoles/Madjic.Edi</PackageProjectUrl>
-    <FileVersion>1.0.4.0</FileVersion>
+    <FileVersion>1.0.6.0</FileVersion>
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
   <ItemGroup>
