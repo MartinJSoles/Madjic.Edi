@@ -73,7 +73,7 @@
     ''' </summary>
     ''' <param name="item">The segment to add to the collection.</param>
     Public Sub Add(item As T) Implements ICollection(Of T).Add
-        If mRepeat > 1 AndAlso Count <= mRepeat Then
+        If mRepeat > 1 AndAlso Count >= mRepeat Then
             Throw New IndexOutOfRangeException
         End If
 

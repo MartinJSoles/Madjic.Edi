@@ -63,7 +63,7 @@
     Public Sub Add(item As T) Implements ICollection(Of T).Add
         Dim L = TryCast(item, ILoop)
 
-        If mRepeat > 1 AndAlso Count <= mRepeat Then
+        If mRepeat > 1 AndAlso Count >= mRepeat Then
             Throw New IndexOutOfRangeException
         End If
 
