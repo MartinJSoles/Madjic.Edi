@@ -1918,7 +1918,7 @@
 						Inherits ISegment
 
 						'''<summary>Service Type Code</summary>
-						Property EQ01 As String
+						ReadOnly Property EQ01 As RepeatingSimpleElementList
 						'''<summary>An information source may support the use of EQ02 - Composite Medical Procedure Identifier at their discretion. The EQ02 allows for a very specific inquiry, such as one based on a procedure code. Additional information such as diagnosis codes can be supplied in the 2100C HI segment and place of service can be supplied in the 2110C III segment.</summary>
 						Property EQ02 As Edi.Dom.Transactions.Transaction270.Transaction270_B1.Composites.Loop2110C.EQ.EQ_02.C003
 						'''<summary>Coverage Level Code</summary>
@@ -2131,7 +2131,7 @@
 						Inherits ISegment
 
 						'''<summary>Service Type Code</summary>
-						Property EQ01 As String
+						ReadOnly Property EQ01 As RepeatingSimpleElementList
 						'''<summary></summary>
 						Property EQ02 As Edi.Dom.Transactions.Transaction270.Transaction270_B1.Composites.Loop2110D.EQ.EQ_02.C003
 						'''<summary></summary>

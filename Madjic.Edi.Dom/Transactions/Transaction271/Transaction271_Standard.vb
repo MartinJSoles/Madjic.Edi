@@ -3064,7 +3064,7 @@
 						'''<summary>Benefit Coverage Level Code</summary>
 						Property EB02 As String
 						'''<summary>See Section 1.4.7 Implementation-Compliant Use of the 270/271 Transaction Set for information about what service type codes must be returned.</summary>
-						Property EB03 As String
+						ReadOnly Property EB03 As RepeatingSimpleElementList
 						'''<summary>Insurance Type Code</summary>
 						Property EB04 As String
 						'''<summary>This element is to be used only to convey the specific product name or special program name for an insurance plan. For example, if a plan has a brand name, such as "Gold 1-2-3", the name may be placed in this element. This element must not be used to give benefit details of a plan.</summary>
@@ -3465,7 +3465,7 @@
 						'''<summary>This element is used in conjunction with EB01 codes (e.g. Active Family Coverage, Deductible Individual, etc.). This element can be used to identify types of individual's within the Subscriber's family that eligibility or benefits extends to (unless EB01 = E - Exclusions).</summary>
 						Property EB02 As String
 						'''<summary>See Section 1.4.7 Implementation-Compliant Use of the 270/271 Transaction Set for information about what service type codes must be returned.</summary>
-						Property EB03 As String
+						ReadOnly Property EB03 As RepeatingSimpleElementList
 						'''<summary>Insurance Type Code</summary>
 						Property EB04 As String
 						'''<summary>This element is to be used only to convey the specific product name for an insurance plan. For example, if a plan has a brand name, such as "Gold 1-2-3", the name may be placed in this element. This element must not to be used to give benefit details of a plan.</summary>

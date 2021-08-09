@@ -1,4 +1,6 @@
-﻿Namespace Global.Madjic.Edi.Dom.DataElements.Composite
+﻿Imports Madjic.Edi.Dom.EdiReader
+
+Namespace Global.Madjic.Edi.Dom.DataElements.Composite
     '''<summary>Reference in Segment</summary>
     '''<remarks>To hold the reference number of a data element and optionally a component data element within a composite</remarks>
     Partial Friend Class C999_Obj
@@ -16,7 +18,7 @@
             Initialize()
         End Sub
 
-        <CodeAnalysis.SuppressMessage("Performance", "CA1822:Mark members as static", Justification := "<Pending>")>
+        <CodeAnalysis.SuppressMessage("Performance", "CA1822:Mark members as static", Justification:="<Pending>")>
         Partial Private Sub Initialize()
         End Sub
 
@@ -54,19 +56,21 @@
 
 #End Region
 
+        Friend Overrides Sub Read(fullElement As String, reader As SegmentReader)
+            Dim values = fullElement.Split(reader.CompositeSeparator)
+
+            If values.Length > 0 Then
+                C999_01 = values(0).ToDecimal(0)
+            End If
+            If values.Length > 1 Then
+                C999_02 = values(1).ToDecimal(0)
+            End If
+        End Sub
+
         Friend Shared Function FromReader(fullElement As String, reader As EdiReader.SegmentReader) As C999_Obj
             Dim rval As New C999_Obj
 
-            Dim values = fullElement.Split(reader.CompositeSeparator)
-
-            With rval
-                If values.Length > 0 Then
-                    .C999_01 = values(0).ToDecimal(0)
-                End If
-                If values.Length > 1 Then
-                    .C999_02 = values(1).ToDecimal(0)
-                End If
-            End With
+            rval.Read(fullElement, reader)
 
             Return rval
         End Function

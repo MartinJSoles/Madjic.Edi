@@ -1,3 +1,5 @@
+Imports System.IO
+
 Namespace Segments
     '''<summary>Eligibility or Benefit Inquiry</summary>
     '''<remarks>To specify inquired eligibility or benefit information</remarks>
@@ -10,7 +12,7 @@ Namespace Segments
 
         Public Sub New()
             MyBase.New("EQ")
-            Elements.AddRange({CType(Nothing, DataElements.Element1365),
+            Elements.AddRange({New RepeatingSimpleElementList(New DataElements.Element1365(), 99),
                                       CType(Nothing, DataElements.Composite.C003_Obj),
                                       CType(Nothing, DataElements.Element1207),
                                       CType(Nothing, DataElements.Element1336),
@@ -24,19 +26,10 @@ Namespace Segments
 
         End Sub
 
-        Friend Property EQ01 As String Implements EQ.EQ01, Transactions.Transaction270.Transaction270_B1.Segments.Loop2110C.EQ.EQ01, Transactions.Transaction270.Transaction270_B1.Segments.Loop2110D.EQ.EQ01
+        Friend ReadOnly Property EQ01 As RepeatingSimpleElementList Implements EQ.EQ01, Transactions.Transaction270.Transaction270_B1.Segments.Loop2110C.EQ.EQ01, Transactions.Transaction270.Transaction270_B1.Segments.Loop2110D.EQ.EQ01
             Get
-                Return If(Elements(0) IsNot Nothing, CType(Elements(0), DataElements.Element1365).Value, Nothing)
+                Return CType(Elements(0), RepeatingSimpleElementList)
             End Get
-            Set(value As String)
-                If Elements(0) Is Nothing AndAlso value IsNot Nothing Then
-                    Elements(0) = New DataElements.Element1365
-                End If
-
-                If Elements(0) IsNot Nothing Then
-                    CType(Elements(0), DataElements.Element1365).Value = value
-                End If
-            End Set
         End Property
 
         Friend Property EQ02 As DataElements.Composite.C003 Implements EQ.EQ02
@@ -110,7 +103,7 @@ Namespace Segments
 
             With rval
                 If source.Elements.Count > 0 Then
-                    .EQ01 = source.ToStringValue(0)
+                    .EQ01.AddFromReader(source.ToStringValue(0), reader)
                 End If
                 If source.Elements.Count > 1 Then
                     .Elements(1) = DataElements.Composite.C003_Obj.FromReader(source.ToStringValue(1), reader)
@@ -128,7 +121,6 @@ Namespace Segments
 
             Return rval
         End Function
-
     End Class
 
     '''<summary>Eligibility or Benefit Inquiry</summary>
@@ -138,7 +130,7 @@ Namespace Segments
 
         '''<summary>Service Type Code</summary>
         '''<remarks>Position of data in the repeating data element conveys no significance.</remarks>
-        Property EQ01 As String
+        ReadOnly Property EQ01 As RepeatingSimpleElementList
 
         '''<summary>Composite Medical Procedure Identifier</summary>
         '''<remarks></remarks>

@@ -5206,7 +5206,7 @@
 						'''<summary>Marital Status Code</summary>
 						Property DMG04 As String
 						'''<summary></summary>
-						Property DMG05 As Edi.Dom.DataElements.Composite.C056
+						ReadOnly Property DMG05 As Edi.Dom.DataElements.Composite.RepeatingC056List
 						'''<summary>Citizenship Status Code</summary>
 						Property DMG06 As String
 						'''<summary>Code List Qualifier Code</summary>
@@ -5313,7 +5313,7 @@
 						'''<summary>Marital Status Code</summary>
 						Property DMG04 As String
 						'''<summary></summary>
-						Property DMG05 As Edi.Dom.DataElements.Composite.C056
+						ReadOnly Property DMG05 As Edi.Dom.DataElements.Composite.RepeatingC056List
 						'''<summary>Citizenship Status Code</summary>
 						Property DMG06 As String
 						'''<summary>Code List Qualifier Code</summary>
@@ -5880,7 +5880,7 @@
 						'''<summary>Coordination of Benefits Code</summary>
 						Property COB03 As String
 						'''<summary>Service Type Code</summary>
-						Property COB04 As String
+						ReadOnly Property COB04 As RepeatingSimpleElementList
 					End Interface
 					'''<summary>Additional Coordination of Benefits Identifiers</summary>
 					Public Interface REF

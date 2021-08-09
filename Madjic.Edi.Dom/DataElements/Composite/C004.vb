@@ -1,4 +1,6 @@
-﻿Namespace Global.Madjic.Edi.Dom.DataElements.Composite
+﻿Imports Madjic.Edi.Dom.EdiReader
+
+Namespace Global.Madjic.Edi.Dom.DataElements.Composite
     '''<summary>Composite Diagnosis Code Pointer</summary>
     '''<remarks>To identify one or more diagnosis code pointers</remarks>
     Partial Friend Class C004_Obj
@@ -85,25 +87,26 @@
 
 #End Region
 
+        Friend Overrides Sub Read(fullElement As String, reader As SegmentReader)
+            Dim values = fullElement.Split(reader.CompositeSeparator)
+
+            If values.Length > 0 Then
+                C004_01 = values(0).ToDecimal(0)
+            End If
+            If values.Length > 1 Then
+                C004_02 = values(1).ToDecimal(0)
+            End If
+            If values.Length > 2 Then
+                C004_03 = values(2).ToDecimal(0)
+            End If
+            If values.Length > 3 Then
+                C004_04 = values(3).ToDecimal(0)
+            End If
+        End Sub
         Friend Shared Function FromReader(fullElement As String, reader As EdiReader.SegmentReader) As C004_Obj
             Dim rval As New C004_Obj
 
-            Dim values = fullElement.Split(reader.CompositeSeparator)
-
-            With rval
-                If values.Length > 0 Then
-                    .C004_01 = values(0).ToDecimal(0)
-                End If
-                If values.Length > 1 Then
-                    .C004_02 = values(1).ToDecimal(0)
-                End If
-                If values.Length > 2 Then
-                    .C004_03 = values(2).ToDecimal(0)
-                End If
-                If values.Length > 3 Then
-                    .C004_04 = values(3).ToDecimal(0)
-                End If
-            End With
+            rval.Read(fullElement, reader)
 
             Return rval
         End Function

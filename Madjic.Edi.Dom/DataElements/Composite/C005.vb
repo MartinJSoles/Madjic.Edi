@@ -1,4 +1,6 @@
-﻿Namespace Global.Madjic.Edi.Dom.DataElements.Composite
+﻿Imports Madjic.Edi.Dom.EdiReader
+
+Namespace Global.Madjic.Edi.Dom.DataElements.Composite
     '''<summary>Tooth Surface</summary>
     '''<remarks>To identify one or more tooth surface codes</remarks>
     Partial Friend Class C005_Obj
@@ -101,28 +103,30 @@
 
 #End Region
 
+        Friend Overrides Sub Read(fullElement As String, reader As SegmentReader)
+            Dim values = fullElement.Split(reader.CompositeSeparator)
+
+            If values.Length > 0 Then
+                C005_01 = values(0)
+            End If
+            If values.Length > 1 Then
+                C005_02 = values(1)
+            End If
+            If values.Length > 2 Then
+                C005_03 = values(2)
+            End If
+            If values.Length > 3 Then
+                C005_04 = values(3)
+            End If
+            If values.Length > 4 Then
+                C005_05 = values(4)
+            End If
+        End Sub
+
         Friend Shared Function FromReader(fullElement As String, reader As EdiReader.SegmentReader) As C005_Obj
             Dim rval As New C005_Obj
 
-            Dim values = fullElement.Split(reader.CompositeSeparator)
-
-            With rval
-                If values.Length > 0 Then
-                    .C005_01 = values(0)
-                End If
-                If values.Length > 1 Then
-                    .C005_02 = values(1)
-                End If
-                If values.Length > 2 Then
-                    .C005_03 = values(2)
-                End If
-                If values.Length > 3 Then
-                    .C005_04 = values(3)
-                End If
-                If values.Length > 4 Then
-                    .C005_05 = values(4)
-                End If
-            End With
+            rval.Read(fullElement, reader)
 
             Return rval
         End Function

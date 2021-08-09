@@ -21,7 +21,7 @@ Namespace Segments
                                       CType(Nothing, DataElements.Element584),
                                       CType(Nothing, DataElements.Element66),
                                       CType(Nothing, DataElements.Element67),
-                                      CType(Nothing, DataElements.Element1176)})
+                                      New RepeatingSimpleElementList(New DataElements.Element1176(), 5)})
 
             Initialize()
         End Sub
@@ -240,19 +240,10 @@ Namespace Segments
             End Set
         End Property
 
-        Friend Property EMS15 As String Implements EMS.EMS15
+        Friend ReadOnly Property EMS15 As RepeatingSimpleElementList Implements EMS.EMS15
             Get
-                Return If(Elements(14) IsNot Nothing, CType(Elements(14), DataElements.Element1176).Value, Nothing)
+                Return CType(Elements(14), RepeatingSimpleElementList)
             End Get
-            Set(value As String)
-                If Elements(14) Is Nothing AndAlso value IsNot Nothing Then
-                    Elements(14) = New DataElements.Element1176
-                End If
-
-                If Elements(14) IsNot Nothing Then
-                    CType(Elements(14), DataElements.Element1176).Value = value
-                End If
-            End Set
         End Property
 
         Friend Shared Function FromGenericSegment(source As GenericSegment, reader As EdiReader.SegmentReader) As EMS
@@ -302,7 +293,7 @@ Namespace Segments
                     .EMS14 = source.ToStringValue(13)
                 End If
                 If source.Elements.Count > 14 Then
-                    .EMS15 = source.ToStringValue(14)
+                    .EMS15.AddFromReader(source.ToStringValue(14), reader)
                 End If
             End With
 
@@ -374,7 +365,7 @@ Namespace Segments
 
         '''<summary>Employment Class Code</summary>
         '''<remarks></remarks>
-        Property EMS15 As String
+        ReadOnly Property EMS15 As RepeatingSimpleElementList
 
     End Interface
 End NameSpace

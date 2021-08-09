@@ -11,7 +11,7 @@ Namespace Segments
             Elements.AddRange({CType(Nothing, DataElements.Element1138),
                                       CType(Nothing, DataElements.Element127),
                                       CType(Nothing, DataElements.Element1143),
-                                      CType(Nothing, DataElements.Element1365)})
+                                      New RepeatingSimpleElementList(New DataElements.Element1365(), 9)})
 
             Initialize()
         End Sub
@@ -65,19 +65,10 @@ Namespace Segments
             End Set
         End Property
 
-        Friend Property COB04 As String Implements COB.COB04, Transactions.Transaction834.Transaction834_A1.Segments.Loop2320.COB.COB04
+        Friend ReadOnly Property COB04 As RepeatingSimpleElementList Implements COB.COB04, Transactions.Transaction834.Transaction834_A1.Segments.Loop2320.COB.COB04
             Get
-                Return If(Elements(3) IsNot Nothing, CType(Elements(3), DataElements.Element1365).Value, Nothing)
+                Return CType(Elements(3), RepeatingSimpleElementList)
             End Get
-            Set(value As String)
-                If Elements(3) Is Nothing AndAlso value IsNot Nothing Then
-                    Elements(3) = New DataElements.Element1365
-                End If
-
-                If Elements(3) IsNot Nothing Then
-                    CType(Elements(3), DataElements.Element1365).Value = value
-                End If
-            End Set
         End Property
 
         Friend Shared Function FromGenericSegment(source As GenericSegment, reader As EdiReader.SegmentReader) As COB
@@ -94,7 +85,7 @@ Namespace Segments
                     .COB03 = source.ToStringValue(2)
                 End If
                 If source.Elements.Count > 3 Then
-                    .COB04 = source.ToStringValue(3)
+                    .COB04.AddFromReader(source.ToStringValue(3), reader)
                 End If
             End With
 
@@ -121,7 +112,7 @@ Namespace Segments
 
         '''<summary>Service Type Code</summary>
         '''<remarks></remarks>
-        Property COB04 As String
+        ReadOnly Property COB04 As RepeatingSimpleElementList
 
     End Interface
 End NameSpace

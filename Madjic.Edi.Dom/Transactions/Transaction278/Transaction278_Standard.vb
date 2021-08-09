@@ -6970,7 +6970,7 @@
 						'''<summary>Review Identification Number</summary>
 						Property HCR02 As String
 						'''<summary>Review Decision Reason Code</summary>
-						Property HCR03 As String
+						ReadOnly Property HCR03 As RepeatingSimpleElementList
 						'''<summary>Second Surgical Opinion Indicator</summary>
 						Property HCR04 As String
 					End Interface
@@ -7533,7 +7533,7 @@
 						'''<summary>Review Identification Number</summary>
 						Property HCR02 As String
 						'''<summary>Review Decision Reason Code</summary>
-						Property HCR03 As String
+						ReadOnly Property HCR03 As RepeatingSimpleElementList
 						'''<summary>Second Surgical Opinion Indicator</summary>
 						Property HCR04 As String
 					End Interface

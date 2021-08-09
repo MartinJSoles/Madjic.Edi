@@ -236,6 +236,10 @@
         Public Shared Function CreateLE() As Global.Madjic.Edi.Dom.Transactions.Transaction834.Transaction834_A1.Segments.Loop2000.LE
             Return New Global.Madjic.Edi.Dom.Segments.LE_Obj
         End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction834.Transaction834_A1.Composites.Loop2000.INS.INS_06.C052" /> interface (Medicare Status Code).</summary>
+        Public Shared Function CreateINS06() As Global.Madjic.Edi.Dom.Transactions.Transaction834.Transaction834_A1.Composites.Loop2000.INS.INS_06.C052
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C052_Obj
+        End Function
     End Class
 
     '''<summary>Provides methods for instantiating the segments contained in the Loop2100A loop (Member Name).</summary>

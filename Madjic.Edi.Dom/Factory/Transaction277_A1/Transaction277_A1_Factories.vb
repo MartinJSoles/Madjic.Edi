@@ -188,6 +188,18 @@
         Public Shared Function CreateSTC() As Global.Madjic.Edi.Dom.Transactions.Transaction277.Transaction277_A1.Segments.Loop2200B.STC
             Return New Global.Madjic.Edi.Dom.Segments.STC_Obj
         End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction277.Transaction277_A1.Composites.Loop2200B.STC.STC_01.C043" /> interface (Health Care Claim Status).</summary>
+        Public Shared Function CreateSTC01() As Global.Madjic.Edi.Dom.Transactions.Transaction277.Transaction277_A1.Composites.Loop2200B.STC.STC_01.C043
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C043_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction277.Transaction277_A1.Composites.Loop2200B.STC.STC_10.C043" /> interface (Health Care Claim Status).</summary>
+        Public Shared Function CreateSTC10() As Global.Madjic.Edi.Dom.Transactions.Transaction277.Transaction277_A1.Composites.Loop2200B.STC.STC_10.C043
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C043_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction277.Transaction277_A1.Composites.Loop2200B.STC.STC_11.C043" /> interface (Health Care Claim Status).</summary>
+        Public Shared Function CreateSTC11() As Global.Madjic.Edi.Dom.Transactions.Transaction277.Transaction277_A1.Composites.Loop2200B.STC.STC_11.C043
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C043_Obj
+        End Function
     End Class
 
     '''<summary>Provides methods for instantiating the segments contained in the Loop2000C loop (Service Provider Level).</summary>
@@ -230,6 +242,18 @@
         '''<summary>Creates an object that implements the <see cref ="Global.Madjic.Edi.Dom.Transactions.Transaction277.Transaction277_A1.Segments.Loop2200C.STC">STC</see> interface (Provider Status Information).</summary>
         Public Shared Function CreateSTC() As Global.Madjic.Edi.Dom.Transactions.Transaction277.Transaction277_A1.Segments.Loop2200C.STC
             Return New Global.Madjic.Edi.Dom.Segments.STC_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction277.Transaction277_A1.Composites.Loop2200C.STC.STC_01.C043" /> interface (Health Care Claim Status).</summary>
+        Public Shared Function CreateSTC01() As Global.Madjic.Edi.Dom.Transactions.Transaction277.Transaction277_A1.Composites.Loop2200C.STC.STC_01.C043
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C043_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction277.Transaction277_A1.Composites.Loop2200C.STC.STC_10.C043" /> interface (Health Care Claim Status).</summary>
+        Public Shared Function CreateSTC10() As Global.Madjic.Edi.Dom.Transactions.Transaction277.Transaction277_A1.Composites.Loop2200C.STC.STC_10.C043
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C043_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction277.Transaction277_A1.Composites.Loop2200C.STC.STC_11.C043" /> interface (Health Care Claim Status).</summary>
+        Public Shared Function CreateSTC11() As Global.Madjic.Edi.Dom.Transactions.Transaction277.Transaction277_A1.Composites.Loop2200C.STC.STC_11.C043
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C043_Obj
         End Function
     End Class
 
@@ -327,6 +351,10 @@
         Public Shared Function CreateDTP() As Global.Madjic.Edi.Dom.Transactions.Transaction277.Transaction277_A1.Segments.Loop2220D.DTP
             Return New Global.Madjic.Edi.Dom.Segments.DTP_Obj
         End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction277.Transaction277_A1.Composites.Loop2220D.SVC.SVC_01.C003" /> interface (Composite Medical Procedure Identifier).</summary>
+        Public Shared Function CreateSVC01() As Global.Madjic.Edi.Dom.Transactions.Transaction277.Transaction277_A1.Composites.Loop2220D.SVC.SVC_01.C003
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C003_Obj
+        End Function
     End Class
 
     '''<summary>Provides methods for instantiating the segments contained in the Loop2000E loop (Dependent Level).</summary>
@@ -422,6 +450,10 @@
         '''<summary>Creates an object that implements the <see cref ="Global.Madjic.Edi.Dom.Transactions.Transaction277.Transaction277_A1.Segments.Loop2220E.DTP">DTP</see> interface (Service Line Date).</summary>
         Public Shared Function CreateDTP() As Global.Madjic.Edi.Dom.Transactions.Transaction277.Transaction277_A1.Segments.Loop2220E.DTP
             Return New Global.Madjic.Edi.Dom.Segments.DTP_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction277.Transaction277_A1.Composites.Loop2220E.SVC.SVC_01.C003" /> interface (Composite Medical Procedure Identifier).</summary>
+        Public Shared Function CreateSVC01() As Global.Madjic.Edi.Dom.Transactions.Transaction277.Transaction277_A1.Composites.Loop2220E.SVC.SVC_01.C003
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C003_Obj
         End Function
     End Class
 End Namespace

@@ -271,61 +271,64 @@ Namespace DataElements.Composite
 
 #End Region
 
+
         Friend Shared Function FromReader(fullElement As String, reader As SegmentReader) As C001_Obj
             Dim rval As New C001_Obj
 
-            Dim values = fullElement.Split(reader.CompositeSeparator)
-
-            With rval
-                If values.Length > 0 Then
-                    .C001_01 = values(0)
-                End If
-                If values.Length > 1 Then
-                    .C001_02 = values(1).ToFloat
-                End If
-                If values.Length > 2 Then
-                    .C001_03 = values(2).ToFloat
-                End If
-                If values.Length > 3 Then
-                    .C001_04 = values(3)
-                End If
-                If values.Length > 4 Then
-                    .C001_05 = values(4).ToFloat
-                End If
-                If values.Length > 5 Then
-                    .C001_06 = values(5).ToFloat
-                End If
-                If values.Length > 6 Then
-                    .C001_07 = values(6)
-                End If
-                If values.Length > 7 Then
-                    .C001_08 = values(7).ToFloat
-                End If
-                If values.Length > 8 Then
-                    .C001_09 = values(8).ToFloat
-                End If
-                If values.Length > 9 Then
-                    .C001_10 = values(9)
-                End If
-                If values.Length > 10 Then
-                    .C001_11 = values(10).ToFloat
-                End If
-                If values.Length > 11 Then
-                    .C001_12 = values(11).ToFloat
-                End If
-                If values.Length > 12 Then
-                    .C001_13 = values(12)
-                End If
-                If values.Length > 13 Then
-                    .C001_14 = values(13).ToFloat
-                End If
-                If values.Length > 14 Then
-                    .C001_15 = values(14).ToFloat
-                End If
-            End With
+            rval.Read(fullElement, reader)
 
             Return rval
         End Function
+
+        Friend Overrides Sub Read(fullElement As String, reader As SegmentReader)
+            Dim values = fullElement.Split(reader.CompositeSeparator)
+
+            If values.Length > 0 Then
+                C001_01 = values(0)
+            End If
+            If values.Length > 1 Then
+                C001_02 = values(1).ToFloat
+            End If
+            If values.Length > 2 Then
+                C001_03 = values(2).ToFloat
+            End If
+            If values.Length > 3 Then
+                C001_04 = values(3)
+            End If
+            If values.Length > 4 Then
+                C001_05 = values(4).ToFloat
+            End If
+            If values.Length > 5 Then
+                C001_06 = values(5).ToFloat
+            End If
+            If values.Length > 6 Then
+                C001_07 = values(6)
+            End If
+            If values.Length > 7 Then
+                C001_08 = values(7).ToFloat
+            End If
+            If values.Length > 8 Then
+                C001_09 = values(8).ToFloat
+            End If
+            If values.Length > 9 Then
+                C001_10 = values(9)
+            End If
+            If values.Length > 10 Then
+                C001_11 = values(10).ToFloat
+            End If
+            If values.Length > 11 Then
+                C001_12 = values(11).ToFloat
+            End If
+            If values.Length > 12 Then
+                C001_13 = values(12)
+            End If
+            If values.Length > 13 Then
+                C001_14 = values(13).ToFloat
+            End If
+            If values.Length > 14 Then
+                C001_15 = values(14).ToFloat
+            End If
+        End Sub
     End Class
 
     '''<summary>Composite Unit of Measure</summary>

@@ -1,4 +1,6 @@
-﻿Namespace Global.Madjic.Edi.Dom.DataElements.Composite
+﻿Imports Madjic.Edi.Dom.EdiReader
+
+Namespace Global.Madjic.Edi.Dom.DataElements.Composite
     '''<summary>Health Care Service Location Information</summary>
     '''<remarks>To provide information that identifies the place of service or the type of bill related to the location at which a health care service was rendered</remarks>
     Partial Friend Class C023_Obj
@@ -27,7 +29,7 @@
             Initialize()
         End Sub
 
-        <CodeAnalysis.SuppressMessage("Performance", "CA1822:Mark members as static", Justification := "<Pending>")>
+        <CodeAnalysis.SuppressMessage("Performance", "CA1822:Mark members as static", Justification:="<Pending>")>
         Partial Private Sub Initialize()
         End Sub
 
@@ -117,22 +119,23 @@
 
 #End Region
 
+        Friend Overrides Sub Read(fullElement As String, reader As SegmentReader)
+            Dim values = fullElement.Split(reader.CompositeSeparator)
+
+            If values.Length > 0 Then
+                C023_01 = values(0)
+            End If
+            If values.Length > 1 Then
+                C023_02 = values(1)
+            End If
+            If values.Length > 2 Then
+                C023_03 = values(2)
+            End If
+        End Sub
         Friend Shared Function FromReader(fullElement As String, reader As EdiReader.SegmentReader) As C023_Obj
             Dim rval As New C023_Obj
 
-            Dim values = fullElement.Split(reader.CompositeSeparator)
-
-            With rval
-                If values.Length > 0 Then
-                    .C023_01 = values(0)
-                End If
-                If values.Length > 1 Then
-                    .C023_02 = values(1)
-                End If
-                If values.Length > 2 Then
-                    .C023_03 = values(2)
-                End If
-            End With
+            rval.Read(fullElement, reader)
 
             Return rval
         End Function

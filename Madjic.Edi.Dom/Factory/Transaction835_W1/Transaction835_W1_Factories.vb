@@ -305,5 +305,13 @@
         Public Shared Function CreateLQ() As Global.Madjic.Edi.Dom.Transactions.Transaction835.Transaction835_W1.Segments.Loop2110.LQ
             Return New Global.Madjic.Edi.Dom.Segments.LQ_Obj
         End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction835.Transaction835_W1.Composites.Loop2110.SVC.SVC_01.C003" /> interface (Composite Medical Procedure Identifier).</summary>
+        Public Shared Function CreateSVC01() As Global.Madjic.Edi.Dom.Transactions.Transaction835.Transaction835_W1.Composites.Loop2110.SVC.SVC_01.C003
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C003_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction835.Transaction835_W1.Composites.Loop2110.SVC.SVC_06.C003" /> interface (Composite Medical Procedure Identifier).</summary>
+        Public Shared Function CreateSVC06() As Global.Madjic.Edi.Dom.Transactions.Transaction835.Transaction835_W1.Composites.Loop2110.SVC.SVC_06.C003
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C003_Obj
+        End Function
     End Class
 End Namespace

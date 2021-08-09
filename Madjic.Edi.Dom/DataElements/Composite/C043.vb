@@ -1,4 +1,6 @@
-﻿Namespace Global.Madjic.Edi.Dom.DataElements.Composite
+﻿Imports Madjic.Edi.Dom.EdiReader
+
+Namespace Global.Madjic.Edi.Dom.DataElements.Composite
     '''<summary>Health Care Claim Status</summary>
     '''<remarks>Used to convey status of the entire claim or a specific service line</remarks>
     Partial Friend Class C043_Obj
@@ -30,7 +32,7 @@
             Initialize()
         End Sub
 
-        <CodeAnalysis.SuppressMessage("Performance", "CA1822:Mark members as static", Justification := "<Pending>")>
+        <CodeAnalysis.SuppressMessage("Performance", "CA1822:Mark members as static", Justification:="<Pending>")>
         Partial Private Sub Initialize()
         End Sub
 
@@ -137,25 +139,27 @@
 
 #End Region
 
+        Friend Overrides Sub Read(fullElement As String, reader As SegmentReader)
+            Dim values = fullElement.Split(reader.CompositeSeparator)
+
+            If values.Length > 0 Then
+                C043_01 = values(0)
+            End If
+            If values.Length > 1 Then
+                C043_02 = values(1)
+            End If
+            If values.Length > 2 Then
+                C043_03 = values(2)
+            End If
+            If values.Length > 3 Then
+                C043_04 = values(3)
+            End If
+        End Sub
+
         Friend Shared Function FromReader(fullElement As String, reader As EdiReader.SegmentReader) As C043_Obj
             Dim rval As New C043_Obj
 
-            Dim values = fullElement.Split(reader.CompositeSeparator)
-
-            With rval
-                If values.Length > 0 Then
-                    .C043_01 = values(0)
-                End If
-                If values.Length > 1 Then
-                    .C043_02 = values(1)
-                End If
-                If values.Length > 2 Then
-                    .C043_03 = values(2)
-                End If
-                If values.Length > 3 Then
-                    .C043_04 = values(3)
-                End If
-            End With
+            rval.Read(fullElement, reader)
 
             Return rval
         End Function

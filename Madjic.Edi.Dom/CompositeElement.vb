@@ -1,9 +1,14 @@
-﻿''' <summary>
+﻿Public Interface ICompositeElement
+    Property HasValue As Boolean
+End Interface
+
+''' <summary>
 ''' Defines an element with multiple values contained within.
 ''' </summary>
 ''' <remarks></remarks>
-Public MustInherit Class CompositeElement
+Friend MustInherit Class CompositeElement
     Inherits ElementBase
+    Implements ICompositeElement
 
     Private ReadOnly mRules2 As New List(Of SyntaxRule)
 
@@ -15,6 +20,8 @@ Public MustInherit Class CompositeElement
         mRules2.Clear()
         mRules2.AddRange(rules)
     End Sub
+
+    Friend MustOverride Sub Read(fullElement As String, reader As EdiReader.SegmentReader)
 
     Friend Overrides Async Function WriteAsync(writer As IO.TextWriter, envelope As Envelope) As Task
         Dim Last As Integer = -1
@@ -69,7 +76,7 @@ Public MustInherit Class CompositeElement
 
     End Sub
 
-    Public Overrides Property HasValue As Boolean
+    Public Overrides Property HasValue As Boolean Implements ICompositeElement.HasValue
         Get
             For Each node In SubElements
                 If node IsNot Nothing AndAlso node.HasValue Then
@@ -80,7 +87,7 @@ Public MustInherit Class CompositeElement
             Return False
         End Get
         Protected Set(value As Boolean)
-            'MyBase.HasValue = value
+            Throw New NotSupportedException("Cannot set HasValue on composite elements. You must either clear individual properties or instantiate a new composite.")
         End Set
     End Property
 End Class

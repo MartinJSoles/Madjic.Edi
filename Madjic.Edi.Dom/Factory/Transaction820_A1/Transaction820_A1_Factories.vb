@@ -311,6 +311,10 @@
         Public Shared Function CreateSLN() As Global.Madjic.Edi.Dom.Transactions.Transaction820.Transaction820_A1.Segments.Loop2315A.SLN
             Return New Global.Madjic.Edi.Dom.Segments.SLN_Obj
         End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction820.Transaction820_A1.Composites.Loop2315A.SLN.SLN_05.C001" /> interface (Composite Unit of Measure).</summary>
+        Public Shared Function CreateSLN05() As Global.Madjic.Edi.Dom.Transactions.Transaction820.Transaction820_A1.Composites.Loop2315A.SLN.SLN_05.C001
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C001_Obj
+        End Function
     End Class
 
     '''<summary>Provides methods for instantiating the segments contained in the Loop2320A loop (Organization Summary Remittance Level Adjustment for Current Payment).</summary>

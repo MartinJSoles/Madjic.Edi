@@ -1,11 +1,11 @@
-﻿Public Class SegmentSubsetContainer(Of T As ISegment, K As ISegment)
-    Implements ITransactionSetItem, IValidate, IParanted, IList(Of T)
+﻿Public Class SegmentSubsetContainer(Of TPublic As ISegment, TStandard As ISegment)
+    Implements ITransactionSetItem, IValidate, IParanted, IList(Of TPublic)
 
     Public Overrides Function ToString() As String
-        Return String.Format("SegmentSubsetContainer, T: {0}, K: {1}, Count: {2}, Area: {3}, Sequence: {4}, Repeat: {5}, Parent: {6}", GetType(T).ToString, GetType(K).ToString, mList.Count, Area, Sequence, mRepeat, mList.ToString)
+        Return String.Format("SegmentSubsetContainer, T: {0}, K: {1}, Count: {2}, Area: {3}, Sequence: {4}, Repeat: {5}, Parent: {6}", GetType(TPublic).ToString, GetType(TStandard).ToString, mList.Count, Area, Sequence, mRepeat, mList.ToString)
     End Function
 
-    Private ReadOnly mList As SegmentContainer(Of K)
+    Private ReadOnly mList As SegmentContainer(Of TStandard)
     Private ReadOnly mRepeat As Integer
 
     ''' <summary>
@@ -20,13 +20,13 @@
     Public ReadOnly Property Sequence As String
 
     ''' <summary>
-    ''' Creates a new instance of the <see cref="SegmentSubsetContainer(Of T, K)">SegmentSubsetContainer</see> class.
+    ''' Creates a new instance of the <see cref="SegmentSubsetContainer(Of TPublic, TStandard)">SegmentSubsetContainer</see> class.
     ''' </summary>
     ''' <param name="baseCollection">The segment collection as defined by the standard.</param>
     ''' <param name="area">The area for the implementation.</param>
     ''' <param name="sequence">The segment sequence in the implementation area.</param>
     ''' <remarks>These collections can only be instantiated by the current assembly.</remarks>
-    Friend Sub New(baseCollection As SegmentContainer(Of K), repeat As Integer, area As String, sequence As String)
+    Friend Sub New(baseCollection As SegmentContainer(Of TStandard), repeat As Integer, area As String, sequence As String)
         mList = baseCollection
         Me.Area = area
         Me.Sequence = sequence
@@ -72,25 +72,25 @@
     ''' Adds a new segment to the end of the collection.
     ''' </summary>
     ''' <param name="item">The segment to add to the collection.</param>
-    Public Sub Add(item As T) Implements ICollection(Of T).Add
-        If mRepeat > 1 AndAlso Count >= mRepeat Then
+    Public Sub Add(item As TPublic) Implements ICollection(Of TPublic).Add
+        If mRepeat > 0 AndAlso Count >= mRepeat Then
             Throw New IndexOutOfRangeException
         End If
 
         Dim s As ISegment = TryCast(item, Segment)
 
-        If s IsNot Nothing AndAlso TypeOf item Is K Then
+        If s IsNot Nothing AndAlso TypeOf item Is TStandard Then
             s.SetArea = Area
             s.SetSequence = Sequence
 
-            mList.Add(CType(s, K))
+            mList.Add(CType(s, TStandard))
         End If
     End Sub
 
     ''' <summary>
     ''' Adds multiple segment instances to the end of the collection.
     ''' </summary>
-    Public Sub AddRange(items As IEnumerable(Of T))
+    Public Sub AddRange(items As IEnumerable(Of TPublic))
         For Each node In items
             Add(node)
         Next
@@ -100,13 +100,13 @@
     ''' Removes all segments for this area and sequence from the collection.
     ''' </summary>
     ''' <remarks></remarks>
-    Public Sub Clear() Implements ICollection(Of T).Clear
+    Public Sub Clear() Implements ICollection(Of TPublic).Clear
         Dim s As ISegment
 
         For index = mList.Count - 1 To 0 Step -1
             s = TryCast(mList(index), ISegment)
 
-            If s IsNot Nothing AndAlso TypeOf s Is K AndAlso String.Compare(s.SetArea, Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(s.SetSequence, Sequence, StringComparison.OrdinalIgnoreCase) = 0 Then
+            If s IsNot Nothing AndAlso TypeOf s Is TStandard AndAlso String.Compare(s.SetArea, Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(s.SetSequence, Sequence, StringComparison.OrdinalIgnoreCase) = 0 Then
                 mList.RemoveAt(index)
             End If
         Next
@@ -116,11 +116,11 @@
     ''' Determines if the given segment is contained in this collection.
     ''' </summary>
     ''' <returns>True, if the segment is contained. Flase, otherwise.</returns>
-    Public Function Contains(item As T) As Boolean Implements ICollection(Of T).Contains
+    Public Function Contains(item As TPublic) As Boolean Implements ICollection(Of TPublic).Contains
         Dim s = TryCast(item, ISegment)
 
-        If s IsNot Nothing AndAlso TypeOf s Is K AndAlso s.SetArea IsNot Nothing AndAlso s.SetSequence IsNot Nothing AndAlso s.SetArea = Area AndAlso s.SetSequence = Sequence Then
-            Return mList.Contains(CType(s, K))
+        If s IsNot Nothing AndAlso TypeOf s Is TStandard AndAlso s.SetArea IsNot Nothing AndAlso s.SetSequence IsNot Nothing AndAlso s.SetArea = Area AndAlso s.SetSequence = Sequence Then
+            Return mList.Contains(CType(s, TStandard))
         Else
             Return False
         End If
@@ -131,14 +131,14 @@
     ''' </summary>
     ''' <param name="array">The array to copy the collection items to.</param>
     ''' <param name="arrayIndex">The starting index to copy items into the array.</param>
-    Public Sub CopyTo(array() As T, arrayIndex As Integer) Implements ICollection(Of T).CopyTo
+    Public Sub CopyTo(array() As TPublic, arrayIndex As Integer) Implements ICollection(Of TPublic).CopyTo
         Dim index As Integer = arrayIndex
         Dim s As ISegment
 
         For Each node In mList
             s = TryCast(node, ISegment)
 
-            If s IsNot Nothing AndAlso TypeOf s Is K AndAlso s.SetArea IsNot Nothing AndAlso s.SetSequence IsNot Nothing AndAlso s.SetArea = Area AndAlso s.SetSequence = Sequence Then
+            If s IsNot Nothing AndAlso TypeOf s Is TStandard AndAlso s.SetArea IsNot Nothing AndAlso s.SetSequence IsNot Nothing AndAlso s.SetArea = Area AndAlso s.SetSequence = Sequence Then
                 array(index) = s
                 index += 1
             End If
@@ -149,7 +149,7 @@
     ''' <summary>
     ''' Gets the number of items contained in this collection.
     ''' </summary>
-    Public ReadOnly Property Count As Integer Implements ICollection(Of T).Count
+    Public ReadOnly Property Count As Integer Implements ICollection(Of TPublic).Count
         Get
             Dim index As Integer
             Dim s As Segment
@@ -157,7 +157,7 @@
             For Each node In mList
                 s = TryCast(node, Segment)
 
-                If s IsNot Nothing AndAlso TypeOf s Is K AndAlso String.Compare(s.SetArea, Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(s.SetSequence, Sequence, StringComparison.OrdinalIgnoreCase) = 0 Then
+                If s IsNot Nothing AndAlso TypeOf s Is TStandard AndAlso String.Compare(s.SetArea, Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(s.SetSequence, Sequence, StringComparison.OrdinalIgnoreCase) = 0 Then
                     index += 1
                 End If
             Next
@@ -166,7 +166,7 @@
         End Get
     End Property
 
-    Private ReadOnly Property IsReadOnly As Boolean Implements ICollection(Of T).IsReadOnly
+    Private ReadOnly Property IsReadOnly As Boolean Implements ICollection(Of TPublic).IsReadOnly
         Get
             Return False
         End Get
@@ -175,24 +175,24 @@
     ''' <summary>
     ''' Removes the given segment from the collection.
     ''' </summary>
-    Public Function Remove(item As T) As Boolean Implements ICollection(Of T).Remove
+    Public Function Remove(item As TPublic) As Boolean Implements ICollection(Of TPublic).Remove
         Dim s = TryCast(item, ISegment)
 
-        If s IsNot Nothing AndAlso TypeOf s Is K AndAlso String.Compare(s.SetArea, Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(s.SetSequence, Sequence, StringComparison.OrdinalIgnoreCase) = 0 Then
+        If s IsNot Nothing AndAlso TypeOf s Is TStandard AndAlso String.Compare(s.SetArea, Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(s.SetSequence, Sequence, StringComparison.OrdinalIgnoreCase) = 0 Then
             Return mList.Remove(s)
         Else
             Return False
         End If
     End Function
 
-    Public Function GetEnumerator() As IEnumerator(Of T) Implements IEnumerable(Of T).GetEnumerator
-        Return New SubsetEnumerator(Me)
+    Public Function GetEnumerator() As IEnumerator(Of TPublic) Implements IEnumerable(Of TPublic).GetEnumerator
+        Return (From s In mList Where String.Compare(s.SetArea, Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(s.SetSequence, Sequence, StringComparison.OrdinalIgnoreCase) = 0).GetEnumerator()
     End Function
 
     ''' <summary>
     ''' Gets the index at which the given item is stored in the collection.
     ''' </summary>
-    Public Function IndexOf(item As T) As Integer Implements IList(Of T).IndexOf
+    Public Function IndexOf(item As TPublic) As Integer Implements IList(Of TPublic).IndexOf
         Dim index As Integer
         Dim s As Segment
 
@@ -203,7 +203,7 @@
 
             s = TryCast(node, Segment)
 
-            If s IsNot Nothing AndAlso TypeOf s Is K AndAlso s.SetArea IsNot Nothing AndAlso s.SetSequence IsNot Nothing AndAlso s.SetArea = Area AndAlso s.SetSequence = Sequence Then
+            If s IsNot Nothing AndAlso TypeOf s Is TStandard AndAlso s.SetArea IsNot Nothing AndAlso s.SetSequence IsNot Nothing AndAlso s.SetArea = Area AndAlso s.SetSequence = Sequence Then
                 index += 1
             End If
         Next
@@ -214,18 +214,18 @@
     ''' <summary>
     ''' Inserts the given item so that it will be at the indicated index in the collection.
     ''' </summary>
-    Public Sub Insert(index As Integer, item As T) Implements IList(Of T).Insert
+    Public Sub Insert(index As Integer, item As TPublic) Implements IList(Of TPublic).Insert
         Dim idx As Integer
         Dim Curt As Integer
 
         Dim s As ISegment
         Dim t = TryCast(item, ISegment)
 
-        If mRepeat > 1 AndAlso Count <= mRepeat Then
+        If mRepeat > 0 AndAlso Count >= mRepeat Then
             Throw New IndexOutOfRangeException
         End If
 
-        If t IsNot Nothing AndAlso TypeOf t Is K Then
+        If t IsNot Nothing AndAlso TypeOf t Is TStandard Then
             t.SetArea = Area
             t.SetSequence = Sequence
 
@@ -251,7 +251,7 @@
     ''' <summary>
     ''' Gets/sets the item at the given index.
     ''' </summary>
-    Default Public Property Item(index As Integer) As T Implements IList(Of T).Item
+    Default Public Property Item(index As Integer) As TPublic Implements IList(Of TPublic).Item
         Get
             Dim idx As Integer
             Dim s As ISegment
@@ -259,10 +259,10 @@
             For Each node In mList
                 s = TryCast(node, Segment)
 
-                If s IsNot Nothing AndAlso TypeOf s Is K AndAlso String.Compare(s.SetArea, Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(s.SetSequence, Sequence, StringComparison.OrdinalIgnoreCase) = 0 Then
+                If s IsNot Nothing AndAlso TypeOf s Is TStandard AndAlso String.Compare(s.SetArea, Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(s.SetSequence, Sequence, StringComparison.OrdinalIgnoreCase) = 0 Then
                     If idx = index Then
                         s = CType(node, ISegment)
-                        Return CType(s, T)
+                        Return CType(s, TPublic)
                     End If
                     idx += 1
                 End If
@@ -270,18 +270,18 @@
 
             Throw New IndexOutOfRangeException
         End Get
-        Set(value As T)
+        Set(value As TPublic)
             Dim idx As Integer
             Dim curt As Integer
 
             Dim s As ISegment
             Dim t = TryCast(value, ISegment)
 
-            If t IsNot Nothing AndAlso TypeOf t Is K Then
+            If t IsNot Nothing AndAlso TypeOf t Is TStandard Then
                 For Each node In mList
                     s = TryCast(node, ISegment)
 
-                    If s IsNot Nothing AndAlso TypeOf s Is K AndAlso String.Compare(s.SetArea, Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(s.SetSequence, Sequence, StringComparison.OrdinalIgnoreCase) = 0 Then
+                    If s IsNot Nothing AndAlso TypeOf s Is TStandard AndAlso String.Compare(s.SetArea, Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(s.SetSequence, Sequence, StringComparison.OrdinalIgnoreCase) = 0 Then
                         If idx = index Then
                             If t IsNot Nothing Then
                                 t.SetArea = Area
@@ -306,7 +306,7 @@
     ''' <summary>
     ''' Removes the item at the given index in the collection.
     ''' </summary>
-    Public Sub RemoveAt(index As Integer) Implements IList(Of T).RemoveAt
+    Public Sub RemoveAt(index As Integer) Implements IList(Of TPublic).RemoveAt
         Dim idx As Integer
         Dim curt As Integer
         Dim s As ISegment
@@ -314,7 +314,7 @@
         For Each node In mList
             s = TryCast(node, ISegment)
 
-            If s IsNot Nothing AndAlso TypeOf s Is K AndAlso String.Compare(s.SetArea, Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(s.SetSequence, Sequence, StringComparison.OrdinalIgnoreCase) = 0 Then
+            If s IsNot Nothing AndAlso TypeOf s Is TStandard AndAlso String.Compare(s.SetArea, Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(s.SetSequence, Sequence, StringComparison.OrdinalIgnoreCase) = 0 Then
                 If idx = index Then
                     mList.RemoveAt(curt)
                     Exit Sub
@@ -332,86 +332,4 @@
     Private Function GetEnumerator1() As IEnumerator Implements IEnumerable.GetEnumerator
         Return GetEnumerator()
     End Function
-
-    Private Class SubsetEnumerator
-        Implements IEnumerator(Of T)
-
-        Private mParent As SegmentSubsetContainer(Of T, K)
-        Public Sub New(parent As SegmentSubsetContainer(Of T, K))
-            mParent = parent
-        End Sub
-
-        Private mIndex As Integer = -1
-
-        Public ReadOnly Property Current As T Implements IEnumerator(Of T).Current
-            Get
-                If mIndex < -1 Then
-                    Throw New NotSupportedException
-                Else
-                    Dim s As ISegment = TryCast(mParent.mList(mIndex), ISegment)
-                    Return CType(s, T)
-                End If
-            End Get
-        End Property
-
-        Private ReadOnly Property Current1 As Object Implements IEnumerator.Current
-            Get
-                Return Current
-            End Get
-        End Property
-
-        Private Function GetSegment(index) As ISegment
-            Dim s As ISegment
-
-            s = TryCast(mParent.mList(index), ISegment)
-            Return s
-        End Function
-        Public Function MoveNext() As Boolean Implements IEnumerator.MoveNext
-            Dim s As ISegment
-
-            Do
-                mIndex += 1
-
-                If mIndex < mParent.mList.Count Then
-                    s = GetSegment(mIndex)
-
-                    If s IsNot Nothing AndAlso TypeOf s Is K Then
-                        If String.Compare(s.SetArea, mParent.Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(s.SetSequence, mParent.Sequence, StringComparison.OrdinalIgnoreCase) = 0 Then
-                            Return True
-                        End If
-                    End If
-                Else
-                    Exit Do
-                End If
-            Loop
-
-            Return False
-        End Function
-
-        Public Sub Reset() Implements IEnumerator.Reset
-            mIndex = -1
-        End Sub
-
-#Region "IDisposable Support"
-        Private disposedValue As Boolean ' To detect redundant calls
-
-        ' IDisposable
-        Protected Overridable Sub Dispose(disposing As Boolean)
-            If Not Me.disposedValue Then
-                If disposing Then
-                    mParent = Nothing
-                End If
-            End If
-            Me.disposedValue = True
-        End Sub
-
-        ' This code added by Visual Basic to correctly implement the disposable pattern.
-        Public Sub Dispose() Implements IDisposable.Dispose
-            ' Do not change this code.  Put cleanup code in Dispose(disposing As Boolean) above.
-            Dispose(True)
-            GC.SuppressFinalize(Me)
-        End Sub
-#End Region
-
-    End Class
 End Class

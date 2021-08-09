@@ -1,4 +1,6 @@
-﻿Namespace Global.Madjic.Edi.Dom.DataElements.Composite
+﻿Imports Madjic.Edi.Dom.EdiReader
+
+Namespace Global.Madjic.Edi.Dom.DataElements.Composite
     '''<summary>Composite Medical Procedure Identifier</summary>
     '''<remarks>To identify a medical procedure by its standardized codes and applicable modifiers</remarks>
     Partial Friend Class C003_Obj
@@ -373,37 +375,39 @@
 
 #End Region
 
+        Friend Overrides Sub Read(fullElement As String, reader As SegmentReader)
+            Dim values = fullElement.Split(reader.CompositeSeparator)
+
+            If values.Length > 0 Then
+                C003_01 = values(0)
+            End If
+            If values.Length > 1 Then
+                C003_02 = values(1)
+            End If
+            If values.Length > 2 Then
+                C003_03 = values(2)
+            End If
+            If values.Length > 3 Then
+                C003_04 = values(3)
+            End If
+            If values.Length > 4 Then
+                C003_05 = values(4)
+            End If
+            If values.Length > 5 Then
+                C003_06 = values(5)
+            End If
+            If values.Length > 6 Then
+                C003_07 = values(6)
+            End If
+            If values.Length > 7 Then
+                C003_08 = values(7)
+            End If
+        End Sub
+
         Friend Shared Function FromReader(fullElement As String, reader As EdiReader.SegmentReader) As C003_Obj
             Dim rval As New C003_Obj
 
-            Dim values = fullElement.Split(reader.CompositeSeparator)
-
-            With rval
-                If values.Length > 0 Then
-                    .C003_01 = values(0)
-                End If
-                If values.Length > 1 Then
-                    .C003_02 = values(1)
-                End If
-                If values.Length > 2 Then
-                    .C003_03 = values(2)
-                End If
-                If values.Length > 3 Then
-                    .C003_04 = values(3)
-                End If
-                If values.Length > 4 Then
-                    .C003_05 = values(4)
-                End If
-                If values.Length > 5 Then
-                    .C003_06 = values(5)
-                End If
-                If values.Length > 6 Then
-                    .C003_07 = values(6)
-                End If
-                If values.Length > 7 Then
-                    .C003_08 = values(7)
-                End If
-            End With
+            rval.Read(fullElement, reader)
 
             Return rval
         End Function

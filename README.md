@@ -1,4 +1,4 @@
-# Madjic.Edi
+# Madjic.Edi.Dom
 Strongly typed ANSI X12 5010 version HIPAA objects for parsing and generating healthcare related documents.
 
 This project used the official ANSI X12 databases to generate the original source code. I'm opening this project up for others to use and modify as they see fit.
@@ -166,7 +166,8 @@ objects that implement the specific interface.
 
                 With .Loop2110C(0)
                     .EQ = Factory.Transaction270_B1.Loop2110CFactory.CreateEQ()
-                    .EQ.EQ01 = "30"
+                    .EQ.EQ01.Add("30") 'Note that this field is a repeating element and can have multiple instances added.
+                    .EQ.EQ01.Add("31")
                 End With
             End With
         End With
@@ -187,8 +188,8 @@ of interfaces, one for each distinct use. The same is true for transaction sets 
 by a single class definition).
 
 ## Known Issues
-1. There is no code in place to properly handle the repeating elements (such as the EB03 element).
-2. Creating transaction sets is affected by the lack of I.G. work that should happen (there should be an extra initialization step that happens to set the specialized loop and segment containers).
+1. Creating transaction sets is affected by the lack of I.G. work that should happen (there should be an extra initialization step that happens to set the specialized loop and segment containers).
+I need to add conveniences that set required fields when instantiating segments and loops.
 
 ## History
 

@@ -30,7 +30,7 @@ Namespace Segments
                                       CType(Nothing, DataElements.Element1251),
                                       CType(Nothing, DataElements.Element1068),
                                       CType(Nothing, DataElements.Element1067),
-                                      CType(Nothing, DataElements.Composite.C056_Obj),
+                                      New RepeatingCompositeElementList(Of DataElements.Composite.C056_Obj)(10, Function() New DataElements.Composite.C056_Obj),
                                       CType(Nothing, DataElements.Element1066),
                                       CType(Nothing, DataElements.Element26),
                                       CType(Nothing, DataElements.Element659),
@@ -106,13 +106,16 @@ Namespace Segments
             End Set
         End Property
 
-        Friend Property DMG05 As DataElements.Composite.C056 Implements DMG.DMG05, Transactions.Transaction834.Transaction834_A1.Segments.Loop2100A.DMG.DMG05, Transactions.Transaction834.Transaction834_A1.Segments.Loop2100B.DMG.DMG05
+
+        Private _Facade As DataElements.Composite.RepeatingC056List
+        Friend ReadOnly Property DMG05 As DataElements.Composite.RepeatingC056List Implements DMG.DMG05, Transactions.Transaction834.Transaction834_A1.Segments.Loop2100A.DMG.DMG05, Transactions.Transaction834.Transaction834_A1.Segments.Loop2100B.DMG.DMG05
             Get
-                Return CType(Elements(4), DataElements.Composite.C056_Obj)
+                If _Facade Is Nothing Then
+                    _Facade = New DataElements.Composite.RepeatingC056List(CType(Elements(4), RepeatingCompositeElementList(Of DataElements.Composite.C056_Obj)))
+                End If
+
+                Return _Facade
             End Get
-            Set(value As DataElements.Composite.C056)
-                Elements(4) = value
-            End Set
         End Property
 
         Friend Property DMG06 As String Implements DMG.DMG06, Transactions.Transaction834.Transaction834_A1.Segments.Loop2100A.DMG.DMG06, Transactions.Transaction834.Transaction834_A1.Segments.Loop2100B.DMG.DMG06
@@ -222,7 +225,7 @@ Namespace Segments
                     .DMG04 = source.ToStringValue(3)
                 End If
                 If source.Elements.Count > 4 Then
-                    .Elements(4) = DataElements.Composite.C056_Obj.FromReader(source.ToStringValue(4), reader)
+                    CType(.Elements(4), RepeatingCompositeElementList(Of DataElements.Composite.C056_Obj)).AddFromReader(source.ToStringValue(4), reader)
                 End If
                 If source.Elements.Count > 5 Then
                     .DMG06 = source.ToStringValue(5)
@@ -272,7 +275,7 @@ Namespace Segments
 
         '''<summary>Composite Race or Ethnicity Information</summary>
         '''<remarks></remarks>
-        Property DMG05 As DataElements.Composite.C056
+        ReadOnly Property DMG05 As DataElements.Composite.RepeatingC056List
 
         '''<summary>Citizenship Status Code</summary>
         '''<remarks></remarks>

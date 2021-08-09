@@ -10,7 +10,7 @@ Namespace Segments
 
         Public Sub New()
             MyBase.New("CTX")
-            Elements.AddRange({CType(Nothing, DataElements.Composite.C998_Obj),
+            Elements.AddRange({New RepeatingCompositeElementList(Of DataElements.Composite.C998_Obj)(10, Function() New DataElements.Composite.C998_Obj),
                                       CType(Nothing, DataElements.Element721),
                                       CType(Nothing, DataElements.Element719),
                                       CType(Nothing, DataElements.Element447),
@@ -25,14 +25,18 @@ Namespace Segments
 
         End Sub
 
-        Friend Property CTX01 As DataElements.Composite.C998 Implements CTX.CTX01, Transactions.Transaction999.Transaction999.Segments.Loop2000.CTX.CTX01, Transactions.Transaction999.Transaction999.Segments.Loop3000.CTX.CTX01
+        Private _StandardCTX01 As DataElements.Composite.RepeatingC998List
+
+        Friend ReadOnly Property CTX01 As DataElements.Composite.RepeatingC998List Implements CTX.CTX01, Transactions.Transaction999.Transaction999.Segments.Loop2000.CTX.CTX01, Transactions.Transaction999.Transaction999.Segments.Loop3000.CTX.CTX01
             Get
-                Return CType(Elements(0), DataElements.Composite.C998_Obj)
+                If _StandardCTX01 Is Nothing Then
+                    _StandardCTX01 = New DataElements.Composite.RepeatingC998List(CType(Elements(0), RepeatingCompositeElementList(Of DataElements.Composite.C998_Obj)))
+                End If
+
+                Return _StandardCTX01
             End Get
-            Set(value As DataElements.Composite.C998)
-                Elements(0) = value
-            End Set
         End Property
+
 
         Friend Property CTX02 As String Implements CTX.CTX02, Transactions.Transaction999.Transaction999.Segments.Loop2000.CTX.CTX02, Transactions.Transaction999.Transaction999.Segments.Loop3000.CTX.CTX02
             Get
@@ -102,7 +106,7 @@ Namespace Segments
 
             With rval
                 If source.Elements.Count > 0 Then
-                    .Elements(0) = DataElements.Composite.C998_Obj.FromReader(source.ToStringValue(0), reader)
+                    CType(.Elements(0), RepeatingCompositeElementList(Of DataElements.Composite.C998_Obj)).AddFromReader(source.ToStringValue(0), reader)
                 End If
                 If source.Elements.Count > 1 Then
                     .CTX02 = source.ToStringValue(1)
@@ -133,7 +137,7 @@ Namespace Segments
 
         '''<summary>Context Identification</summary>
         '''<remarks></remarks>
-        Property CTX01 As DataElements.Composite.C998
+        ReadOnly Property CTX01 As DataElements.Composite.RepeatingC998List
 
         '''<summary>Segment ID Code</summary>
         '''<remarks></remarks>

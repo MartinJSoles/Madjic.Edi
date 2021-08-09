@@ -12,7 +12,7 @@ Namespace Segments
             MyBase.New("HCR")
             Elements.AddRange({CType(Nothing, DataElements.Element306),
                                       CType(Nothing, DataElements.Element127),
-                                      CType(Nothing, DataElements.Element1271),
+                                      New RepeatingSimpleElementList(New DataElements.Element1271(), 5),
                                       CType(Nothing, DataElements.Element1073)})
 
             SyntaxRules.AddRange(_Rules)
@@ -53,19 +53,10 @@ Namespace Segments
             End Set
         End Property
 
-        Friend Property HCR03 As String Implements HCR.HCR03, Transactions.Transaction278.Transaction278_A3.Segments.Loop2000E.HCR.HCR03, Transactions.Transaction278.Transaction278_A3.Segments.Loop2000F.HCR.HCR03
+        Friend ReadOnly Property HCR03 As RepeatingSimpleElementList Implements HCR.HCR03, Transactions.Transaction278.Transaction278_A3.Segments.Loop2000E.HCR.HCR03, Transactions.Transaction278.Transaction278_A3.Segments.Loop2000F.HCR.HCR03
             Get
-                Return If(Elements(2) IsNot Nothing, CType(Elements(2), DataElements.Element1271).Value, Nothing)
+                Return CType(Elements(2), RepeatingSimpleElementList)
             End Get
-            Set(value As String)
-                If Elements(2) Is Nothing AndAlso value IsNot Nothing Then
-                    Elements(2) = New DataElements.Element1271
-                End If
-
-                If Elements(2) IsNot Nothing Then
-                    CType(Elements(2), DataElements.Element1271).Value = value
-                End If
-            End Set
         End Property
 
         Friend Property HCR04 As String Implements HCR.HCR04, Transactions.Transaction278.Transaction278_A3.Segments.Loop2000E.HCR.HCR04, Transactions.Transaction278.Transaction278_A3.Segments.Loop2000F.HCR.HCR04
@@ -94,7 +85,7 @@ Namespace Segments
                     .HCR02 = source.ToStringValue(1)
                 End If
                 If source.Elements.Count > 2 Then
-                    .HCR03 = source.ToStringValue(2)
+                    .HCR03.AddFromReader(source.ToStringValue(2), reader)
                 End If
                 If source.Elements.Count > 3 Then
                     .HCR04 = source.ToStringValue(3)
@@ -121,7 +112,7 @@ Namespace Segments
 
         '''<summary>Industry Code</summary>
         '''<remarks>HCR03 is the code assigned by the information source to identify the reason for the health care service review outcome indicated in HCR01.See Code Source 886</remarks>
-        Property HCR03 As String
+        ReadOnly Property HCR03 As RepeatingSimpleElementList
 
         '''<summary>Yes/No Condition or Response Code</summary>
         '''<remarks>HCR04 is the second surgical opinion indicator. A "Y" value indicates a second surgical opinion is required; an "N" value indicates a second surgical opinion is not required for this request.</remarks>

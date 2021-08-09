@@ -650,7 +650,7 @@
 						Inherits ISegment
 
 						'''<summary></summary>
-						Property CTX01 As Edi.Dom.DataElements.Composite.C998
+						ReadOnly Property CTX01 As DataElements.Composite.RepeatingC998List
 						'''<summary></summary>
 						Property CTX02 As String
 						'''<summary></summary>
@@ -684,7 +684,7 @@
 						Inherits ISegment
 
 						'''<summary></summary>
-						Property CTX01 As Edi.Dom.DataElements.Composite.C998
+						ReadOnly Property CTX01 As DataElements.Composite.RepeatingC998List
 						'''<summary></summary>
 						Property CTX02 As String
 						'''<summary></summary>

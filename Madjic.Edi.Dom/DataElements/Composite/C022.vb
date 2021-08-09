@@ -1,4 +1,6 @@
-﻿Namespace Global.Madjic.Edi.Dom.DataElements.Composite
+﻿Imports Madjic.Edi.Dom.EdiReader
+
+Namespace Global.Madjic.Edi.Dom.DataElements.Composite
     '''<summary>Health Care Code Information</summary>
     '''<remarks>To send health care codes and their associated dates, amounts and quantities</remarks>
     Partial Friend Class C022_Obj
@@ -342,7 +344,7 @@
             Initialize()
         End Sub
 
-        <CodeAnalysis.SuppressMessage("Performance", "CA1822:Mark members as static", Justification := "<Pending>")>
+        <CodeAnalysis.SuppressMessage("Performance", "CA1822:Mark members as static", Justification:="<Pending>")>
         Partial Private Sub Initialize()
         End Sub
 
@@ -1613,40 +1615,41 @@
 
 #End Region
 
+        Friend Overrides Sub Read(fullElement As String, reader As SegmentReader)
+            Dim values = fullElement.Split(reader.CompositeSeparator)
+
+            If values.Length > 0 Then
+                C022_01 = values(0)
+            End If
+            If values.Length > 1 Then
+                C022_02 = values(1)
+            End If
+            If values.Length > 2 Then
+                C022_03 = values(2)
+            End If
+            If values.Length > 3 Then
+                C022_04 = values(3)
+            End If
+            If values.Length > 4 Then
+                C022_05 = values(4).ToFloat
+            End If
+            If values.Length > 5 Then
+                C022_06 = values(5).ToFloat
+            End If
+            If values.Length > 6 Then
+                C022_07 = values(6)
+            End If
+            If values.Length > 7 Then
+                C022_08 = values(7)
+            End If
+            If values.Length > 8 Then
+                C022_09 = values(8)
+            End If
+        End Sub
         Friend Shared Function FromReader(fullElement As String, reader As EdiReader.SegmentReader) As C022_Obj
             Dim rval As New C022_Obj
 
-            Dim values = fullElement.Split(reader.CompositeSeparator)
-
-            With rval
-                If values.Length > 0 Then
-                    .C022_01 = values(0)
-                End If
-                If values.Length > 1 Then
-                    .C022_02 = values(1)
-                End If
-                If values.Length > 2 Then
-                    .C022_03 = values(2)
-                End If
-                If values.Length > 3 Then
-                    .C022_04 = values(3)
-                End If
-                If values.Length > 4 Then
-                    .C022_05 = values(4).ToFloat
-                End If
-                If values.Length > 5 Then
-                    .C022_06 = values(5).ToFloat
-                End If
-                If values.Length > 6 Then
-                    .C022_07 = values(6)
-                End If
-                If values.Length > 7 Then
-                    .C022_08 = values(7)
-                End If
-                If values.Length > 8 Then
-                    .C022_09 = values(8)
-                End If
-            End With
+            rval.Read(fullElement, reader)
 
             Return rval
         End Function

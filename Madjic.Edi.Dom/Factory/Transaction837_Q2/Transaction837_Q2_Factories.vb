@@ -555,6 +555,30 @@
         Public Shared Function CreateHCP() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Segments.Loop2300.HCP
             Return New Global.Madjic.Edi.Dom.Segments.HCP_Obj
         End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Composites.Loop2300.CLM.CLM_05.C023" /> interface (Health Care Service Location Information).</summary>
+        Public Shared Function CreateCLM05() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Composites.Loop2300.CLM.CLM_05.C023
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C023_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Composites.Loop2300.CLM.CLM_11.C024" /> interface (Related Causes Information).</summary>
+        Public Shared Function CreateCLM11() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Composites.Loop2300.CLM.CLM_11.C024
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C024_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Composites.Loop2300.HI.HI_01.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI01() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Composites.Loop2300.HI.HI_01.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Composites.Loop2300.HI.HI_02.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI02() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Composites.Loop2300.HI.HI_02.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Composites.Loop2300.HI.HI_03.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI03() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Composites.Loop2300.HI.HI_03.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Composites.Loop2300.HI.HI_04.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI04() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Composites.Loop2300.HI.HI_04.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
     End Class
 
     '''<summary>Provides methods for instantiating the segments contained in the Loop2310A loop (Referring Provider Name).</summary>
@@ -954,6 +978,30 @@
         Public Shared Function CreateHCP() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Segments.Loop2400.HCP
             Return New Global.Madjic.Edi.Dom.Segments.HCP_Obj
         End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Composites.Loop2400.SV3.SV3_01.C003" /> interface (Composite Medical Procedure Identifier).</summary>
+        Public Shared Function CreateSV301() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Composites.Loop2400.SV3.SV3_01.C003
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C003_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.DataElements.Composite.C006" /> interface (Oral Cavity Designation).</summary>
+        Public Shared Function CreateSV304() As Global.Madjic.Edi.Dom.DataElements.Composite.C006
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C006_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.DataElements.Composite.C004" /> interface (Composite Diagnosis Code Pointer).</summary>
+        Public Shared Function CreateSV311() As Global.Madjic.Edi.Dom.DataElements.Composite.C004
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C004_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Composites.Loop2400.REF.REF_04.C040" /> interface (Reference Identifier).</summary>
+        Public Shared Function CreateREF04() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Composites.Loop2400.REF.REF_04.C040
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C040_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Composites.Loop2400.REF_1.REF_1_04.C040" /> interface (Reference Identifier).</summary>
+        Public Shared Function CreateREF_1_REF04() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Composites.Loop2400.REF_1.REF_1_04.C040
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C040_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Composites.Loop2400.REF_5.REF_5_04.C040" /> interface (Reference Identifier).</summary>
+        Public Shared Function CreateREF_5_REF04() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Composites.Loop2400.REF_5.REF_5_04.C040
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C040_Obj
+        End Function
     End Class
 
     '''<summary>Provides methods for instantiating the segments contained in the Loop2420A loop (Rendering Provider Name).</summary>
@@ -974,6 +1022,10 @@
         '''<summary>Creates an object that implements the <see cref ="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Segments.Loop2420A.REF">REF</see> interface (Rendering Provider Secondary Identification).</summary>
         Public Shared Function CreateREF() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Segments.Loop2420A.REF
             Return New Global.Madjic.Edi.Dom.Segments.REF_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Composites.Loop2420A.REF.REF_04.C040" /> interface (Reference Identifier).</summary>
+        Public Shared Function CreateREF04() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Composites.Loop2420A.REF.REF_04.C040
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C040_Obj
         End Function
     End Class
 
@@ -996,6 +1048,10 @@
         Public Shared Function CreateREF() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Segments.Loop2420B.REF
             Return New Global.Madjic.Edi.Dom.Segments.REF_Obj
         End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Composites.Loop2420B.REF.REF_04.C040" /> interface (Reference Identifier).</summary>
+        Public Shared Function CreateREF04() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Composites.Loop2420B.REF.REF_04.C040
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C040_Obj
+        End Function
     End Class
 
     '''<summary>Provides methods for instantiating the segments contained in the Loop2420C loop (Supervising Provider Name).</summary>
@@ -1012,6 +1068,10 @@
         '''<summary>Creates an object that implements the <see cref ="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Segments.Loop2420C.REF">REF</see> interface (Supervising Provider Secondary Identification).</summary>
         Public Shared Function CreateREF() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Segments.Loop2420C.REF
             Return New Global.Madjic.Edi.Dom.Segments.REF_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Composites.Loop2420C.REF.REF_04.C040" /> interface (Reference Identifier).</summary>
+        Public Shared Function CreateREF04() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Composites.Loop2420C.REF.REF_04.C040
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C040_Obj
         End Function
     End Class
 
@@ -1038,6 +1098,10 @@
         Public Shared Function CreateREF() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Segments.Loop2420D.REF
             Return New Global.Madjic.Edi.Dom.Segments.REF_Obj
         End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Composites.Loop2420D.REF.REF_04.C040" /> interface (Reference Identifier).</summary>
+        Public Shared Function CreateREF04() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Composites.Loop2420D.REF.REF_04.C040
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C040_Obj
+        End Function
     End Class
 
     '''<summary>Provides methods for instantiating the segments contained in the Loop2430 loop (Line Adjudication Information).</summary>
@@ -1062,6 +1126,10 @@
         '''<summary>Creates an object that implements the <see cref ="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Segments.Loop2430.AMT">AMT</see> interface (Remaining Patient Liability).</summary>
         Public Shared Function CreateAMT() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Segments.Loop2430.AMT
             Return New Global.Madjic.Edi.Dom.Segments.AMT_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Composites.Loop2430.SVD.SVD_03.C003" /> interface (Composite Medical Procedure Identifier).</summary>
+        Public Shared Function CreateSVD03() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Composites.Loop2430.SVD.SVD_03.C003
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C003_Obj
         End Function
     End Class
 End Namespace

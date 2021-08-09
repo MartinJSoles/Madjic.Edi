@@ -13,7 +13,7 @@ Namespace Segments
             MyBase.New("EB")
             Elements.AddRange({CType(Nothing, DataElements.Element1390),
                                       CType(Nothing, DataElements.Element1207),
-                                      CType(Nothing, DataElements.Element1365),
+                                      New RepeatingSimpleElementList(New DataElements.Element1365(), 99),
                                       CType(Nothing, DataElements.Element1336),
                                       CType(Nothing, DataElements.Element1204),
                                       CType(Nothing, DataElements.Element615),
@@ -64,19 +64,10 @@ Namespace Segments
             End Set
         End Property
 
-        Friend Property EB03 As String Implements EB.EB03, Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.EB.EB03, Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.EB.EB03
+        Friend ReadOnly Property EB03 As RepeatingSimpleElementList Implements EB.EB03, Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.EB.EB03, Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.EB.EB03
             Get
-                Return If(Elements(2) IsNot Nothing, CType(Elements(2), DataElements.Element1365).Value, Nothing)
+                Return CType(Elements(2), RepeatingSimpleElementList)
             End Get
-            Set(value As String)
-                If Elements(2) Is Nothing AndAlso value IsNot Nothing Then
-                    Elements(2) = New DataElements.Element1365
-                End If
-
-                If Elements(2) IsNot Nothing Then
-                    CType(Elements(2), DataElements.Element1365).Value = value
-                End If
-            End Set
         End Property
 
         Friend Property EB04 As String Implements EB.EB04, Transactions.Transaction271.Transaction271_B1.Segments.Loop2110C.EB.EB04, Transactions.Transaction271.Transaction271_B1.Segments.Loop2110D.EB.EB04
@@ -261,7 +252,7 @@ Namespace Segments
                     .EB02 = source.ToStringValue(1)
                 End If
                 If source.Elements.Count > 2 Then
-                    .EB03 = source.ToStringValue(2)
+                    .EB03.AddFromReader(source.ToStringValue(2), reader)
                 End If
                 If source.Elements.Count > 3 Then
                     .EB04 = source.ToStringValue(3)
@@ -318,7 +309,7 @@ Namespace Segments
 
         '''<summary>Service Type Code</summary>
         '''<remarks>Position of data in the repeating data element conveys no significance.</remarks>
-        Property EB03 As String
+        ReadOnly Property EB03 As RepeatingSimpleElementList
 
         '''<summary>Insurance Type Code</summary>
         '''<remarks></remarks>

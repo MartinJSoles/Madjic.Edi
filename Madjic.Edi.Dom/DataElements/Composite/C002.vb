@@ -1,4 +1,6 @@
-﻿Namespace Global.Madjic.Edi.Dom.DataElements.Composite
+﻿Imports Madjic.Edi.Dom.EdiReader
+
+Namespace Global.Madjic.Edi.Dom.DataElements.Composite
     '''<summary>Actions Indicated</summary>
     '''<remarks>Actions to be performed on the piece of paperwork identified</remarks>
     Partial Friend Class C002_Obj
@@ -101,28 +103,29 @@
 
 #End Region
 
+        Friend Overrides Sub Read(fullElement As String, reader As SegmentReader)
+            Dim values = fullElement.Split(reader.CompositeSeparator)
+
+            If values.Length > 0 Then
+                C002_01 = values(0)
+            End If
+            If values.Length > 1 Then
+                C002_02 = values(1)
+            End If
+            If values.Length > 2 Then
+                C002_03 = values(2)
+            End If
+            If values.Length > 3 Then
+                C002_04 = values(3)
+            End If
+            If values.Length > 4 Then
+                C002_05 = values(4)
+            End If
+        End Sub
         Friend Shared Function FromReader(fullElement As String, reader As EdiReader.SegmentReader) As C002_Obj
             Dim rval As New C002_Obj
 
-            Dim values = fullElement.Split(reader.CompositeSeparator)
-
-            With rval
-                If values.Length > 0 Then
-                    .C002_01 = values(0)
-                End If
-                If values.Length > 1 Then
-                    .C002_02 = values(1)
-                End If
-                If values.Length > 2 Then
-                    .C002_03 = values(2)
-                End If
-                If values.Length > 3 Then
-                    .C002_04 = values(3)
-                End If
-                If values.Length > 4 Then
-                    .C002_05 = values(4)
-                End If
-            End With
+            rval.Read(fullElement, reader)
 
             Return rval
         End Function

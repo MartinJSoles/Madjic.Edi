@@ -1,18 +1,18 @@
-﻿Public Class RepeatingElement(Of T As ElementBase)
+﻿Public MustInherit Class RepeatingElement(Of T)
     Inherits ElementBase
     Implements ICollection(Of T), IList(Of T)
 
     Private ReadOnly mList As New List(Of T)
 
-    Public Sub New()
-
-    End Sub
-
-    Public Sub New(maximumRepetitions As Integer)
-        Me.MaximumRepetitions = maximumRepetitions
-    End Sub
-
-    Public ReadOnly Property MaximumRepetitions As Integer
+    Private _MaximumRepetitions As Integer
+    Public Property MaximumRepetitions As Integer
+        Get
+            Return _MaximumRepetitions
+        End Get
+        Protected Set(value As Integer)
+            _MaximumRepetitions = value
+        End Set
+    End Property
 
     Public Sub Add(item As T) Implements ICollection(Of T).Add
         mList.Add(item)
@@ -54,76 +54,21 @@
         Return mList.GetEnumerator
     End Function
 
-    Friend Overrides Async Function WriteAsync(writer As IO.TextWriter, envelope As Envelope) As Task
-        Dim WriteCount As Integer
+    Friend MustOverride Sub AddFromReader(fullElement As String, reader As EdiReader.SegmentReader)
+    'Dim Values = fullElement.Split(reader.RepeatingElementSeparator)
 
-        For Each node In mList
-            If node.HasValue Then
-                If WriteCount > 0 Then
-                    Await writer.WriteAsync(envelope.RepetitionSeparator).ConfigureAwait(False)
-                End If
+    '    For Each value In Values
+    '        Dim r As T
 
-                WriteCount += 1
+    '        If value.Length > 0 Then
+    '            r = populator.Invoke(value, reader)
 
-                Await node.WriteAsync(writer, envelope).ConfigureAwait(False)
-
-                If MaximumRepetitions > 0 AndAlso WriteCount = MaximumRepetitions Then
-                    Exit For
-                End If
-            End If
-        Next
-    End Function
-
-    Public Overrides Sub ValidateElement(results As ValidationResults)
-        If MaximumRepetitions > 0 Then
-            Dim WriteCount As Integer
-
-            For Each node In mList
-                If node.HasValue Then
-                    WriteCount += 1
-                End If
-            Next
-
-            If MaximumRepetitions < WriteCount Then
-                Dim e As New ValidationFailureResult With {.Source = Me}
-
-                e.Errors.Add("There are more elements than allowed by the MaximumRepetition property.")
-
-                results.Failures.Add(e)
-            End If
-        End If
-    End Sub
-
-    Public Overrides Property HasValue As Boolean
-        Get
-            For Each node In mList
-                If node.HasValue Then
-                    Return True
-                End If
-            Next
-
-            Return False
-        End Get
-        Protected Set(value As Boolean)
-            MyBase.HasValue = value
-        End Set
-    End Property
-
-    Friend Sub AddFromReader(fullElement As String, reader As EdiReader.SegmentReader, populator As FromReader)
-        Dim Values = fullElement.Split(reader.RepeatingElementSeparator)
-
-        For Each value In Values
-            Dim r As T
-
-            If value.Length > 0 Then
-                r = populator.Invoke(value, reader)
-
-                If r IsNot Nothing Then
-                    Add(r)
-                End If
-            End If
-        Next
-    End Sub
+    '            If r IsNot Nothing Then
+    '                Add(r)
+    '            End If
+    '        End If
+    '    Next
+    'End Sub
 
     Friend Delegate Function FromReader(text As String, reader As EdiReader.SegmentReader) As T
 
@@ -147,4 +92,13 @@
     Public Sub RemoveAt(index As Integer) Implements IList(Of T).RemoveAt
         mList.RemoveAt(index)
     End Sub
+
+    Public Overrides Property HasValue As Boolean
+        Get
+            Return mList.Count > 0
+        End Get
+        Protected Set(value As Boolean)
+            Throw New NotSupportedException("Cannot set HasValue on a repeating element. Use Clear instead.")
+        End Set
+    End Property
 End Class

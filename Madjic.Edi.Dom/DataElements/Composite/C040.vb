@@ -1,4 +1,6 @@
-﻿Namespace Global.Madjic.Edi.Dom.DataElements.Composite
+﻿Imports Madjic.Edi.Dom.EdiReader
+
+Namespace Global.Madjic.Edi.Dom.DataElements.Composite
     '''<summary>Reference Identifier</summary>
     '''<remarks>To identify one or more reference numbers or identification numbers as specified by the Reference Qualifier</remarks>
     Partial Friend Class C040_Obj
@@ -61,7 +63,7 @@
             Initialize()
         End Sub
 
-        <CodeAnalysis.SuppressMessage("Performance", "CA1822:Mark members as static", Justification := "<Pending>")>
+        <CodeAnalysis.SuppressMessage("Performance", "CA1822:Mark members as static", Justification:="<Pending>")>
         Partial Private Sub Initialize()
         End Sub
 
@@ -237,31 +239,33 @@
 
 #End Region
 
+        Friend Overrides Sub Read(fullElement As String, reader As SegmentReader)
+            Dim values = fullElement.Split(reader.CompositeSeparator)
+
+            If values.Length > 0 Then
+                C040_01 = values(0)
+            End If
+            If values.Length > 1 Then
+                C040_02 = values(1)
+            End If
+            If values.Length > 2 Then
+                C040_03 = values(2)
+            End If
+            If values.Length > 3 Then
+                C040_04 = values(3)
+            End If
+            If values.Length > 4 Then
+                C040_05 = values(4)
+            End If
+            If values.Length > 5 Then
+                C040_06 = values(5)
+            End If
+        End Sub
+
         Friend Shared Function FromReader(fullElement As String, reader As EdiReader.SegmentReader) As C040_Obj
             Dim rval As New C040_Obj
 
-            Dim values = fullElement.Split(reader.CompositeSeparator)
-
-            With rval
-                If values.Length > 0 Then
-                    .C040_01 = values(0)
-                End If
-                If values.Length > 1 Then
-                    .C040_02 = values(1)
-                End If
-                If values.Length > 2 Then
-                    .C040_03 = values(2)
-                End If
-                If values.Length > 3 Then
-                    .C040_04 = values(3)
-                End If
-                If values.Length > 4 Then
-                    .C040_05 = values(4)
-                End If
-                If values.Length > 5 Then
-                    .C040_06 = values(5)
-                End If
-            End With
+            rval.Read(fullElement, reader)
 
             Return rval
         End Function

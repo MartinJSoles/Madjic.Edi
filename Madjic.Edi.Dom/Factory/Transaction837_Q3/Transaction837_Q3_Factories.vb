@@ -629,6 +629,422 @@
         Public Shared Function CreateHCP() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Segments.Loop2300.HCP
             Return New Global.Madjic.Edi.Dom.Segments.HCP_Obj
         End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.CLM.CLM_05.C023" /> interface (Health Care Service Location Information).</summary>
+        Public Shared Function CreateCLM05() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.CLM.CLM_05.C023
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C023_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI.HI_01.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI01() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI.HI_01.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_1.HI_1_01.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_1_HI01() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_1.HI_1_01.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_2.HI_2_01.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_2_HI01() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_2.HI_2_01.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_2.HI_2_02.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_2_HI02() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_2.HI_2_02.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_2.HI_2_03.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_2_HI03() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_2.HI_2_03.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_3.HI_3_01.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_3_HI01() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_3.HI_3_01.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_3.HI_3_02.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_3_HI02() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_3.HI_3_02.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_3.HI_3_03.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_3_HI03() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_3.HI_3_03.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_3.HI_3_04.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_3_HI04() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_3.HI_3_04.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_3.HI_3_05.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_3_HI05() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_3.HI_3_05.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_3.HI_3_06.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_3_HI06() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_3.HI_3_06.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_3.HI_3_07.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_3_HI07() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_3.HI_3_07.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_3.HI_3_08.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_3_HI08() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_3.HI_3_08.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_3.HI_3_09.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_3_HI09() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_3.HI_3_09.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_3.HI_3_10.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_3_HI10() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_3.HI_3_10.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_3.HI_3_11.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_3_HI11() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_3.HI_3_11.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_3.HI_3_12.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_3_HI12() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_3.HI_3_12.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_4.HI_4_01.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_4_HI01() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_4.HI_4_01.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_5.HI_5_01.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_5_HI01() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_5.HI_5_01.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_5.HI_5_02.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_5_HI02() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_5.HI_5_02.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_5.HI_5_03.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_5_HI03() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_5.HI_5_03.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_5.HI_5_04.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_5_HI04() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_5.HI_5_04.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_5.HI_5_05.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_5_HI05() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_5.HI_5_05.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_5.HI_5_06.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_5_HI06() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_5.HI_5_06.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_5.HI_5_07.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_5_HI07() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_5.HI_5_07.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_5.HI_5_08.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_5_HI08() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_5.HI_5_08.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_5.HI_5_09.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_5_HI09() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_5.HI_5_09.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_5.HI_5_10.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_5_HI10() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_5.HI_5_10.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_5.HI_5_11.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_5_HI11() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_5.HI_5_11.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_5.HI_5_12.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_5_HI12() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_5.HI_5_12.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_6.HI_6_01.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_6_HI01() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_6.HI_6_01.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_7.HI_7_01.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_7_HI01() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_7.HI_7_01.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_7.HI_7_02.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_7_HI02() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_7.HI_7_02.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_7.HI_7_03.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_7_HI03() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_7.HI_7_03.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_7.HI_7_04.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_7_HI04() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_7.HI_7_04.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_7.HI_7_05.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_7_HI05() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_7.HI_7_05.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_7.HI_7_06.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_7_HI06() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_7.HI_7_06.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_7.HI_7_07.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_7_HI07() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_7.HI_7_07.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_7.HI_7_08.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_7_HI08() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_7.HI_7_08.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_7.HI_7_09.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_7_HI09() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_7.HI_7_09.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_7.HI_7_10.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_7_HI10() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_7.HI_7_10.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_7.HI_7_11.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_7_HI11() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_7.HI_7_11.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_7.HI_7_12.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_7_HI12() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_7.HI_7_12.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_8.HI_8_01.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_8_HI01() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_8.HI_8_01.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_8.HI_8_02.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_8_HI02() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_8.HI_8_02.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_8.HI_8_03.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_8_HI03() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_8.HI_8_03.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_8.HI_8_04.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_8_HI04() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_8.HI_8_04.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_8.HI_8_05.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_8_HI05() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_8.HI_8_05.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_8.HI_8_06.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_8_HI06() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_8.HI_8_06.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_8.HI_8_07.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_8_HI07() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_8.HI_8_07.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_8.HI_8_08.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_8_HI08() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_8.HI_8_08.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_8.HI_8_09.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_8_HI09() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_8.HI_8_09.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_8.HI_8_10.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_8_HI10() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_8.HI_8_10.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_8.HI_8_11.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_8_HI11() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_8.HI_8_11.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_8.HI_8_12.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_8_HI12() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_8.HI_8_12.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_9.HI_9_01.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_9_HI01() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_9.HI_9_01.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_9.HI_9_02.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_9_HI02() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_9.HI_9_02.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_9.HI_9_03.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_9_HI03() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_9.HI_9_03.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_9.HI_9_04.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_9_HI04() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_9.HI_9_04.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_9.HI_9_05.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_9_HI05() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_9.HI_9_05.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_9.HI_9_06.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_9_HI06() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_9.HI_9_06.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_9.HI_9_07.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_9_HI07() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_9.HI_9_07.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_9.HI_9_08.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_9_HI08() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_9.HI_9_08.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_9.HI_9_09.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_9_HI09() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_9.HI_9_09.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_9.HI_9_10.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_9_HI10() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_9.HI_9_10.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_9.HI_9_11.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_9_HI11() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_9.HI_9_11.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_9.HI_9_12.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_9_HI12() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_9.HI_9_12.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_10.HI_10_01.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_10_HI01() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_10.HI_10_01.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_10.HI_10_02.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_10_HI02() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_10.HI_10_02.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_10.HI_10_03.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_10_HI03() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_10.HI_10_03.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_10.HI_10_04.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_10_HI04() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_10.HI_10_04.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_10.HI_10_05.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_10_HI05() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_10.HI_10_05.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_10.HI_10_06.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_10_HI06() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_10.HI_10_06.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_10.HI_10_07.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_10_HI07() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_10.HI_10_07.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_10.HI_10_08.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_10_HI08() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_10.HI_10_08.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_10.HI_10_09.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_10_HI09() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_10.HI_10_09.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_10.HI_10_10.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_10_HI10() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_10.HI_10_10.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_10.HI_10_11.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_10_HI11() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_10.HI_10_11.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_10.HI_10_12.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_10_HI12() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_10.HI_10_12.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_11.HI_11_01.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_11_HI01() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_11.HI_11_01.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_11.HI_11_02.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_11_HI02() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_11.HI_11_02.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_11.HI_11_03.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_11_HI03() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_11.HI_11_03.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_11.HI_11_04.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_11_HI04() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_11.HI_11_04.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_11.HI_11_05.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_11_HI05() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_11.HI_11_05.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_11.HI_11_06.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_11_HI06() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_11.HI_11_06.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_11.HI_11_07.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_11_HI07() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_11.HI_11_07.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_11.HI_11_08.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_11_HI08() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_11.HI_11_08.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_11.HI_11_09.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_11_HI09() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_11.HI_11_09.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_11.HI_11_10.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_11_HI10() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_11.HI_11_10.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_11.HI_11_11.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_11_HI11() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_11.HI_11_11.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_11.HI_11_12.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_11_HI12() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_11.HI_11_12.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_12.HI_12_01.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_12_HI01() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_12.HI_12_01.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_12.HI_12_02.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_12_HI02() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_12.HI_12_02.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_12.HI_12_03.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_12_HI03() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_12.HI_12_03.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_12.HI_12_04.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_12_HI04() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_12.HI_12_04.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_12.HI_12_05.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_12_HI05() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_12.HI_12_05.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_12.HI_12_06.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_12_HI06() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_12.HI_12_06.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_12.HI_12_07.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_12_HI07() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_12.HI_12_07.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_12.HI_12_08.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_12_HI08() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_12.HI_12_08.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_12.HI_12_09.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_12_HI09() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_12.HI_12_09.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_12.HI_12_10.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_12_HI10() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_12.HI_12_10.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_12.HI_12_11.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_12_HI11() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_12.HI_12_11.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_12.HI_12_12.C022" /> interface (Health Care Code Information).</summary>
+        Public Shared Function CreateHI_12_HI12() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2300.HI_12.HI_12_12.C022
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C022_Obj
+        End Function
     End Class
 
     '''<summary>Provides methods for instantiating the segments contained in the Loop2310A loop (Attending Provider Name).</summary>
@@ -1022,6 +1438,10 @@
         Public Shared Function CreateHCP() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Segments.Loop2400.HCP
             Return New Global.Madjic.Edi.Dom.Segments.HCP_Obj
         End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2400.SV2.SV2_02.C003" /> interface (Composite Medical Procedure Identifier).</summary>
+        Public Shared Function CreateSV202() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2400.SV2.SV2_02.C003
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C003_Obj
+        End Function
     End Class
 
     '''<summary>Provides methods for instantiating the segments contained in the Loop2420A loop (Operating Physician Name).</summary>
@@ -1038,6 +1458,10 @@
         '''<summary>Creates an object that implements the <see cref ="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Segments.Loop2420A.REF">REF</see> interface (Operating Physician Secondary Identification).</summary>
         Public Shared Function CreateREF() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Segments.Loop2420A.REF
             Return New Global.Madjic.Edi.Dom.Segments.REF_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2420A.REF.REF_04.C040" /> interface (Reference Identifier).</summary>
+        Public Shared Function CreateREF04() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2420A.REF.REF_04.C040
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C040_Obj
         End Function
     End Class
 
@@ -1056,6 +1480,10 @@
         Public Shared Function CreateREF() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Segments.Loop2420B.REF
             Return New Global.Madjic.Edi.Dom.Segments.REF_Obj
         End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2420B.REF.REF_04.C040" /> interface (Reference Identifier).</summary>
+        Public Shared Function CreateREF04() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2420B.REF.REF_04.C040
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C040_Obj
+        End Function
     End Class
 
     '''<summary>Provides methods for instantiating the segments contained in the Loop2420C loop (Rendering Provider Name).</summary>
@@ -1073,6 +1501,10 @@
         Public Shared Function CreateREF() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Segments.Loop2420C.REF
             Return New Global.Madjic.Edi.Dom.Segments.REF_Obj
         End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2420C.REF.REF_04.C040" /> interface (Reference Identifier).</summary>
+        Public Shared Function CreateREF04() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2420C.REF.REF_04.C040
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C040_Obj
+        End Function
     End Class
 
     '''<summary>Provides methods for instantiating the segments contained in the Loop2420D loop (Referring Provider Name).</summary>
@@ -1089,6 +1521,10 @@
         '''<summary>Creates an object that implements the <see cref ="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Segments.Loop2420D.REF">REF</see> interface (Referring Provider Secondary Identification).</summary>
         Public Shared Function CreateREF() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Segments.Loop2420D.REF
             Return New Global.Madjic.Edi.Dom.Segments.REF_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2420D.REF.REF_04.C040" /> interface (Reference Identifier).</summary>
+        Public Shared Function CreateREF04() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2420D.REF.REF_04.C040
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C040_Obj
         End Function
     End Class
 
@@ -1114,6 +1550,10 @@
         '''<summary>Creates an object that implements the <see cref ="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Segments.Loop2430.AMT">AMT</see> interface (Remaining Patient Liability).</summary>
         Public Shared Function CreateAMT() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Segments.Loop2430.AMT
             Return New Global.Madjic.Edi.Dom.Segments.AMT_Obj
+        End Function
+        '''<summary>Creates an object that implements the <see cref="Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2430.SVD.SVD_03.C003" /> interface (Composite Medical Procedure Identifier).</summary>
+        Public Shared Function CreateSVD03() As Global.Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Composites.Loop2430.SVD.SVD_03.C003
+            Return New Global.Madjic.Edi.Dom.DataElements.Composite.C003_Obj
         End Function
     End Class
 End Namespace

@@ -1782,7 +1782,7 @@
 			End Property
 
 			Private Loop2300Subset_Loop2000B_Obj As LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction837.Transaction837_Q1.Loops.Loop2300, Edi.Dom.Transactions.Transaction837.Loops.Loop2300)
-			Private ReadOnly Property Loop2300_Obj_1_Loop2000B_Obj As LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction837.Transaction837_Q1.Loops.Loop2300, Edi.Dom.Transactions.Transaction837.Loops.Loop2300) Implements Edi.Dom.Transactions.Transaction837.Transaction837_Q1.Loops.Loop2000B.Loop2300
+			Private ReadOnly Property Loop2300_Obj_1_Loop2000B_Obj As LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction837.Transaction837_Q1.Loops.Loop2300, Edi.Dom.Transactions.Transaction837.Loops.Loop2300) Implements Edi.Dom.Transactions.Transaction837.Transaction837_Q1.Loops.Loop2000B.Loop2300, Edi.Dom.Transactions.Transaction837.Transaction837_Q1.Loops.Loop2000C.Loop2300
 				Get
 					If Loop2300Subset_Loop2000B_Obj Is Nothing Then
 						Loop2300Subset_Loop2000B_Obj = New LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction837.Transaction837_Q1.Loops.Loop2300, Edi.Dom.Transactions.Transaction837.Loops.Loop2300)(Children(7), 100, "C", "1300")
@@ -1792,7 +1792,7 @@
 				End Get
 			End Property
 			Private Loop2300Subset_Loop2000B_Obj_1 As LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Loops.Loop2300, Edi.Dom.Transactions.Transaction837.Loops.Loop2300)
-			Private ReadOnly Property Loop2300_Obj_2_Loop2000B_Obj_1 As LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Loops.Loop2300, Edi.Dom.Transactions.Transaction837.Loops.Loop2300) Implements Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Loops.Loop2000B.Loop2300
+			Private ReadOnly Property Loop2300_Obj_2_Loop2000B_Obj_1 As LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Loops.Loop2300, Edi.Dom.Transactions.Transaction837.Loops.Loop2300) Implements Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Loops.Loop2000B.Loop2300, Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Loops.Loop2000C.Loop2300
 				Get
 					If Loop2300Subset_Loop2000B_Obj_1 Is Nothing Then
 						Loop2300Subset_Loop2000B_Obj_1 = New LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Loops.Loop2300, Edi.Dom.Transactions.Transaction837.Loops.Loop2300)(Children(7), 100, "C", "1300")
@@ -1802,7 +1802,7 @@
 				End Get
 			End Property
 			Private Loop2300Subset_Loop2000B_Obj_2 As LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Loops.Loop2300, Edi.Dom.Transactions.Transaction837.Loops.Loop2300)
-			Private ReadOnly Property Loop2300_Obj_3_Loop2000B_Obj_2 As LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Loops.Loop2300, Edi.Dom.Transactions.Transaction837.Loops.Loop2300) Implements Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Loops.Loop2000B.Loop2300
+			Private ReadOnly Property Loop2300_Obj_3_Loop2000B_Obj_2 As LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Loops.Loop2300, Edi.Dom.Transactions.Transaction837.Loops.Loop2300) Implements Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Loops.Loop2000B.Loop2300, Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Loops.Loop2000C.Loop2300
 				Get
 					If Loop2300Subset_Loop2000B_Obj_2 Is Nothing Then
 						Loop2300Subset_Loop2000B_Obj_2 = New LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Loops.Loop2300, Edi.Dom.Transactions.Transaction837.Loops.Loop2300)(Children(7), 100, "C", "1300")
@@ -1811,7 +1811,6 @@
 					Return Loop2300Subset_Loop2000B_Obj_2
 				End Get
 			End Property
-
 		End Class
 		Partial Friend Class Loop2010_Obj
 			Inherits LoopBase
@@ -19186,6 +19185,9 @@
 
 					'''<summary>Patient Name</summary>
 					Property Loop2010CA As Edi.Dom.Transactions.Transaction837.Transaction837_Q1.Loops.Loop2010CA
+
+					'''<summary>Claim Information</summary>
+					ReadOnly Property Loop2300 As LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction837.Transaction837_Q1.Loops.Loop2300, Edi.Dom.Transactions.Transaction837.Loops.Loop2300)
 				End Interface
 				'''<summary>Patient Name</summary>
 				Public Interface Loop2010CA
@@ -22271,6 +22273,10 @@
 
 					'''<summary>Patient Name</summary>
 					Property Loop2010CA As Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Loops.Loop2010CA
+
+					'''<summary>Claim Information</summary>
+					ReadOnly Property Loop2300 As LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction837.Transaction837_Q2.Loops.Loop2300, Edi.Dom.Transactions.Transaction837.Loops.Loop2300)
+
 				End Interface
 				'''<summary>Patient Name</summary>
 				Public Interface Loop2010CA
@@ -26487,6 +26493,8 @@
 
 					'''<summary>Patient Name</summary>
 					Property Loop2010CA As Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Loops.Loop2010CA
+					'''<summary>Claim Information</summary>
+					ReadOnly Property Loop2300 As LoopSubsetContainer(Of Edi.Dom.Transactions.Transaction837.Transaction837_Q3.Loops.Loop2300, Edi.Dom.Transactions.Transaction837.Loops.Loop2300)
 				End Interface
 				'''<summary>Patient Name</summary>
 				Public Interface Loop2010CA

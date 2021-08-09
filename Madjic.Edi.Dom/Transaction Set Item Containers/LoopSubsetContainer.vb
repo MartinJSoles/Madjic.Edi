@@ -1,13 +1,13 @@
-﻿Public Class LoopSubsetContainer(Of T As ILoop, K As ILoop)
-    Implements IList(Of T), ICollection(Of T), ITransactionSetItem, IValidate, IParanted
+﻿Public Class LoopSubsetContainer(Of TPublic As ILoop, TStandard As ILoop)
+    Implements IList(Of TPublic), ICollection(Of TPublic), ITransactionSetItem, IValidate, IParanted
 
     Private ReadOnly mRepeat As Integer
 
     Public Overrides Function ToString() As String
-        Return String.Format("LoopSubsetContainer, T: {0}, K: {1}, Area: {2}, Sequence: {3}, Repeat: {4}, Count: {5}, Parent: {6}", GetType(T).ToString, GetType(K).ToString, Area, Sequence, mRepeat, Count, If(Parent?.ToString, "(null)"))
+        Return String.Format("LoopSubsetContainer, T: {0}, K: {1}, Area: {2}, Sequence: {3}, Repeat: {4}, Count: {5}, Parent: {6}", GetType(TPublic).ToString, GetType(TStandard).ToString, Area, Sequence, mRepeat, Count, If(Parent?.ToString, "(null)"))
     End Function
 
-    Friend ReadOnly Property Parent As LoopContainer(Of K)
+    Friend ReadOnly Property Parent As LoopContainer(Of TStandard)
 
     ''' <summary>
     ''' Gets the area that this loop instance is defined in the implementation.
@@ -20,13 +20,13 @@
     Public ReadOnly Property Sequence As String
 
     ''' <summary>
-    ''' Creates a new instance of the <see cref="LoopSubsetContainer(Of T, K)">LoopSubsetContainer</see> class.
+    ''' Creates a new instance of the <see cref="LoopSubsetContainer(Of TPublic, TStandard)">LoopSubsetContainer</see> class.
     ''' </summary>
     ''' <param name="parent">The base loop collection this subset is based on.</param>
     ''' <param name="area">The implementation area covered by this collection.</param>
     ''' <param name="sequence">The area sequence covered by this collection.</param>
     ''' <remarks></remarks>
-    Friend Sub New(parent As LoopContainer(Of K), repeat As Integer, area As String, sequence As String)
+    Friend Sub New(parent As LoopContainer(Of TStandard), repeat As Integer, area As String, sequence As String)
         Me.Parent = parent
         Me.Area = area
         Me.Sequence = sequence
@@ -60,14 +60,14 @@
     ''' <summary>
     ''' Adds the given loop instance to the collection.
     ''' </summary>
-    Public Sub Add(item As T) Implements ICollection(Of T).Add
+    Public Sub Add(item As TPublic) Implements ICollection(Of TPublic).Add
         Dim L = TryCast(item, ILoop)
 
-        If mRepeat > 1 AndAlso Count >= mRepeat Then
+        If mRepeat > 0 AndAlso Count >= mRepeat Then
             Throw New IndexOutOfRangeException
         End If
 
-        If L IsNot Nothing AndAlso TypeOf L Is K Then
+        If L IsNot Nothing AndAlso TypeOf L Is TStandard Then
             L.SetArea = Area
             L.SetSequence = Sequence
 
@@ -77,7 +77,7 @@
         End If
     End Sub
 
-    Public Sub AddRange(items As IEnumerable(Of T))
+    Public Sub AddRange(items As IEnumerable(Of TPublic))
         For Each node In items
             Add(node)
         Next
@@ -86,11 +86,11 @@
     ''' <summary>
     ''' Removes all loops from this collection.
     ''' </summary>
-    Public Sub Clear() Implements ICollection(Of T).Clear
+    Public Sub Clear() Implements ICollection(Of TPublic).Clear
         For index = Parent.Count - 1 To 0 Step -1
             Dim n = TryCast(Parent(index), ILoop)
 
-            If n IsNot Nothing AndAlso TypeOf n Is K AndAlso String.Compare(n.SetArea, Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(n.SetSequence, Sequence, StringComparison.OrdinalIgnoreCase) = 0 Then
+            If n IsNot Nothing AndAlso TypeOf n Is TStandard AndAlso String.Compare(n.SetArea, Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(n.SetSequence, Sequence, StringComparison.OrdinalIgnoreCase) = 0 Then
                 Parent.RemoveAt(index)
             End If
         Next
@@ -99,10 +99,10 @@
     ''' <summary>
     ''' Indicates whether the given item is contained by this collection.
     ''' </summary>
-    Public Function Contains(item As T) As Boolean Implements ICollection(Of T).Contains
+    Public Function Contains(item As TPublic) As Boolean Implements ICollection(Of TPublic).Contains
         Dim L = TryCast(item, ILoop)
 
-        If L IsNot Nothing AndAlso TypeOf L Is K AndAlso String.Compare(L.SetArea, Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(L.SetSequence, Sequence, StringComparison.OrdinalIgnoreCase) = 0 Then
+        If L IsNot Nothing AndAlso TypeOf L Is TStandard AndAlso String.Compare(L.SetArea, Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(L.SetSequence, Sequence, StringComparison.OrdinalIgnoreCase) = 0 Then
             Return Parent.Contains(L)
         Else
             Return False
@@ -112,7 +112,7 @@
     ''' <summary>
     ''' Copies all items contained in this collection to the given array, starting at the specified index.
     ''' </summary>
-    Public Sub CopyTo(array() As T, arrayIndex As Integer) Implements ICollection(Of T).CopyTo
+    Public Sub CopyTo(array() As TPublic, arrayIndex As Integer) Implements ICollection(Of TPublic).CopyTo
         For Each node In Parent
             Dim n = TryCast(node, ILoop)
 
@@ -126,13 +126,13 @@
     ''' <summary>
     ''' Gets the number of items contained by this collection.
     ''' </summary>
-    Public ReadOnly Property Count As Integer Implements ICollection(Of T).Count
+    Public ReadOnly Property Count As Integer Implements ICollection(Of TPublic).Count
         Get
             Return (From c In Parent Where String.Compare(c.SetArea, Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(c.SetSequence, Sequence, StringComparison.OrdinalIgnoreCase) = 0).Count
         End Get
     End Property
 
-    Private ReadOnly Property IsReadOnly As Boolean Implements ICollection(Of T).IsReadOnly
+    Private ReadOnly Property IsReadOnly As Boolean Implements ICollection(Of TPublic).IsReadOnly
         Get
             Return False
         End Get
@@ -141,28 +141,28 @@
     ''' <summary>
     ''' Removes the given item from the collection.
     ''' </summary>
-    Public Function Remove(item As T) As Boolean Implements ICollection(Of T).Remove
+    Public Function Remove(item As TPublic) As Boolean Implements ICollection(Of TPublic).Remove
         Dim L = TryCast(item, ILoop)
 
-        If L IsNot Nothing AndAlso TypeOf L Is K AndAlso String.Compare(L.SetArea, Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(L.SetSequence, Sequence, StringComparison.OrdinalIgnoreCase) = 0 Then
+        If L IsNot Nothing AndAlso TypeOf L Is TStandard AndAlso String.Compare(L.SetArea, Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(L.SetSequence, Sequence, StringComparison.OrdinalIgnoreCase) = 0 Then
             Return Parent.Remove(L)
         Else
             Return False
         End If
     End Function
 
-    Public Function GetEnumerator() As IEnumerator(Of T) Implements IEnumerable(Of T).GetEnumerator
-        Return (From c In Parent Where String.Compare(c.SetArea, Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(c.SetSequence, Sequence, StringComparison.OrdinalIgnoreCase) = 0).Cast(Of T).GetEnumerator
+    Public Function GetEnumerator() As IEnumerator(Of TPublic) Implements IEnumerable(Of TPublic).GetEnumerator
+        Return (From c In Parent Where String.Compare(c.SetArea, Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(c.SetSequence, Sequence, StringComparison.OrdinalIgnoreCase) = 0).Cast(Of TPublic).GetEnumerator
     End Function
 
     ''' <summary>
     ''' Gets the index that the given item is at in the collection.
     ''' </summary>
-    Public Function IndexOf(item As T) As Integer Implements IList(Of T).IndexOf
+    Public Function IndexOf(item As TPublic) As Integer Implements IList(Of TPublic).IndexOf
         Dim idx As Integer
         Dim L = TryCast(item, ILoop)
 
-        If L IsNot Nothing AndAlso TypeOf L Is K AndAlso String.Compare(L.SetArea, Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(L.SetSequence, Sequence, StringComparison.OrdinalIgnoreCase) = 0 Then
+        If L IsNot Nothing AndAlso TypeOf L Is TStandard AndAlso String.Compare(L.SetArea, Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(L.SetSequence, Sequence, StringComparison.OrdinalIgnoreCase) = 0 Then
             For Each node In Parent
                 If node.Equals(L) Then
                     Return idx
@@ -182,16 +182,16 @@
     ''' <summary>
     ''' Inserts the given item at the index specified.
     ''' </summary>
-    Public Sub Insert(index As Integer, item As T) Implements IList(Of T).Insert
+    Public Sub Insert(index As Integer, item As TPublic) Implements IList(Of TPublic).Insert
         Dim curt As Integer
         Dim idx As Integer
         Dim L = TryCast(item, ILoop)
 
-        If mRepeat > 1 AndAlso Count <= mRepeat Then
+        If mRepeat > 0 AndAlso Count >= mRepeat Then
             Throw New IndexOutOfRangeException
         End If
 
-        If L IsNot Nothing AndAlso TypeOf L Is K Then
+        If L IsNot Nothing AndAlso TypeOf L Is TStandard Then
             L.SetArea = Area
             L.SetSequence = Sequence
 
@@ -217,14 +217,14 @@
     ''' <summary>
     ''' Gets/sets the item at the given index.
     ''' </summary>
-    Default Public Property Item(index As Integer) As T Implements IList(Of T).Item
+    Default Public Property Item(index As Integer) As TPublic Implements IList(Of TPublic).Item
         Get
             Dim idx As Integer
 
             For Each node In Parent
                 Dim n = TryCast(node, ILoop)
 
-                If n IsNot Nothing AndAlso TypeOf n Is K AndAlso String.Compare(n.SetArea, Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(n.SetSequence, Sequence, StringComparison.OrdinalIgnoreCase) = 0 Then
+                If n IsNot Nothing AndAlso TypeOf n Is TStandard AndAlso String.Compare(n.SetArea, Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(n.SetSequence, Sequence, StringComparison.OrdinalIgnoreCase) = 0 Then
                     If index = idx Then
                         n = TryCast(node, ILoop)
                         Return n
@@ -236,11 +236,11 @@
 
             Throw New IndexOutOfRangeException
         End Get
-        Set(value As T)
+        Set(value As TPublic)
             Dim idx As Integer
             Dim L = TryCast(value, ILoop)
 
-            If L IsNot Nothing AndAlso TypeOf L Is K Then
+            If L IsNot Nothing AndAlso TypeOf L Is TStandard Then
                 For curt = 0 To Parent.Count - 1
                     Dim n = TryCast(Parent(curt), ILoop)
 
@@ -265,12 +265,12 @@
     ''' <summary>
     ''' Removes the item at the given index.
     ''' </summary>
-    Public Sub RemoveAt(index As Integer) Implements IList(Of T).RemoveAt
+    Public Sub RemoveAt(index As Integer) Implements IList(Of TPublic).RemoveAt
         Dim idx As Integer
         For curt = 0 To Parent.Count - 1
             Dim n = TryCast(Parent(curt), LoopBase)
 
-            If n IsNot Nothing AndAlso TypeOf n Is K AndAlso String.Compare(n.SetArea, Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(n.SetSequence, Sequence, StringComparison.OrdinalIgnoreCase) = 0 Then
+            If n IsNot Nothing AndAlso TypeOf n Is TStandard AndAlso String.Compare(n.SetArea, Area, StringComparison.OrdinalIgnoreCase) = 0 AndAlso String.Compare(n.SetSequence, Sequence, StringComparison.OrdinalIgnoreCase) = 0 Then
                 If index = idx Then
                     Parent.RemoveAt(curt)
                     Exit Sub
