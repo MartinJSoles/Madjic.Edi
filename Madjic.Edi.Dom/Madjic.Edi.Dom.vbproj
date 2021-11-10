@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <RootNamespace>Madjic.Edi.Dom</RootNamespace>
-    <TargetFrameworks>netstandard2.0;net472;net5.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net472;net5.0;net6.0</TargetFrameworks>
     <Authors>Martin Soles</Authors>
     <Company>madjic.com</Company>
     <Description>Strongly typed classes to support reading and writing ANSI X12 5010 transaction sets for HIPAA. This covers the following transaction sets: 270, 271, 277, 278, 820, 834, 835, 837, and 999.</Description>
@@ -10,19 +10,17 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/MartinJSoles/Madjic.Edi</RepositoryUrl>
     <PackageTags>HIPAA, EDI, ANSI X12</PackageTags>
-    <PackageReleaseNotes>This release adds support for repeating data elements, simple and composite. This is a breaking change as it does change the property signatures.
-
-In addition, there is support for creating composite data elements. This was missing in prior versions. These are all in the factory namespace. You will find the methods located in the same classes as those that would create the containing segment.</PackageReleaseNotes>
+    <PackageReleaseNotes>This is a servicing release. The only change made is a recompilation for .NET 6.0.</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Version>2.0.0</Version>
-    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <Version>2.0.1</Version>
+    <AssemblyVersion>2.0.1.0</AssemblyVersion>
   </PropertyGroup>
   <PropertyGroup>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <PackageProjectUrl>https://github.com/MartinJSoles/Madjic.Edi</PackageProjectUrl>
-    <FileVersion>2.0.0.0</FileVersion>
+    <FileVersion>2.0.1.0</FileVersion>
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
   <ItemGroup>
