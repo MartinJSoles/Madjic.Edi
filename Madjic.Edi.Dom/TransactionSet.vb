@@ -153,4 +153,18 @@ Public MustInherit Class TransactionSet
             Return i > 0 AndAlso i < allowedOptions.Length - 1 AndAlso allowedOptions(i - 1) = ";"c AndAlso allowedOptions(i + instance.Length) = ";"c
         End If
     End Function
+
+    Private _HasError As Boolean
+    ''' <summary>
+    ''' Gets a value indicating that there were errors while reading this transaction set (the results should not be considered valid).
+    ''' </summary>
+    ''' <returns>True, to indicate there was an error while reading. False, otherwise.</returns>
+    Public Property HasReaderErrors As Boolean
+        Get
+            Return _HasError
+        End Get
+        Friend Set(value As Boolean)
+            _HasError = value
+        End Set
+    End Property
 End Class

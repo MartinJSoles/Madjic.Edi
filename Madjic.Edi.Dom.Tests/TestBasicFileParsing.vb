@@ -16,6 +16,30 @@ Public Class TestBasicFileParsing
         ".\samples\Test837P.txt",
         ".\samples\Test999.txt"}
 
+    <TestMethod()> Async Function TestBadTransactionSet() As Task
+        Dim Doc As Document
+
+        Using stream As New IO.FileStream(".\Samples\Test271.BadTS.txt", IO.FileMode.Open, IO.FileAccess.Read, IO.FileShare.Read)
+            Doc = Await Document.FromStreamAsync(stream)
+        End Using
+
+        Assert.AreEqual(1, Doc.Envelopes.Count)
+        Assert.AreEqual(1, Doc.Envelopes(0).FunctionalGroups.Count)
+        Assert.AreEqual(3, Doc.Envelopes(0).FunctionalGroups(0).Transactions.Count)
+
+        For Each ts In Doc.Envelopes(0).FunctionalGroups(0).Transactions
+            Assert.IsInstanceOfType(ts, GetType(Transactions.Transaction271.Transaction271_B1.TransactionSet))
+        Next
+
+        Dim ShouldBeBad() = {True, False, False}
+
+        For i = 0 To 2
+            Dim ts = Doc.Envelopes(0).FunctionalGroups(0).Transactions(i)
+
+            Assert.AreEqual(ShouldBeBad(i), ts.HasReaderErrors, $"Transaction set #{i + 1}.")
+        Next
+    End Function
+
     <TestMethod()> Async Function TestAllFileImplementations() As Task
         Dim Doc As Document
         Dim ExpectedTypes() As Type = {

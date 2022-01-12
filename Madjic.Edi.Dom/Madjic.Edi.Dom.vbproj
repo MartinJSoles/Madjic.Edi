@@ -10,11 +10,12 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/MartinJSoles/Madjic.Edi</RepositoryUrl>
     <PackageTags>HIPAA, EDI, ANSI X12</PackageTags>
-    <PackageReleaseNotes>This is a servicing release. The only change made is a recompilation for .NET 6.0.</PackageReleaseNotes>
+    <PackageReleaseNotes>This version is adding minimal support to indicate when a transaction set failed to parse correctly. To do this, an extra readonly property `HasReaderErrors` has been added to the base TransactionSet object.</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Version>2.0.1</Version>
+    <Version>2.1.0-alpha</Version>
     <AssemblyVersion>2.0.1.0</AssemblyVersion>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
   <PropertyGroup>
     <IncludeSymbols>true</IncludeSymbols>
@@ -26,5 +27,7 @@
   <ItemGroup>
     <None Include="..\.editorconfig" Link=".editorconfig" />
   </ItemGroup>
-
+  <ItemGroup>
+    <None Include="..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
 </Project>

@@ -66,6 +66,10 @@
                     Await Reader.ReadAsync().ConfigureAwait(False)
 
                     If Reader.CurrentSegment IsNot Nothing Then
+                        Do While Not IsValueInGroup(Reader.CurrentSegment.SegmentID, {"ST", "GE", "IEA"}, StringComparison.OrdinalIgnoreCase)
+                            Await Reader.ReadAsync().ConfigureAwait(False)
+                        Loop
+
                         If String.Compare(Reader.CurrentSegment.SegmentID, "ST", StringComparison.OrdinalIgnoreCase) = 0 Then
                             Reader.ResetCountTransaction()
                             Return New EdiTransactionSetReader(Me, Reader.CurrentSegment, Reader)
@@ -76,6 +80,16 @@
 
             atEOF = True
             Return Nothing
+        End Function
+
+        Private Shared Function IsValueInGroup(value As String, groupToTestMembership() As String, comparison As StringComparison) As Boolean
+            For Each v In groupToTestMembership
+                If String.Compare(value, v, comparison) = 0 Then
+                    Return True
+                End If
+            Next
+
+            Return False
         End Function
     End Class
 

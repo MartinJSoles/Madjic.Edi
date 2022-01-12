@@ -187,6 +187,8 @@
                 .Implementation = ReaderFactory.GetImplementationKey(rval.VersionCode, rval.TransactionSetIdCode, grp.FunctionalIdCode)
             }
             Await rval.ReadAsync(args).ConfigureAwait(False)
+
+            CType(rval, TransactionSet).HasReaderErrors = args.DataSegment IsNot Nothing AndAlso String.Compare(args.DataSegment.SegmentID, "SE", StringComparison.OrdinalIgnoreCase) <> 0
         End If
 
         Return rval
