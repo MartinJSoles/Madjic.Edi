@@ -311,9 +311,10 @@
     ''' <param name="bufferSize">The size of the buffer to use for the stream writer, in bytes.</param>
     ''' <param name="leaveOpen">If true, the underlying stream is left open after the document has been written.</param>
     ''' <remarks>This will write each <see cref="Envelope">Envelope</see> object, and its child Functional Groups and Transactions, to the given <see cref="IO.stream">IO.Stream</see>.</remarks>
-    Public Function ToStreamAsync(stream As IO.Stream, textEncoding As Text.Encoding, insertNewLines As Boolean, bufferSize As Integer, leaveOpen As Boolean) As Task
+    Public Async Function ToStreamAsync(stream As IO.Stream, textEncoding As Text.Encoding, insertNewLines As Boolean, bufferSize As Integer, leaveOpen As Boolean) As Task
         Using writer As New IO.StreamWriter(stream, textEncoding, bufferSize, leaveOpen)
-            Return ToStreamAsync(writer, insertNewLines)
+            Await ToStreamAsync(writer, insertNewLines).ConfigureAwait(False)
+            Await writer.FlushAsync.ConfigureAwait(False)
         End Using
     End Function
 
@@ -343,8 +344,6 @@
                 item.SegmentTerminator = oldSegTerm
             Next
         End If
-
-        Await writer.FlushAsync().ConfigureAwait(False)
     End Function
 
     Public Sub Validate(results As ValidationResults) Implements IValidate.Validate

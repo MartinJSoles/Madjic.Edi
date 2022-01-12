@@ -127,7 +127,7 @@ Public Class TestBasicFileParsing
                 Using stream As New IO.MemoryStream()
                     Dim writer As New IO.StreamWriter(stream, New Text.UTF8Encoding(False, True))
                     Await Doc.ToStreamAsync(writer, False)
-
+                    Await writer.FlushAsync()
                     stream.Seek(0, IO.SeekOrigin.Begin)
                     Output = ReadStreamToString(stream)
                 End Using

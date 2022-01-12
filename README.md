@@ -193,8 +193,9 @@ I need to add conveniences that set required fields when instantiating segments 
 
 ## History
 
-#### V2.1.0-alpha
+#### V2.1.0 (pre-release)
 * This release includes very basic validation when reading a transaction set. After parsing is complete, the `HasReaderErrors` property on the base `TransactionSet` object.
+* Fixes an issue with writing a new document. When trying to write a document to a stream, performing the FlushAsync operation was throwing an error.
 
 #### V1.0.6
 * This release includes a test case for writing a file from scratch.
