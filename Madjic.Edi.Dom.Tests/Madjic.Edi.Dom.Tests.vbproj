@@ -25,10 +25,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="samples\Test270.txt">
+    <None Update="samples\*.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="samples\Test271.BadTS.txt">
+    <!--<None Update="samples\Test271.BadTS.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="samples\test271.txt">
@@ -60,7 +60,7 @@
     </None>
     <None Update="samples\TestMultipleFunctionalGroups.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </None>-->
   </ItemGroup>
 
 </Project>

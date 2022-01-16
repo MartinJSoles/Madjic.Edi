@@ -13,7 +13,7 @@
     <PackageReleaseNotes>This version is adding minimal support to indicate when a transaction set failed to parse correctly. To do this, an extra readonly property `HasReaderErrors` has been added to the base TransactionSet object.</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Version>2.1.0-alpha.1</Version>
+    <Version>2.1.0-alpha.2</Version>
     <AssemblyVersion>2.0.1.0</AssemblyVersion>
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>

@@ -16,6 +16,34 @@ Public Class TestBasicFileParsing
         ".\samples\Test837P.txt",
         ".\samples\Test999.txt"}
 
+    <TestMethod()> Async Function TestSample837() As Task
+        Dim Doc As Document
+
+        Using stream As New IO.FileStream(".\Samples\837_TEST.txt", IO.FileMode.Open, IO.FileAccess.Read, IO.FileShare.Read)
+            Doc = Await Document.FromStreamAsync(stream)
+        End Using
+
+        Dim TS = Doc.Envelopes.FirstOrDefault?.FunctionalGroups?.FirstOrDefault?.Transactions?.FirstOrDefault()
+
+        Assert.IsNotNull(TS)
+
+        Dim ClaimSet = TryCast(TS, Madjic.Edi.Dom.Transactions.Transaction837.Transaction837_Q1.TransactionSet)
+
+        Assert.IsNotNull(ClaimSet)
+
+        Assert.IsTrue(ClaimSet.Loop2000C.Count > 0)
+
+        Dim FoundAnN3 As Boolean
+
+        For Each lpc In ClaimSet.Loop2000C
+            Dim N3 = lpc.Loop2010CA?.N3
+
+            FoundAnN3 = FoundAnN3 OrElse N3 IsNot Nothing
+        Next
+
+        Assert.IsTrue(FoundAnN3)
+    End Function
+
     <TestMethod()> Async Function TestBadTransactionSet() As Task
         Dim Doc As Document
 
