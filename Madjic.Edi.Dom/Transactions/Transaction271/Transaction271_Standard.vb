@@ -1546,38 +1546,18 @@
                     New ReaderState(17, "LS", ReadAction.PopulateSegmentAndStartBoundedLoop, 22, False),
                     New ReaderState(18, "LS", ReadAction.PopulateSegmentAndStartBoundedLoop, 22, False),
                     New ReaderState(20, "LS", ReadAction.PopulateSegmentAndStartBoundedLoop, 22, False),
-                    New ReaderState(1, "NM1", ReadAction.PopulateLoop, 23, False),
-                    New ReaderState(2, "NM1", ReadAction.PopulateLoop, 23, False),
-                    New ReaderState(4, "NM1", ReadAction.PopulateLoop, 23, False),
-                    New ReaderState(6, "NM1", ReadAction.PopulateLoop, 23, False),
-                    New ReaderState(8, "NM1", ReadAction.PopulateLoop, 23, False),
-                    New ReaderState(10, "NM1", ReadAction.PopulateLoop, 23, False),
-                    New ReaderState(11, "NM1", ReadAction.PopulateLoop, 23, False),
-                    New ReaderState(12, "NM1", ReadAction.PopulateLoop, 23, False),
-                    New ReaderState(13, "NM1", ReadAction.PopulateLoop, 23, False),
-                    New ReaderState(14, "NM1", ReadAction.PopulateLoop, 23, False),
-                    New ReaderState(15, "NM1", ReadAction.PopulateLoop, 23, False),
-                    New ReaderState(16, "NM1", ReadAction.PopulateLoop, 23, False),
-                    New ReaderState(17, "NM1", ReadAction.PopulateLoop, 23, False),
-                    New ReaderState(18, "NM1", ReadAction.PopulateLoop, 23, False),
-                    New ReaderState(20, "NM1", ReadAction.PopulateLoop, 23, False),
                     New ReaderState(22, "NM1", ReadAction.PopulateLoop, 23, False),
+                    New ReaderState(22, "N2", ReadAction.PopulateLoop, 23, False),
+                    New ReaderState(22, "N3", ReadAction.PopulateLoop, 23, False),
+                    New ReaderState(22, "N4", ReadAction.PopulateLoop, 23, False),
+                    New ReaderState(22, "PER", ReadAction.PopulateLoop, 23, False),
+                    New ReaderState(22, "PRV", ReadAction.PopulateLoop, 23, False),
                     New ReaderState(23, "NM1", ReadAction.PopulateLoop, 23, False),
-                    New ReaderState(1, "LE", ReadAction.PopulateSegment, 25, False),
-                    New ReaderState(2, "LE", ReadAction.PopulateSegment, 25, False),
-                    New ReaderState(4, "LE", ReadAction.PopulateSegment, 25, False),
-                    New ReaderState(6, "LE", ReadAction.PopulateSegment, 25, False),
-                    New ReaderState(8, "LE", ReadAction.PopulateSegment, 25, False),
-                    New ReaderState(10, "LE", ReadAction.PopulateSegment, 25, False),
-                    New ReaderState(11, "LE", ReadAction.PopulateSegment, 25, False),
-                    New ReaderState(12, "LE", ReadAction.PopulateSegment, 25, False),
-                    New ReaderState(13, "LE", ReadAction.PopulateSegment, 25, False),
-                    New ReaderState(14, "LE", ReadAction.PopulateSegment, 25, False),
-                    New ReaderState(15, "LE", ReadAction.PopulateSegment, 25, False),
-                    New ReaderState(16, "LE", ReadAction.PopulateSegment, 25, False),
-                    New ReaderState(17, "LE", ReadAction.PopulateSegment, 25, False),
-                    New ReaderState(18, "LE", ReadAction.PopulateSegment, 25, False),
-                    New ReaderState(20, "LE", ReadAction.PopulateSegment, 25, False),
+                    New ReaderState(23, "N2", ReadAction.PopulateLoop, 23, False),
+                    New ReaderState(23, "N3", ReadAction.PopulateLoop, 23, False),
+                    New ReaderState(23, "N4", ReadAction.PopulateLoop, 23, False),
+                    New ReaderState(23, "PER", ReadAction.PopulateLoop, 23, False),
+                    New ReaderState(23, "PRV", ReadAction.PopulateLoop, 23, False),
                     New ReaderState(22, "LE", ReadAction.PopulateSegment, 25, False),
                     New ReaderState(23, "LE", ReadAction.PopulateSegment, 25, False)})
 
@@ -1720,16 +1700,23 @@
                     Else
                         Await NewLoop.ReadAsync(args).ConfigureAwait(False)
                     End If
-                ElseIf String.Compare(args.DataSegment.SegmentID, "NM1", StringComparison.OrdinalIgnoreCase) = 0 Then
+                ElseIf String.Compare(args.DataSegment.SegmentID, "NM1", StringComparison.OrdinalIgnoreCase) = 0 OrElse
+                    String.Compare(args.DataSegment.SegmentID, "N2", StringComparison.OrdinalIgnoreCase) = 0 OrElse
+                    String.Compare(args.DataSegment.SegmentID, "N3", StringComparison.OrdinalIgnoreCase) = 0 OrElse
+                    String.Compare(args.DataSegment.SegmentID, "N4", StringComparison.OrdinalIgnoreCase) = 0 OrElse
+                    String.Compare(args.DataSegment.SegmentID, "PER", StringComparison.OrdinalIgnoreCase) = 0 OrElse
+                    String.Compare(args.DataSegment.SegmentID, "PRV", StringComparison.OrdinalIgnoreCase) = 0 Then
                     Dim NewLoop As LoopBase = New Madjic.Edi.Dom.Transactions.Transaction271.Loop2120_Obj
                     Dim LoopKey As String = args.DataSegment.ToStringValue(0)
                     Loop2120_Obj.Add(NewLoop)
-                    If MyBase.CompareKey(LoopKey, ";13;1I;1P;2B;36;73;FA;GP;GW;I3;IL;LR;OC;P3;P4;P5;PR;PRP;SEP;TTP;VER;VN;VY;X3;Y2;") AndAlso String.Compare(args.Implementation, "_271B1__2000C__2100C__2110C", StringComparison.OrdinalIgnoreCase) = 0 Then
+                    'If MyBase.CompareKey(LoopKey, ";13;1I;1P;2B;36;73;FA;GP;GW;I3;IL;LR;OC;P3;P4;P5;PR;PRP;SEP;TTP;VER;VN;VY;X3;Y2;") AndAlso String.Compare(args.Implementation, "_271B1__2000C__2100C__2110C", StringComparison.OrdinalIgnoreCase) = 0 Then
+                    If String.Compare(args.Implementation, "_271B1__2000C__2100C__2110C", StringComparison.OrdinalIgnoreCase) = 0 Then
                         args.Implementation = "_271B1__2000C__2100C__2110C__2120C"
                         NewLoop.SetArea = "4"
                         NewLoop.SetSequence = "1800"
                         Await NewLoop.ReadAsync(args).ConfigureAwait(False)
-                    ElseIf MyBase.CompareKey(LoopKey, ";13;1I;1P;2B;36;73;FA;GP;GW;I3;IL;LR;OC;P3;P4;P5;PR;PRP;SEP;TTP;VER;VN;VY;X3;Y2;") AndAlso String.Compare(args.Implementation, "_271B1__2000D__2100D__2110D", StringComparison.OrdinalIgnoreCase) = 0 Then
+                        'ElseIf MyBase.CompareKey(LoopKey, ";13;1I;1P;2B;36;73;FA;GP;GW;I3;IL;LR;OC;P3;P4;P5;PR;PRP;SEP;TTP;VER;VN;VY;X3;Y2;") AndAlso String.Compare(args.Implementation, "_271B1__2000D__2100D__2110D", StringComparison.OrdinalIgnoreCase) = 0 Then
+                    ElseIf String.Compare(args.Implementation, "_271B1__2000D__2100D__2110D", StringComparison.OrdinalIgnoreCase) = 0 Then
                         args.Implementation = "_271B1__2000D__2100D__2110D__2120D"
                         NewLoop.SetArea = "5"
                         NewLoop.SetSequence = "1800"

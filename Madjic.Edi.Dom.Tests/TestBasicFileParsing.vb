@@ -195,6 +195,8 @@ Public Class TestBasicFileParsing
             Doc = Await Document.FromStreamAsync(stream)
         End Using
 
+        Debug.WriteLine("Document read from stream.")
+
         Dim RawTS = Doc.Envelopes(0).FunctionalGroups(0).Transactions(0)
         Dim Imp = TryCast(RawTS, Transactions.Transaction271.Transaction271_B1.TransactionSet)
 
@@ -214,7 +216,7 @@ Public Class TestBasicFileParsing
                     End If
 
                     If lp3.PER IsNot Nothing AndAlso lp3.PER.Count > 0 Then
-                        Debug.WriteLine("PER03 = " * lp3.PER.First().PER03)
+                        Debug.WriteLine("PER03 = " & lp3.PER.First().PER03)
                     Else
                         Debug.WriteLine("(no PER)")
                     End If
