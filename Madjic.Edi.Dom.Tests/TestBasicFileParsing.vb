@@ -44,6 +44,40 @@ Public Class TestBasicFileParsing
         Assert.IsTrue(FoundAnN3)
     End Function
 
+    <TestMethod()> Async Function TestInvalidEdiVersion() As Task
+        Dim Doc As Document
+
+        Using stream As New IO.FileStream(".\Samples\Test4010_837.txt", IO.FileMode.Open, IO.FileAccess.Read, IO.FileShare.Read)
+            Doc = Await Document.FromStreamAsync(stream)
+        End Using
+
+        Dim X As Integer
+
+        Assert.AreEqual(1, Doc.Envelopes.Count)
+        Assert.ThrowsException(Of EdiException)(Sub() X = Doc.Envelopes.First().FunctionalGroups().Count, "It is expected that reading an invalid EDI Version envelope will throw when attempting to iterate over the Funcational Groups.")
+    End Function
+
+    <TestMethod()> Async Function TestMixedFileWithGoodAndBadEdiVersions() As Task
+        Dim Doc As Document
+        Dim Results() As Boolean = {True, False, True}
+
+        Using stream As New IO.FileStream(".\Samples\TestMixedEnvelopes.txt", IO.FileMode.Open, IO.FileAccess.Read, IO.FileShare.Read)
+            Doc = Await Document.FromStreamAsync(stream)
+        End Using
+
+        Dim X As Integer
+
+        Assert.AreEqual(3, Doc.Envelopes.Count, "We should've read 3 EDI Envelopes.")
+
+        For i = 0 To 2
+            If Results(i) Then
+                Assert.IsTrue(Doc.Envelopes(i).FunctionalGroups.Count > 0, $"There should be at least one good functional group contained in envelope instance {i}.")
+            Else
+                Assert.ThrowsException(Of EdiException)(Sub() X = Doc.Envelopes(i).FunctionalGroups.Count, $"An exception should be thrown when reading an invalid EDI Version envelope instance {i}")
+            End If
+        Next
+    End Function
+
     <TestMethod()> Async Function TestBadTransactionSet() As Task
         Dim Doc As Document
 
