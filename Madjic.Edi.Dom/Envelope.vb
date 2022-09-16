@@ -11,6 +11,8 @@
     ''' <remarks></remarks>
     Public ReadOnly Property FunctionalGroups() As IEnumerable(Of FunctionalGroup)
         Get
+            EnsureEdiVersionIsCorrect()
+
             If Not IsIterator Then
                 Return mGroups
             Else
@@ -20,12 +22,24 @@
     End Property
 
     Public Sub AddFunctionalGroup(fg As FunctionalGroup)
+        EnsureEdiVersionIsCorrect()
+
         If Not IsIterator Then
             mGroups.Add(fg)
         Else
             Throw New NotSupportedException("You cannot add a FunctionalGroup object when useForwardOnlyEnumeration is set to true from the Document.")
         End If
     End Sub
+
+    Private Sub EnsureEdiVersionIsCorrect()
+        If Not IsEdiVersionCorrect() Then
+            Throw New EdiException("The EdiVersion must be ""00501"" for this version of the EDI Standards.")
+        End If
+    End Sub
+
+    Friend Function IsEdiVersionCorrect() As Boolean
+        Return String.Compare(EdiVersion, "00501", StringComparison.InvariantCultureIgnoreCase) = 0
+    End Function
 
     Friend Property IsIterator As Boolean
 
@@ -74,7 +88,15 @@
 
     Public Property RepetitionSeparator() As Char = "^"c
 
-    Public ReadOnly Property EdiVersion() As String = "00501"
+    Private _EdiVersion As String = "00501"
+    Public Property EdiVersion() As String
+        Get
+            Return _EdiVersion
+        End Get
+        Friend Set(value As String)
+            _EdiVersion = value
+        End Set
+    End Property
 
     Public Property AcknowledgementRequested() As Boolean
 

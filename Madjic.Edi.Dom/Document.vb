@@ -95,6 +95,7 @@
             .InterchangeReceiverID = rdr.Element(7)
             .InterchangeDateTime = GetDateTime(rdr.Element(8), rdr.Element(9))
             .RepetitionSeparator = If(rdr.Element(9).Length > 0, rdr.Element(9).Chars(0), "^"c)
+            .EdiVersion = rdr.Element(11)
             .InterchangeControlNumber = rdr.Element(12)
             .AcknowledgementRequested = GetBoolean(rdr.Element(13), "1"c)
             .IsTest = GetBoolean(rdr.Element(14), "T"c)
@@ -113,18 +114,20 @@
         Dim G As EdiReader.EdiGroupReader
 
         Do
-            G = Await rdr.ReadGroup()
+            If Env.IsEdiVersionCorrect() Then
+                G = Await rdr.ReadGroup()
 
-            If G IsNot Nothing Then
-                Await ReadGroupAsync(Env, G).ConfigureAwait(False)
+                If G IsNot Nothing Then
+                    Await ReadGroupAsync(Env, G).ConfigureAwait(False)
+                End If
+            Else
+                G = Await rdr.SkipGroup()
             End If
-
         Loop Until rdr.IsAtEndOfEnvelope OrElse G Is Nothing
 
         If rdr.EnvelopTA1Segments.Count > 0 Then
             Env.TA1.AddRange(rdr.EnvelopTA1Segments)
         End If
-
     End Function
 
     ''' <summary>

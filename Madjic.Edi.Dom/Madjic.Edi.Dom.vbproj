@@ -10,18 +10,18 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/MartinJSoles/Madjic.Edi</RepositoryUrl>
     <PackageTags>HIPAA, EDI, ANSI X12</PackageTags>
-    <PackageReleaseNotes>This version is adding minimal support to indicate when a transaction set failed to parse correctly. To do this, an extra readonly property `HasReaderErrors` has been added to the base TransactionSet object.</PackageReleaseNotes>
+    <PackageReleaseNotes>This version will accept files with older EDI version identifiers in the ISA header segment. Errors will be thrown when attempting to access the FunctionalGroups property.</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Version>2.1.0</Version>
-    <AssemblyVersion>2.0.1.0</AssemblyVersion>
+    <Version>2.1.1</Version>
+    <AssemblyVersion>2.1.1.0</AssemblyVersion>
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
   <PropertyGroup>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <PackageProjectUrl>https://github.com/MartinJSoles/Madjic.Edi</PackageProjectUrl>
-    <FileVersion>2.0.1.0</FileVersion>
+    <FileVersion>2.1.1.0</FileVersion>
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
   <ItemGroup>

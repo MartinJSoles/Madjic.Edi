@@ -188,6 +188,22 @@
 
             Return Nothing
         End Function
+
+        Friend Async Function SkipGroup() As Task(Of EdiGroupReader)
+            Do Until atEOF
+                If Reader.CurrentSegment IsNot Nothing Then
+                    If String.Compare(Reader.CurrentSegment.SegmentID, "IEA", StringComparison.InvariantCultureIgnoreCase) = 0 Then
+                        atEOF = True
+                    Else
+                        atEOF = Await Reader.ReadAsync().ConfigureAwait(False) Is Nothing
+                    End If
+                Else
+                    atEOF = (Await Reader.ReadAsync().ConfigureAwait(False) Is Nothing)
+                End If
+            Loop
+
+            Return Nothing
+        End Function
     End Class
 
 End Namespace

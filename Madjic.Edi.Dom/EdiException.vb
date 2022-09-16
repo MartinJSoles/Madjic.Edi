@@ -19,12 +19,12 @@
         MyBase.New(message, innerException)
     End Sub
 
-    Private _CountISA
-    Public Property SegmentPositionInEnvelope As Integer
+    Private _CountISA As Integer?
+    Public Property SegmentPositionInEnvelope As Integer?
         Get
             Return _CountISA
         End Get
-        Friend Set(value As Integer)
+        Friend Set(value As Integer?)
             _CountISA = value
         End Set
     End Property
