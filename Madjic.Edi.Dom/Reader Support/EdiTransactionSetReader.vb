@@ -44,6 +44,17 @@
             End Get
         End Property
 
+        ''' <summary>
+        ''' Gets the number of elements in the transaction set header segment.
+        ''' </summary>
+        ''' <value>The number of elements in the transaction set header segment.</value>
+        ''' <remarks></remarks>
+        Public ReadOnly Property ElementCount() As Integer
+            Get
+                Return DataSegment.Elements.Count
+            End Get
+        End Property
+
         Friend ReadOnly Property DataSegment As GenericSegment
 
         ''' <summary>
