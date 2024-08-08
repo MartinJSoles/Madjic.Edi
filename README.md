@@ -193,6 +193,12 @@ I need to add conveniences that set required fields when instantiating segments 
 
 ## History
 
+#### V2.1.2
+* This release includes a fix to make reading `ST03` optional. The 835 implementation guide
+allows this to be inferred from the GS segment. This stops throwing an exception.
+Note: this relaxing of the rule is currently global. For other transaction sets, the element
+should be required but isn't enforced.
+
 #### V2.1.0
 * This release includes very basic validation when reading a transaction set. After parsing is complete, the `HasReaderErrors` property on the base `TransactionSet` object.
 * Fixes an issue with writing a new document. When trying to write a document to a stream, performing the FlushAsync operation was throwing an error.
